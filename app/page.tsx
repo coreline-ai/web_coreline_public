@@ -86,7 +86,7 @@ export default function Home() {
                             </div>
 
                             <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tight transition-colors">
-                                미래를 코딩하는 <br />
+                                미래를 코딩하는 <span className="dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FFD600] dark:to-yellow-200">AI</span><br />
                                 <span className="inline-block relative">
                                     <span className="absolute inset-x-0 bottom-2 h-4 bg-[#FFD600] -z-10 -rotate-2 dark:hidden"></span>
                                     <span className="dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FFD600] dark:to-yellow-200">
