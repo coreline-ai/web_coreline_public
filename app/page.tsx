@@ -1,4 +1,5 @@
 "use client";
+// Trigger deploy update
 
 import React, { useState } from 'react';
 import { PROJECTS, SERVICES, PROCESS_STEPS, TECH_STACK } from './constants';
