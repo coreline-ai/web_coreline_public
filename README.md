@@ -78,7 +78,7 @@
 
 이 프로젝트는 Next.js App Router의 표준 폴더 구조를 따릅니다.
 
-`
+```bash
 /
 ├── app/                  # 메인 애플리케이션 (라우팅, 페이지)
 │   ├── layout.tsx        # 전역 레이아웃
@@ -89,7 +89,7 @@
 ├── docs/                 # 프로젝트 문서 (PRD 등)
 ├── package.json          # 의존성 및 스크립트
 └── tsconfig.json         # TypeScript 설정
-`
+```
 
 ## 7. 향후 계획 (Future Considerations)
 
