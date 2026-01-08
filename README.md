@@ -1,5 +1,7 @@
 # Coreline - Engineering First AI & Software Studio
 
+<a href=https://render-coreline-ai-vub3.vercel.app/><img width="164" height="64" alt="스크린샷 2026-01-08 오후 10 20 51" src="https://github.com/user-attachments/assets/c0aef752-6a84-4cab-85d4-1207225c2e0a" /><br /><a/>
+
 ![Coreline](https://img.shields.io/badge/Coreline-Engineering%20Studio-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-16.1-black.svg?logo=next.js)
 ![React](https://img.shields.io/badge/React-19-blue.svg?logo=react)
@@ -42,8 +44,8 @@
 
 1.  **저장소 클론**
     ```bash
-    git clone https://github.com/your-username/coreline-engineering-studio.git
-    cd coreline-engineering-studio
+    git clone https://github.com/coreline-ai/web_coreline_public.git
+    cd web_coreline_public
     ```
 
 2.  **의존성 설치**
