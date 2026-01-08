@@ -11,6 +11,8 @@
 
 **Coreline**은 엔지니어링 중심의 AI 및 소프트웨어 스튜디오를 위한 포트폴리오 웹사이트입니다. 단순한 프로토타입을 넘어, 지속 가능하고 실제 프로덕션 환경에서 운영 가능한 고품질 솔루션을 제공하는 역량을 보여주기 위해 제작되었습니다. - DEMO 개발 진행 중!
 
+**Simple Dev Profile** 여기에 심플 풀스택 페이지 https://github.com/coreline-ai/fullstack_profile_public 참고 하시면 됩니다.
+
 이 프로젝트는 최신 **Next.js 16 (App Router)** 와 **React 19**를 기반으로 구축되어 있으며, 서버 컴포넌트를 활용하여 최적의 성능을 제공합니다.
 
 ## ✨ 주요 기능 (Key Features)
