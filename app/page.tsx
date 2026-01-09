@@ -2,7 +2,9 @@
 // Trigger deploy update
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { PROJECTS, SERVICES, PROCESS_STEPS, TECH_STACK } from './constants';
+import { useTheme } from './components/ThemeProvider';
 
 const PASTEL_COLORS = [
     "bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800/30",
@@ -31,12 +33,12 @@ const getTagColor = (tag: string) => {
 };
 
 export default function Home() {
-    // Default to dark mode as per recent heavy development, but allow toggling
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    // Use global theme context
+    const { isDarkMode, toggleTheme } = useTheme();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
-        <div className={`${isDarkMode ? 'dark' : ''}`}>
+        <div className="">
             <div className="min-h-screen transition-colors duration-300 font-sans
         bg-white text-black selection:bg-black selection:text-white
         dark:bg-black dark:text-white dark:selection:bg-[#FFD600] dark:selection:text-black">
@@ -47,7 +49,7 @@ export default function Home() {
             bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
             dark:bg-black/80 dark:backdrop-blur-md dark:border dark:border-white/20 dark:shadow-none">
 
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                             <div className="w-10 h-10 flex items-center justify-center rounded-lg transition-all duration-300
                                 bg-[#FFD600] text-black border-2 border-black
                                 dark:border-transparent">
@@ -61,7 +63,7 @@ export default function Home() {
                 text-black
                 dark:text-gray-300">
                                 {['서비스', '포트폴리오', '프로세스', '소개'].map((item, i) => (
-                                    <a key={i} href={`#${item === '포트폴리오' ? 'projects' : item === '서비스' ? 'services' : item === '프로세스' ? 'process' : 'about'}`}
+                                    <a key={i} href={`${item === '포트폴리오' ? '#projects' : item === '서비스' ? '#services' : item === '프로세스' ? '#process' : '#about'}`}
                                         className="hover:underline decoration-2 underline-offset-4 transition-all
                     decoration-black hover:text-black
                     dark:decoration-[#FFD600] dark:hover:text-white">
@@ -74,7 +76,7 @@ export default function Home() {
 
                             {/* Theme Toggle Button */}
                             <button
-                                onClick={() => setIsDarkMode(!isDarkMode)}
+                                onClick={toggleTheme}
                                 className="w-10 h-10 flex items-center justify-center rounded-lg border-2 border-black transition-all hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
                 bg-white text-black
                 dark:bg-transparent dark:border-white/20 dark:text-white dark:shadow-none dark:hover:bg-white/10 dark:hover:translate-none">
@@ -83,11 +85,11 @@ export default function Home() {
                                 </span>
                             </button>
 
-                            <button className="px-6 py-3 rounded-lg font-black text-sm transition-all active:scale-95
+                            <Link href="/login" className="px-6 py-3 rounded-lg font-black text-sm transition-all active:scale-95
                 bg-black text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
                 dark:bg-white dark:text-black dark:border-transparent dark:hover:bg-[#FFD600] dark:shadow-none dark:hover:translate-none">
                                 프로젝트 시작하기
-                            </button>
+                            </Link>
                         </div>
 
                         <div className="md:hidden">
@@ -126,7 +128,7 @@ export default function Home() {
                         <div className="flex flex-col gap-6 text-2xl font-black">
                             {['서비스', '포트폴리오', '프로세스', '소개'].map((item, i) => (
                                 <a key={i}
-                                    href={`#${item === '포트폴리오' ? 'projects' : item === '서비스' ? 'services' : item === '프로세스' ? 'process' : 'about'}`}
+                                    href={`${item === '포트폴리오' ? '#projects' : item === '서비스' ? '#services' : item === '프로세스' ? '#process' : '#about'}`}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="border-b-2 border-black pb-4 hover:pl-4 transition-all
                                         dark:border-white/10 dark:text-gray-300 dark:hover:text-white">
@@ -137,7 +139,7 @@ export default function Home() {
 
                         <div className="mt-auto flex flex-col gap-4">
                             <button
-                                onClick={() => setIsDarkMode(!isDarkMode)}
+                                onClick={toggleTheme}
                                 className="w-full h-14 flex items-center justify-center gap-3 rounded-lg border-2 border-black font-bold text-lg transition-all active:scale-95
                                 bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
                                 dark:bg-transparent dark:border-white/20 dark:text-white dark:shadow-none">
@@ -173,7 +175,7 @@ export default function Home() {
                                 <span className="text-xs font-bold uppercase tracking-wider text-black dark:text-gray-300">프로젝트 접수 중</span>
                             </div>
 
-                            <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tight transition-colors">
+                            <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tight transition-colors break-keep">
                                 미래를 코딩하는 <span className="dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FFD600] dark:to-yellow-200">AI</span><br />
                                 <span className="inline-block relative">
                                     <span className="absolute inset-x-0 bottom-2 h-4 bg-[#FFD600] -z-10 -rotate-2 dark:hidden"></span>
@@ -190,19 +192,19 @@ export default function Home() {
                             </p>
 
                             <div className="flex flex-wrap gap-4 pt-4">
-                                <button className="h-14 px-8 font-black text-lg rounded-xl flex items-center gap-3 transition-all active:scale-95
+                                <Link href="/services" className="h-14 px-8 font-black text-lg rounded-xl flex items-center gap-3 transition-all active:scale-95
                   bg-black text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
                   dark:bg-[#FFD600] dark:text-black dark:shadow-none dark:hover:bg-yellow-400 dark:hover:translate-none">
                                     서비스 보기 <span className="material-symbols-outlined">arrow_forward</span>
-                                </button>
-                                <a href="https://github.com/coreline-ai/web_coreline_public" target="_blank" rel="noopener noreferrer" className="h-14 px-8 font-black text-lg rounded-xl transition-all active:scale-95 flex items-center justify-center
+                                </Link>
+                                <a href="https://github.com/coreline-ai/web_coreline_public" target="_blank" rel="noopener noreferrer" className="h-14 px-8 font-black text-lg rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2
                   bg-white text-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
                   dark:bg-transparent dark:text-white dark:border dark:border-white/30 dark:shadow-none dark:hover:bg-white/10 dark:hover:translate-none">
-                                    포트폴리오
+                                    <span className="material-symbols-outlined">hub</span> GIT HUB
                                 </a>
                             </div>
 
-                            <div className="flex gap-8 pt-8">
+                            <div className="flex gap-8 pt-4">
                                 {[{ num: '50+', label: 'Projects' }, { num: '98%', label: 'Retention' }].map((stat, i) => (
                                     <div key={i} className="p-4 rounded-xl transition-all
                     bg-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
@@ -266,25 +268,25 @@ export default function Home() {
                 </section>
 
                 {/* Services Section */}
-                <section id="services" className="scroll-mt-32 py-24 px-4 flex justify-center transition-colors duration-300
+                <section id="services" className="scroll-mt-20 py-24 px-4 flex justify-center transition-colors duration-300
           bg-[#FFD600] border-y-2 border-black
           dark:bg-black dark:border-y dark:border-white/10">
                     <div className="max-w-[1200px] w-full">
-                        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
                             <div className="flex flex-col gap-4">
                                 <div className="flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest w-fit border-2 transition-all
                   bg-black text-white border-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
                   dark:bg-[#FFD600] dark:text-black dark:border-none dark:shadow-none">
                                     <span className="material-symbols-outlined text-sm text-[#FFD600] dark:text-black">stars</span> What We Do
                                 </div>
-                                <h2 className="text-4xl md:text-6xl font-black">
+                                <h2 className="text-4xl md:text-6xl font-black leading-tight">
                                     탁월한 기술력, <br />
                                     <span className="transition-all
                     text-white [text-shadow:2px_2px_0px_black,-2px_-2px_0px_black,2px_-2px_0px_black,-2px_2px_0px_black]
                     dark:text-[#8B5CF6] dark:[text-shadow:none]">확실한 결과물.</span>
                                 </h2>
                             </div>
-                            <p className="max-w-xs text-lg font-black text-right md:text-left leading-relaxed
+                            <p className="max-w-xs text-lg font-black text-left leading-relaxed
                 text-black
                 dark:text-gray-400">
                                 단순 코딩을 넘어 비즈니스 가치를 창출하는 맞춤형 엔지니어링 솔루션을 제공합니다.
@@ -292,7 +294,7 @@ export default function Home() {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {SERVICES.map((s) => (
-                                <div key={s.id} className="p-6 rounded-2xl transition-all group cursor-pointer
+                                <Link href="/services" key={s.id} className="block p-6 rounded-2xl transition-all group cursor-pointer
                   bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
                   dark:bg-[#111] dark:border dark:border-white/10 dark:shadow-none hover:dark:border-[#FFD600] hover:dark:-translate-y-1 hover:dark:translate-x-0">
 
@@ -318,7 +320,7 @@ export default function Home() {
                                             <span className="material-symbols-outlined text-lg font-black">arrow_forward</span>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>
@@ -352,7 +354,7 @@ export default function Home() {
                 </div>
 
                 {/* Portfolio Section */}
-                <section id="projects" className="scroll-mt-24 py-24 px-4 flex justify-center border-b-2 transition-colors duration-300
+                <section id="projects" className="scroll-mt-20 py-24 px-4 flex justify-center border-b-2 transition-colors duration-300
           bg-gray-50 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] border-black
           dark:bg-black dark:border-white/10 dark:bg-none">
                     <div className="max-w-[1200px] w-full">
@@ -365,15 +367,15 @@ export default function Home() {
                                 </div>
                                 <h2 className="text-4xl md:text-5xl font-black">주요 프로젝트 사례</h2>
                             </div>
-                            <button className="hidden md:flex items-center gap-2 px-6 py-3 rounded-lg font-black transition-all
+                            <Link href="/projects" className="hidden md:flex items-center gap-2 px-6 py-3 rounded-lg font-black transition-all
                 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
                 dark:bg-transparent dark:text-white dark:border dark:border-white/30 dark:shadow-none dark:hover:bg-white dark:hover:text-black dark:hover:translate-none">
                                 모든 프로젝트 <span className="material-symbols-outlined">arrow_forward</span>
-                            </button>
+                            </Link>
                         </div>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {PROJECTS.map((p) => (
-                                <div key={p.id} className="rounded-[2rem] overflow-hidden transition-all duration-300 group
+                                <Link href={`/project/${p.id}`} key={p.id} className="block rounded-[2rem] overflow-hidden transition-all duration-300 group
                   bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1
                   dark:bg-[#111] dark:border dark:border-white/10 dark:shadow-none dark:hover:border-gray-500">
 
@@ -390,34 +392,30 @@ export default function Home() {
                     bg-gray-200
                     dark:bg-gray-800">
                                         <img src={p.imageUrl} alt={p.title} className="w-full h-full object-cover transition-all duration-500
-                      grayscale-[20%] hover:grayscale-0
-                      dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:scale-105" />
-                                        <div className="absolute inset-0 transition-colors
-                      hidden
-                      dark:block dark:bg-black/20 dark:group-hover:bg-transparent"></div>
+                                        group-hover:scale-105" />
                                     </div>
 
                                     <div className="p-8">
                                         <div className="flex flex-wrap gap-2 mb-4">
-                                            {p.tags.map(tag => (
-                                                <span key={tag} className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase border-2 transition-colors ${getTagColor(tag)}`}>
+                                            {p.tags.slice(0, 2).map(tag => (
+                                                <span key={tag} className="px-3 py-1 rounded-lg text-[10px] font-black uppercase border-2 transition-colors bg-[#FFD600] text-black border-black">
                                                     {tag}
                                                 </span>
                                             ))}
                                         </div>
                                         <h3 className="text-2xl font-black mb-3">{p.title}</h3>
-                                        <p className="font-bold leading-relaxed
+                                        <p className="font-bold leading-relaxed line-clamp-4
                       text-gray-600
                       dark:text-gray-400 dark:font-medium">{p.description}</p>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>
                 </section>
 
                 {/* Process Section */}
-                <section id="process" className="scroll-mt-32 py-24 px-4 flex justify-center border-b-2 transition-colors duration-300
+                <section id="process" className="scroll-mt-40 py-24 px-4 flex justify-center border-b-2 transition-colors duration-300
           bg-white border-black
           dark:bg-[#0a0a0a] dark:border-white/10">
                     <div className="max-w-[1200px] w-full text-center">
@@ -483,35 +481,35 @@ export default function Home() {
                                     Coreline은 거대 에이전시의 비효율성에 지친 시니어 엔지니어들이 설립했습니다. 우리는 깔끔한 코드, 실용적인 솔루션, 직접적인 소통을 믿습니다. 중개인 없이 전문가들이 직접 훌륭한 제품을 만듭니다.
                                 </p>
                                 <div className="flex flex-wrap gap-4">
-                                    <div className="flex items-center gap-2 px-6 py-3 border-2 rounded-xl font-black transition-colors
+                                    <Link href="/profile" className="flex items-center gap-2 px-6 py-3 border-2 rounded-xl font-black transition-colors hover:-translate-y-1 hover:shadow-md
                     bg-gray-50 border-black
-                    dark:bg-white/5 dark:border-white/20 dark:text-gray-300">
+                    dark:bg-white/5 dark:border-white/20 dark:text-gray-300 dark:hover:bg-white/10">
                                         <span className="material-symbols-outlined dark:text-[#FFD600]">check_circle</span> 100% 인하우스 팀
-                                    </div>
-                                    <div className="flex items-center gap-2 px-6 py-3 border-2 rounded-xl font-black transition-colors
+                                    </Link>
+                                    <Link href="/profile" className="flex items-center gap-2 px-6 py-3 border-2 rounded-xl font-black transition-colors hover:-translate-y-1 hover:shadow-md
                     bg-gray-50 border-black
-                    dark:bg-white/5 dark:border-white/20 dark:text-gray-300">
+                    dark:bg-white/5 dark:border-white/20 dark:text-gray-300 dark:hover:bg-white/10">
                                         <span className="material-symbols-outlined dark:text-[#FFD600]">check_circle</span> 투명한 가격 정책
-                                    </div>
+                                    </Link>
                                 </div>
                             </div>
 
                             <div className="w-full lg:w-1/3 flex justify-center relative z-10">
-                                <div className="relative w-64 h-64">
-                                    <div className="absolute inset-0 rounded-full translate-x-4 translate-y-4 transition-all
+                                <Link href="/profile" className="relative w-64 h-64 block group cursor-pointer">
+                                    <div className="absolute inset-0 rounded-full translate-x-4 translate-y-4 transition-all group-hover:translate-x-5 group-hover:translate-y-5
                     bg-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
-                    dark:bg-[#FFD600] dark:opacity-80 dark:translate-x-2 dark:translate-y-2 dark:border-none dark:shadow-none"></div>
+                    dark:bg-[#FFD600] dark:opacity-80 dark:translate-x-2 dark:translate-y-2 dark:border-none dark:shadow-none dark:group-hover:translate-x-3 dark:group-hover:translate-y-3"></div>
                                     <div className="relative w-full h-full rounded-full border-2 overflow-hidden bg-gray-200 transition-colors
                     border-black
                     dark:border-white/20 dark:bg-gray-800">
                                         <img src="https://picsum.photos/400/400?grayscale" alt="Founder" className="w-full h-full object-cover" />
                                     </div>
-                                    <div className="absolute -bottom-4 -right-4 px-4 py-2 rounded-lg font-black rotate-6 transition-all
+                                    <div className="absolute -bottom-4 -right-4 px-4 py-2 rounded-lg font-black rotate-6 transition-all group-hover:rotate-12
                     bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
                     dark:bg-[#111] dark:text-white dark:border dark:border-white/20 dark:shadow-lg">
                                         Hello! 👋
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -532,11 +530,11 @@ export default function Home() {
                   dark:text-gray-500">
                                     초기 컨셉부터 최종 배포까지, 당신의 든든한 엔지니어링 파트너가 되어드리겠습니다.
                                 </p>
-                                <button className="h-16 px-10 border-2 rounded-xl font-black text-xl flex items-center gap-3 transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none
+                                <Link href="/contact" className="h-16 px-10 border-2 rounded-xl font-black text-xl flex items-center gap-3 transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none
                   border-white shadow-[6px_6px_0px_0px_white] hover:bg-white hover:text-black
                   dark:border-white dark:shadow-none dark:active:scale-95">
                                     프로젝트 문의하기 <span className="material-symbols-outlined">arrow_forward</span>
-                                </button>
+                                </Link>
                             </div>
                             <div className="w-full lg:w-[450px]">
                                 <div className="p-8 rounded-3xl border-2 relative transition-all
@@ -565,7 +563,7 @@ export default function Home() {
                         border-2 border-black placeholder-gray-300 focus:border-[#FFD600] text-black bg-white
                         dark:bg-black dark:border-white/20 dark:text-white dark:font-bold dark:placeholder-gray-700" />
                                         </div>
-                                        <button type="button" className="w-full h-16 font-black text-lg rounded-xl border-2 transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none mt-4
+                                        <button type="button" className="w-full h-12 font-black text-base rounded-xl border-2 transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none mt-4
                       bg-black text-white border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
                       dark:bg-[#FFD600] dark:text-black dark:border-transparent dark:hover:bg-yellow-400 dark:active:scale-95 dark:shadow-none">
                                             문의 보내기
@@ -600,4 +598,4 @@ export default function Home() {
             </div>
         </div>
     );
-};
+}

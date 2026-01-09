@@ -1,5 +1,6 @@
 
 import './globals.css';
+import { ThemeProvider } from './components/ThemeProvider';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -37,7 +38,9 @@ export default function RootLayout({
                     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
                 />
             </head>
-            <body className="bg-black text-white" suppressHydrationWarning>{children}</body>
+            <body className="bg-black text-white" suppressHydrationWarning>
+                <ThemeProvider>{children}</ThemeProvider>
+            </body>
         </html>
     );
 }
