@@ -37,7 +37,7 @@ export default function RootLayout({
                     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
                 />
             </head>
-            <body className="bg-black text-white">{children}</body>
+            <body className="bg-black text-white" suppressHydrationWarning>{children}</body>
         </html>
     );
 }

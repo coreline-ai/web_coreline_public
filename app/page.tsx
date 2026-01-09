@@ -4,9 +4,36 @@
 import React, { useState } from 'react';
 import { PROJECTS, SERVICES, PROCESS_STEPS, TECH_STACK } from './constants';
 
+const PASTEL_COLORS = [
+    "bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800/30",
+    "bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800/30",
+    "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-800/30",
+    "bg-green-100 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800/30",
+    "bg-emerald-100 text-emerald-800 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800/30",
+    "bg-teal-100 text-teal-800 border-teal-200 dark:bg-teal-900/30 dark:text-teal-300 dark:border-teal-800/30",
+    "bg-cyan-100 text-cyan-800 border-cyan-200 dark:bg-cyan-900/30 dark:text-cyan-300 dark:border-cyan-800/30",
+    "bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800/30",
+    "bg-indigo-100 text-indigo-800 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:border-indigo-800/30",
+    "bg-violet-100 text-violet-800 border-violet-200 dark:bg-violet-900/30 dark:text-violet-300 dark:border-violet-800/30",
+    "bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-800/30",
+    "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-200 dark:bg-fuchsia-900/30 dark:text-fuchsia-300 dark:border-fuchsia-800/30",
+    "bg-pink-100 text-pink-800 border-pink-200 dark:bg-pink-900/30 dark:text-pink-300 dark:border-pink-800/30",
+    "bg-rose-100 text-rose-800 border-rose-200 dark:bg-rose-900/30 dark:text-rose-300 dark:border-rose-800/30",
+];
+
+const getTagColor = (tag: string) => {
+    let hash = 0;
+    for (let i = 0; i < tag.length; i++) {
+        hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const index = Math.abs(hash) % PASTEL_COLORS.length;
+    return PASTEL_COLORS[index];
+};
+
 export default function Home() {
     // Default to dark mode as per recent heavy development, but allow toggling
     const [isDarkMode, setIsDarkMode] = useState(true);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
         <div className={`${isDarkMode ? 'dark' : ''}`}>
@@ -64,10 +91,70 @@ export default function Home() {
                         </div>
 
                         <div className="md:hidden">
-                            <span className="material-symbols-outlined">menu</span>
+                            <button
+                                onClick={() => setIsMobileMenuOpen(true)}
+                                className="w-10 h-10 flex items-center justify-center rounded-lg transition-all active:scale-95
+                                    hover:bg-gray-100 dark:hover:bg-white/10">
+                                <span className="material-symbols-outlined">menu</span>
+                            </button>
                         </div>
                     </div>
                 </nav>
+
+                {/* Mobile Menu Overlay */}
+                {isMobileMenuOpen && (
+                    <div className="fixed inset-0 z-[100] flex flex-col p-6 transition-all duration-300
+                        bg-white dark:bg-black">
+                        <div className="flex justify-between items-center mb-10">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 flex items-center justify-center rounded-lg
+                                    bg-[#FFD600] text-black border-2 border-black
+                                    dark:border-transparent">
+                                    <span className="material-symbols-outlined font-black">terminal</span>
+                                </div>
+                                <h2 className="text-2xl font-black tracking-tighter">Coreline</h2>
+                            </div>
+                            <button
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="w-10 h-10 flex items-center justify-center rounded-lg border-2 border-black transition-all active:scale-95
+                                    bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+                                    dark:bg-transparent dark:border-white/20 dark:text-white dark:shadow-none">
+                                <span className="material-symbols-outlined">close</span>
+                            </button>
+                        </div>
+
+                        <div className="flex flex-col gap-6 text-2xl font-black">
+                            {['서비스', '포트폴리오', '프로세스', '소개'].map((item, i) => (
+                                <a key={i}
+                                    href={`#${item === '포트폴리오' ? 'projects' : item === '서비스' ? 'services' : item === '프로세스' ? 'process' : 'about'}`}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="border-b-2 border-black pb-4 hover:pl-4 transition-all
+                                        dark:border-white/10 dark:text-gray-300 dark:hover:text-white">
+                                    {item}
+                                </a>
+                            ))}
+                        </div>
+
+                        <div className="mt-auto flex flex-col gap-4">
+                            <button
+                                onClick={() => setIsDarkMode(!isDarkMode)}
+                                className="w-full h-14 flex items-center justify-center gap-3 rounded-lg border-2 border-black font-bold text-lg transition-all active:scale-95
+                                bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+                                dark:bg-transparent dark:border-white/20 dark:text-white dark:shadow-none">
+                                <span className="material-symbols-outlined">
+                                    {isDarkMode ? 'light_mode' : 'dark_mode'}
+                                </span>
+                                {isDarkMode ? '라이트 모드' : '다크 모드'}
+                            </button>
+
+                            <button className="w-full h-14 rounded-lg font-black text-lg transition-all active:scale-95
+                                bg-black text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]
+                                dark:bg-white dark:text-black dark:border-transparent dark:shadow-none">
+                                프로젝트 시작하기
+                            </button>
+                        </div>
+                    </div>
+                )}
 
                 {/* Hero Section */}
                 <section className="pt-48 pb-24 px-4 flex justify-center relative overflow-hidden transition-all duration-300
@@ -108,11 +195,11 @@ export default function Home() {
                   dark:bg-[#FFD600] dark:text-black dark:shadow-none dark:hover:bg-yellow-400 dark:hover:translate-none">
                                     서비스 보기 <span className="material-symbols-outlined">arrow_forward</span>
                                 </button>
-                                <button className="h-14 px-8 font-black text-lg rounded-xl transition-all active:scale-95
+                                <a href="https://github.com/coreline-ai/web_coreline_public" target="_blank" rel="noopener noreferrer" className="h-14 px-8 font-black text-lg rounded-xl transition-all active:scale-95 flex items-center justify-center
                   bg-white text-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
                   dark:bg-transparent dark:text-white dark:border dark:border-white/30 dark:shadow-none dark:hover:bg-white/10 dark:hover:translate-none">
                                     포트폴리오
-                                </button>
+                                </a>
                             </div>
 
                             <div className="flex gap-8 pt-8">
@@ -313,9 +400,7 @@ export default function Home() {
                                     <div className="p-8">
                                         <div className="flex flex-wrap gap-2 mb-4">
                                             {p.tags.map(tag => (
-                                                <span key={tag} className="px-3 py-1 rounded-lg text-[10px] font-black uppercase border-2 transition-colors
-                          bg-gray-100 border-black
-                          dark:bg-white/10 dark:border-white/5 dark:text-gray-300">
+                                                <span key={tag} className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase border-2 transition-colors ${getTagColor(tag)}`}>
                                                     {tag}
                                                 </span>
                                             ))}
@@ -353,7 +438,7 @@ export default function Home() {
                     dark:bg-[#111] dark:border-white/20 dark:shadow-2xl dark:shadow-black dark:group-hover:border-[#FFD600] dark:group-hover:text-[#FFD600]
                     ${step.shape === 'circle' ? 'rounded-full' :
                                             step.shape === 'polygon' ? 'rounded-tr-3xl rounded-bl-3xl' :
-                                                step.shape === 'rect' ? 'bg-black text-white dark:bg-[#FFD600] dark:text-black dark:border-[#FFD600]' : 'rounded-2xl'
+                                                step.shape === 'rect' ? 'bg-[#FFD600] text-black border-[#FFD600] group-hover:text-black dark:bg-[#FFD600] dark:text-black dark:border-[#FFD600] dark:group-hover:text-black' : 'rounded-2xl'
                                         }`}>
                                         {step.shape === 'rect' ? (
                                             <span className="material-symbols-outlined text-3xl">rocket_launch</span>
