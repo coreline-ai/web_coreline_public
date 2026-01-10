@@ -1,4 +1,4 @@
-"use client";
+'use client';
 // Trigger deploy update
 
 import React from 'react';
@@ -9,43 +9,49 @@ import ServicesSection from './components/home/ServicesSection';
 import { useTheme } from './components/ThemeProvider';
 
 const LoadingSkeleton = () => (
-    <section className="py-24 px-4 flex justify-center">
-        <div className="max-w-[1200px] w-full">
-            <div className="animate-pulse">
-                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-md w-1/4 mb-8"></div>
-                <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
-            </div>
-        </div>
-    </section>
+  <section className="flex justify-center px-4 py-24">
+    <div className="w-full max-w-[1200px]">
+      <div className="animate-pulse">
+        <div className="mb-8 h-8 w-1/4 rounded-md bg-gray-200 dark:bg-gray-700"></div>
+        <div className="h-48 rounded-lg bg-gray-200 dark:bg-gray-700"></div>
+      </div>
+    </div>
+  </section>
 );
 
-const TechStackSection = dynamic(() => import('./components/home/TechStackSection'), { loading: () => <LoadingSkeleton /> });
-const PortfolioSection = dynamic(() => import('./components/home/PortfolioSection'), { loading: () => <LoadingSkeleton /> });
-const ProcessSection = dynamic(() => import('./components/home/ProcessSection'), { loading: () => <LoadingSkeleton /> });
-const AboutSection = dynamic(() => import('./components/home/AboutSection'), { loading: () => <LoadingSkeleton /> });
-const FooterSection = dynamic(() => import('./components/home/FooterSection'), { loading: () => <LoadingSkeleton /> });
+const TechStackSection = dynamic(() => import('./components/home/TechStackSection'), {
+  loading: () => <LoadingSkeleton />,
+});
+const PortfolioSection = dynamic(() => import('./components/home/PortfolioSection'), {
+  loading: () => <LoadingSkeleton />,
+});
+const ProcessSection = dynamic(() => import('./components/home/ProcessSection'), {
+  loading: () => <LoadingSkeleton />,
+});
+const AboutSection = dynamic(() => import('./components/home/AboutSection'), {
+  loading: () => <LoadingSkeleton />,
+});
+const FooterSection = dynamic(() => import('./components/home/FooterSection'), {
+  loading: () => <LoadingSkeleton />,
+});
 
 export default function Home() {
-    // Use global theme context is mainly used in Navigation/ThemeToggle, 
-    // but initializing it here ensures context is available if needed at top level.
-    useTheme();
+  // Use global theme context is mainly used in Navigation/ThemeToggle,
+  // but initializing it here ensures context is available if needed at top level.
+  useTheme();
 
-    return (
-        <div className="">
-            <div className="min-h-screen transition-colors duration-300 font-sans
-        bg-white text-black selection:bg-black selection:text-white
-        dark:bg-black dark:text-white dark:selection:bg-[#FFD600] dark:selection:text-black">
-
-                <Navigation />
-                <HeroSection />
-                <ServicesSection />
-                <TechStackSection />
-                <PortfolioSection />
-                <ProcessSection />
-                <AboutSection />
-                <FooterSection />
-
-            </div>
-        </div>
-    );
+  return (
+    <div className="">
+      <div className="min-h-screen bg-white font-sans text-black transition-colors duration-300 selection:bg-black selection:text-white dark:bg-black dark:text-white dark:selection:bg-[#FFD600] dark:selection:text-black">
+        <Navigation />
+        <HeroSection />
+        <ServicesSection />
+        <TechStackSection />
+        <PortfolioSection />
+        <ProcessSection />
+        <AboutSection />
+        <FooterSection />
+      </div>
+    </div>
+  );
 }

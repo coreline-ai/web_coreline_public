@@ -8,157 +8,196 @@ import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 
 export default function ProjectsPage() {
-    // Duplicate projects to simulate "12+" items for visual fullness as requested
-    const allProjects = [...PROJECTS, ...PROJECTS, ...PROJECTS];
+  // Duplicate projects to simulate "12+" items for visual fullness as requested
+  const allProjects = [...PROJECTS, ...PROJECTS, ...PROJECTS];
 
-    return (
-        <div className={`min-h-screen font-sans transition-colors duration-300
-            bg-white text-black selection:bg-black selection:text-white
-            bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:2rem_2rem]
-            dark:bg-black dark:text-white dark:selection:bg-[#FFD600] dark:selection:text-black
-            dark:bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)]`}>
-            <SimpleHeader />
+  return (
+    <div
+      className={`min-h-screen bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:2rem_2rem] font-sans text-black transition-colors duration-300 selection:bg-black selection:text-white dark:bg-black dark:bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] dark:text-white dark:selection:bg-[#FFD600] dark:selection:text-black`}
+    >
+      <SimpleHeader />
 
-            <main>
-                {/* Hero Section */}
-                <section className="pt-32 pb-20 px-4 border-b-4 border-black dark:border-white/20 relative overflow-hidden">
-                    <div className="absolute top-20 right-[-10%] w-[300px] h-[300px] bg-[#FFD600] rounded-full blur-[100px] opacity-20 dark:opacity-10 pointer-events-none"></div>
+      <main>
+        {/* Hero Section */}
+        <section className="relative overflow-hidden border-b-4 border-black px-4 pt-32 pb-20 dark:border-white/20">
+          <div className="pointer-events-none absolute top-20 right-[-10%] h-[300px] w-[300px] rounded-full bg-[#FFD600] opacity-20 blur-[100px] dark:opacity-10"></div>
 
-                    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div className="relative z-10">
-                            <span className="inline-block px-4 py-1.5 rounded-full border-2 border-black dark:border-white text-sm font-bold mb-6 bg-white dark:bg-black uppercase tracking-wider shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)]">
-                                • OPEN FOR OPPORTUNITIES
-                            </span>
-                            <h1 className="text-5xl md:text-7xl font-black mb-6 leading-[0.9] tracking-tighter">
-                                Coreline Project<br />
-                                <span className="relative inline-block dark:text-[#FFD600]">
-                                    Collections
-                                    <span className="absolute -bottom-2 left-0 w-full h-1 bg-[#FFD600] dark:bg-white/90 -z-10 bg-opacity-80 transform -rotate-1 rounded-sm"></span>
-                                </span>
-                            </h1>
-                            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-lg font-medium leading-relaxed">
-                                Explore a curated list of scalable web applications, robust APIs, and interactive tools built with modern technologies.
-                            </p>
+          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
+            <div className="relative z-10">
+              <span className="mb-6 inline-block rounded-full border-2 border-black bg-white px-4 py-1.5 text-sm font-bold tracking-wider uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:bg-black dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)]">
+                • OPEN FOR OPPORTUNITIES
+              </span>
+              <h1 className="mb-6 text-5xl leading-[0.9] font-black tracking-tighter md:text-7xl">
+                Coreline Project
+                <br />
+                <span className="relative inline-block dark:text-[#FFD600]">
+                  Collections
+                  <span className="bg-opacity-80 absolute -bottom-2 left-0 -z-10 h-1 w-full -rotate-1 transform rounded-sm bg-[#FFD600] dark:bg-white/90"></span>
+                </span>
+              </h1>
+              <p className="max-w-lg text-xl leading-relaxed font-medium text-gray-600 dark:text-gray-400">
+                Explore a curated list of scalable web applications, robust APIs, and interactive
+                tools built with modern technologies.
+              </p>
 
-                            <div className="mt-10 flex gap-4">
-                                <a href="#projects-grid" className="px-8 py-4 bg-black text-white font-bold rounded-xl shadow-[6px_6px_0px_0px_#FFD600] border-2 border-black hover:-translate-y-1 transition-transform flex items-center gap-2
-                                    dark:bg-[#FFD600] dark:text-black dark:border-[#FFD600] dark:shadow-none">
-                                    Browse Projects
-                                    <span className="material-symbols-outlined text-sm">arrow_downward</span>
-                                </a>
-                                <a href="https://github.com/coreline-ai/web_coreline_public" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-white text-black font-bold rounded-xl border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-transform flex items-center gap-2
-                                    dark:bg-transparent dark:text-white dark:border-white/20 dark:shadow-none dark:hover:bg-white/10">
-                                    View GitHub
-                                </a>
-                            </div>
-                        </div>
+              <div className="mt-10 flex gap-4">
+                <a
+                  href="#projects-grid"
+                  className="flex items-center gap-2 rounded-xl border-2 border-black bg-black px-8 py-4 font-bold text-white shadow-[6px_6px_0px_0px_#FFD600] transition-transform hover:-translate-y-1 dark:border-[#FFD600] dark:bg-[#FFD600] dark:text-black dark:shadow-none"
+                >
+                  Browse Projects
+                  <span className="material-symbols-outlined text-sm">arrow_downward</span>
+                </a>
+                <a
+                  href="https://github.com/coreline-ai/web_coreline_public"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-xl border-2 border-black bg-white px-8 py-4 font-bold text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:bg-white/10"
+                >
+                  View GitHub
+                </a>
+              </div>
+            </div>
 
-                        <div className="relative">
-                            <div className="relative z-10 rounded-3xl border-4 border-black dark:border-white/20 overflow-hidden shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-none bg-white dark:bg-[#222] aspect-video group">
-                                <div className="absolute top-0 left-0 right-0 h-10 border-b-4 border-black dark:border-white/20 bg-gray-100 dark:bg-[#1a1a1a] flex items-center px-4 gap-2">
-                                    <div className="w-3 h-3 rounded-full bg-red-500 border border-black/10"></div>
-                                    <div className="w-3 h-3 rounded-full bg-yellow-400 border border-black/10"></div>
-                                    <div className="w-3 h-3 rounded-full bg-green-500 border border-black/10"></div>
-                                </div>
-                                <div className="mt-10 h-full w-full relative">
-                                    <Image
-                                        src="/images/projects_header_right.png"
-                                        alt="Coreline Team collaborating on project development"
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                    />
-                                    {/* Overlay Gradient REMOVED */}
-                                </div>
-                            </div>
+            <div className="relative">
+              <div className="group relative z-10 aspect-video overflow-hidden rounded-3xl border-4 border-black bg-white shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#222] dark:shadow-none">
+                <div className="absolute top-0 right-0 left-0 flex h-10 items-center gap-2 border-b-4 border-black bg-gray-100 px-4 dark:border-white/20 dark:bg-[#1a1a1a]">
+                  <div className="h-3 w-3 rounded-full border border-black/10 bg-red-500"></div>
+                  <div className="h-3 w-3 rounded-full border border-black/10 bg-yellow-400"></div>
+                  <div className="h-3 w-3 rounded-full border border-black/10 bg-green-500"></div>
+                </div>
+                <div className="relative mt-10 h-full w-full">
+                  <Image
+                    src="/images/projects_header_right.png"
+                    alt="Coreline Team collaborating on project development"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {/* Overlay Gradient REMOVED */}
+                </div>
+              </div>
 
-                            {/* Floating Badge */}
-                            <div className="absolute -bottom-8 -left-8 z-20 bg-white dark:bg-black border-4 border-black dark:border-white rounded-2xl p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_#FFD600] rotate-[-5deg] hover:rotate-0 transition-transform">
-                                <div className="text-4xl font-black mb-1">12+</div>
-                                <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Live Projects</div>
-                            </div>
-                        </div>
+              {/* Floating Badge */}
+              <div className="absolute -bottom-8 -left-8 z-20 rotate-[-5deg] rounded-2xl border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform hover:rotate-0 dark:border-white dark:bg-black dark:shadow-[8px_8px_0px_0px_#FFD600]">
+                <div className="mb-1 text-4xl font-black">12+</div>
+                <div className="text-[10px] font-bold tracking-widest text-gray-500 uppercase">
+                  Live Projects
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Project Grid Section */}
+        <section
+          id="projects-grid"
+          className="relative border-b-4 border-black bg-[#FFD600] px-4 py-20 transition-colors dark:border-white/10 dark:bg-[#111]"
+        >
+          {/* Grid Background Pattern */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
+              backgroundSize: '40px 40px',
+            }}
+          ></div>
+
+          <div className="relative z-10 mx-auto max-w-7xl">
+            {/* Section Header & Search */}
+            <div className="mb-16 flex flex-col items-end justify-between gap-8 md:flex-row">
+              <div>
+                <span className="mb-4 inline-block rounded bg-black px-3 py-1 text-xs font-bold text-white uppercase">
+                  Showcase
+                </span>
+                <h2 className="text-5xl font-black text-black dark:text-white">Projects</h2>
+                <p className="mt-4 max-w-xl text-lg font-bold text-black opacity-80 dark:text-gray-300">
+                  A selection of recent development work, experiments, and deployed applications.
+                </p>
+              </div>
+
+              <div className="relative w-full md:w-auto">
+                <input
+                  type="text"
+                  placeholder="Search projects..."
+                  className="w-full rounded-xl border-2 border-black bg-white px-6 py-4 text-lg font-bold text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder:font-medium focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus:outline-none md:w-[320px]"
+                />
+                <span className="material-symbols-outlined pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-black/50">
+                  search
+                </span>
+              </div>
+            </div>
+
+            {/* Projects Grid */}
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {allProjects.map((project, index) => (
+                <div
+                  key={`${project.id}-${index}`}
+                  className="group flex h-full flex-col rounded-3xl border-3 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform duration-300 hover:-translate-y-2 dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none"
+                >
+                  {/* Icon / Thumbnail Area */}
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-black bg-black text-white transition-colors group-hover:bg-[#FFD600] group-hover:text-black dark:border-white/20 dark:bg-[#FFD600] dark:text-black dark:group-hover:bg-[#FFD600] dark:group-hover:text-black">
+                    <span className="material-symbols-outlined text-3xl">
+                      {index % 4 === 0
+                        ? 'terminal'
+                        : index % 4 === 1
+                          ? 'smartphone'
+                          : index % 4 === 2
+                            ? 'psychology'
+                            : 'shopping_cart'}
+                    </span>
+                  </div>
+
+                  <h3 className="mb-3 line-clamp-1 text-2xl font-black text-black dark:text-white">
+                    {project.title}
+                  </h3>
+
+                  <p className="mb-6 line-clamp-3 text-sm leading-relaxed font-medium text-gray-600 dark:text-gray-400">
+                    {project.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="mt-auto mb-8 flex flex-wrap gap-2">
+                    {project.tags.slice(0, 3).map((tag, i) => (
+                      <span
+                        key={i}
+                        className="rounded-md border border-black bg-[#FFD600] px-2 py-1 text-[10px] font-bold text-black uppercase dark:border-white/20 dark:bg-black dark:text-gray-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto flex items-center justify-between border-t-2 border-dashed border-gray-200 pt-4 dark:border-white/10">
+                    <div className="flex items-center gap-1 text-xs font-bold tracking-wide text-gray-400 uppercase">
+                      <span className="material-symbols-outlined text-sm">schedule</span>
+                      Last commit: {['2d ago', '5h ago', '1w ago', '3d ago'][index % 4]}
                     </div>
-                </section>
+                    <Link
+                      href={`/project/${project.id}`}
+                      className="rounded-lg border-2 border-black px-4 py-2 text-xs font-bold text-black transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:text-white dark:hover:bg-white dark:hover:text-black"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-                {/* Project Grid Section */}
-                <section id="projects-grid" className="py-20 px-4 bg-[#FFD600] dark:bg-[#111] border-b-4 border-black dark:border-white/10 relative transition-colors">
-                    {/* Grid Background Pattern */}
-                    <div className="absolute inset-0 opacity-10 pointer-events-none"
-                        style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
-                    </div>
+            <div className="mt-16 text-center">
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-black bg-white px-8 py-4 font-black text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 dark:border-white/20 dark:bg-[#222] dark:text-white dark:shadow-none"
+              >
+                View More Projects
+                <span className="material-symbols-outlined">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
 
-                    <div className="max-w-7xl mx-auto relative z-10">
-                        {/* Section Header & Search */}
-                        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                            <div>
-                                <span className="inline-block px-3 py-1 bg-black text-white text-xs font-bold rounded mb-4 uppercase">Showcase</span>
-                                <h2 className="text-5xl font-black text-black dark:text-white">Projects</h2>
-                                <p className="text-lg font-bold mt-4 text-black opacity-80 dark:text-gray-300 max-w-xl">
-                                    A selection of recent development work, experiments, and deployed applications.
-                                </p>
-                            </div>
-
-                            <div className="w-full md:w-auto relative">
-                                <input
-                                    type="text"
-                                    placeholder="Search projects..."
-                                    className="w-full md:w-[320px] px-6 py-4 rounded-xl border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus:translate-x-[2px] focus:translate-y-[2px] transition-all text-lg font-bold placeholder:font-medium text-black bg-white"
-                                />
-                                <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-black/50 pointer-events-none">search</span>
-                            </div>
-                        </div>
-
-                        {/* Projects Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {allProjects.map((project, index) => (
-                                <div key={`${project.id}-${index}`} className="bg-white dark:bg-[#1a1a1a] rounded-3xl border-3 border-black dark:border-white/20 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-none hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full group">
-
-                                    {/* Icon / Thumbnail Area */}
-                                    <div className="w-16 h-16 rounded-2xl border-2 border-black dark:border-white/20 bg-black dark:bg-[#FFD600] flex items-center justify-center mb-6 group-hover:bg-[#FFD600] dark:group-hover:bg-[#FFD600] text-white dark:text-black group-hover:text-black dark:group-hover:text-black transition-colors">
-                                        <span className="material-symbols-outlined text-3xl">
-                                            {index % 4 === 0 ? 'terminal' : index % 4 === 1 ? 'smartphone' : index % 4 === 2 ? 'psychology' : 'shopping_cart'}
-                                        </span>
-                                    </div>
-
-                                    <h3 className="text-2xl font-black mb-3 text-black dark:text-white line-clamp-1">{project.title}</h3>
-
-                                    <p className="text-gray-600 dark:text-gray-400 font-medium text-sm leading-relaxed mb-6 line-clamp-3">
-                                        {project.description}
-                                    </p>
-
-                                    {/* Tags */}
-                                    <div className="flex flex-wrap gap-2 mb-8 mt-auto">
-                                        {project.tags.slice(0, 3).map((tag, i) => (
-                                            <span key={i} className="px-2 py-1 rounded-md border border-black dark:border-white/20 text-[10px] font-bold uppercase bg-[#FFD600] text-black dark:bg-black dark:text-gray-300">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    <div className="border-t-2 border-dashed border-gray-200 dark:border-white/10 pt-4 flex items-center justify-between mt-auto">
-                                        <div className="flex items-center gap-1 text-xs font-bold text-gray-400 uppercase tracking-wide">
-                                            <span className="material-symbols-outlined text-sm">schedule</span>
-                                            Last commit: {['2d ago', '5h ago', '1w ago', '3d ago'][index % 4]}
-                                        </div>
-                                        <Link href={`/project/${project.id}`} className="px-4 py-2 rounded-lg border-2 border-black dark:border-white/20 text-xs font-bold text-black hover:bg-black hover:text-white dark:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
-                                            View Details
-                                        </Link>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="mt-16 text-center">
-                            <a href="#" className="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-[#222] font-black rounded-xl border-2 border-black dark:border-white/20 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-none hover:-translate-y-1 transition-transform text-black dark:text-white">
-                                View More Projects
-                                <span className="material-symbols-outlined">arrow_forward</span>
-                            </a>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            <SimpleFooter />
-        </div>
-    );
+      <SimpleFooter />
+    </div>
+  );
 }

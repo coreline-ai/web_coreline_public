@@ -1,14 +1,13 @@
 import React from 'react';
 
 export default function SimpleFooter() {
-    return (
-        <>
-            <div className="fixed bottom-6 left-0 right-0 flex justify-center gap-2">
-                <div className="w-2 h-2 rounded-full border bg-[#FFD600] border-black dark:border-none"></div>
-                <div className="w-2 h-2 rounded-full border bg-[#A78BFA] border-black dark:border-none"></div>
-                <div className="w-2 h-2 rounded-full border bg-[#2DD4BF] border-black dark:border-none"></div>
-            </div>
-
-        </>
-    );
+  return (
+    <>
+      <div className="fixed right-0 bottom-6 left-0 flex justify-center gap-2">
+        <div className="h-2 w-2 rounded-full border border-black bg-[#FFD600] dark:border-none"></div>
+        <div className="h-2 w-2 rounded-full border border-black bg-[#A78BFA] dark:border-none"></div>
+        <div className="h-2 w-2 rounded-full border border-black bg-[#2DD4BF] dark:border-none"></div>
+      </div>
+    </>
+  );
 }
