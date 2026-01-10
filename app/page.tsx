@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { PROJECTS, SERVICES, PROCESS_STEPS, TECH_STACK } from './constants';
 import { useTheme } from './components/ThemeProvider';
 
@@ -322,12 +323,12 @@ export default function Home() {
                                                 {/* Top Section (Image Only) */}
                                                 <div className="relative h-48 w-full border-b-2 border-black dark:border-white/10">
                                                     <div className="absolute inset-0">
-                                                        <img
-                                                            src={specialImage}
-                                                            alt="Background"
-                                                            className={`w-full h-full object-cover ${(i === 2 || i === 3) ? 'object-[70%_center]' : ''}`}
-                                                        />
-                                                        {/* Subtle gradient for depth, but keep image clear */}
+                                                                                                                    <Image
+                                                                                                                        src={specialImage}
+                                                                                                                        alt="Background"
+                                                                                                                        fill
+                                                                                                                        className={`object-cover ${(i === 2 || i === 3) ? 'object-[70%_center]' : ''}`}
+                                                                                                                    />                                                        {/* Subtle gradient for depth, but keep image clear */}
                                                         {/* Subtle gradient for depth, but keep image clear - REMOVED per user request */}
                                                     </div>
                                                 </div>
@@ -453,7 +454,7 @@ export default function Home() {
                                     <div className="aspect-video overflow-hidden relative
                     bg-gray-200
                     dark:bg-gray-800">
-                                        <img src={p.imageUrl} alt={p.title} className="w-full h-full object-cover transition-all duration-500
+                                        <Image src={p.imageUrl} alt={p.title} fill className="object-cover transition-all duration-500
                                         group-hover:scale-105" />
                                     </div>
 
@@ -565,12 +566,12 @@ export default function Home() {
                     border-black
                     dark:border-white/20 dark:bg-gray-800">
                                         {/* Default Image (Fades out on hover) */}
-                                        <img src="/images/intro_profile.png" alt="Founder"
-                                            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" />
+                                        <Image src="/images/intro_profile.png" alt="Founder" fill
+                                            className="object-cover transition-opacity duration-500 group-hover:opacity-0" />
 
                                         {/* Hover Image (Fades in on hover) */}
-                                        <img src="/images/intro_profile_hover.png" alt="Founder Hover"
-                                            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
+                                        <Image src="/images/intro_profile_hover.png" alt="Founder Hover" fill
+                                            className="object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
                                     </div>
                                     <div className="absolute -bottom-4 -right-4 px-4 py-2 rounded-lg font-black rotate-6 transition-all group-hover:rotate-12
                     bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]

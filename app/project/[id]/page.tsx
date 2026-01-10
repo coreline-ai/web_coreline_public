@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import SimpleHeader from '../../components/SimpleHeader';
 import SimpleFooter from '../../components/SimpleFooter';
@@ -115,10 +116,11 @@ export default function ProjectDetailPage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {project.visualOverview.map((img, index) => (
                                     <div key={index} className="rounded-2xl border-2 overflow-hidden bg-white text-black border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:bg-[#1a1a1a] dark:text-white dark:border-white/20 dark:shadow-none group aspect-video relative">
-                                        <img
+                                        <Image
                                             src={img}
                                             alt={`Visual Overview ${index + 1}`}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            fill
+                                            className="object-cover transition-transform duration-500 group-hover:scale-105"
                                         />
                                     </div>
                                 ))}

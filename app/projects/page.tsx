@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { PROJECTS } from '../constants';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
@@ -60,10 +61,11 @@ export default function ProjectsPage() {
                                     <div className="w-3 h-3 rounded-full bg-green-500 border border-black/10"></div>
                                 </div>
                                 <div className="mt-10 h-full w-full relative">
-                                    <img
+                                    <Image
                                         src="/images/projects_header_right.png"
                                         alt="Team collaboration"
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
                                     {/* Overlay Gradient REMOVED */}
                                 </div>

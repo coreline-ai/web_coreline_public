@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 
@@ -67,8 +68,8 @@ export default function ProfilePage() {
 
                                         {/* Image Container */}
                                         <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gray-300 border-4 border-white/20 relative overflow-hidden">
-                                            <img src="/images/profile_main.png" alt="Profile" className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 group-hover:opacity-0" />
-                                            <img src="/images/profile_hover.png" alt="Profile Hover" className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
+                                            <Image src="/images/profile_main.png" alt="Profile" fill className="object-cover object-top transition-opacity duration-500 group-hover:opacity-0" />
+                                            <Image src="/images/profile_hover.png" alt="Profile Hover" fill className="object-cover object-top transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
                                         </div>
                                     </div>
 

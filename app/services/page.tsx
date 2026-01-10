@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 
@@ -60,10 +61,11 @@ export default function ServicesPage() {
 
                         {/* Right Image */}
                         <div className="rounded-3xl border-4 border-black dark:border-white/20 overflow-hidden shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-none aspect-video relative group">
-                            <img
+                            <Image
                                 src="/images/services_fullstack.png"
                                 alt="Developers working"
-                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                                fill
+                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                             />
                         </div>
                     </div>
@@ -123,7 +125,7 @@ export default function ServicesPage() {
                             </div>
                             <h3 className="text-xl font-bold mb-4">Automated Experience (AX) Design</h3>
                             <p className="text-gray-700 dark:text-gray-300 font-medium text-lg leading-relaxed mb-8">
-                                We don't just add a chatbot. We re-engineer your workflows with intelligent agents. From Large Language Model fine-tuning to vector database implementation, we turn "AI hype" into measurable business automation.
+                                We don&apos;t just add a chatbot. We re-engineer your workflows with intelligent agents. From Large Language Model fine-tuning to vector database implementation, we turn &quot;AI hype&quot; into measurable business automation.
                             </p>
 
                             <ul className="space-y-3 mb-8">
@@ -160,7 +162,7 @@ export default function ServicesPage() {
                                 <h2 className="text-3xl font-black uppercase">AI Infra & Vibe Coding</h2>
                             </div>
                             <p className="text-gray-300 font-medium text-lg leading-relaxed mb-10">
-                                The way we write code has changed. We train your teams to leverage AI-assisted development environments. Master the art of "Vibe Coding"—where intuition meets AI generation.
+                                The way we write code has changed. We train your teams to leverage AI-assisted development environments. Master the art of &quot;Vibe Coding&quot;—where intuition meets AI generation.
                             </p>
                             <div className="flex gap-4 mb-10">
                                 <button className="px-4 py-2 border border-gray-600 rounded bg-gray-800 text-xs font-mono hover:bg-gray-700 transition-colors">
@@ -172,7 +174,7 @@ export default function ServicesPage() {
                             </div>
 
                             <div className="border-l-4 border-[#FFD600] pl-6 py-2">
-                                <p className="font-bold text-lg mb-4 italic">"Our shipping velocity doubled after the Vibe Coding workshop."</p>
+                                <p className="font-bold text-lg mb-4 italic">&quot;Our shipping velocity doubled after the Vibe Coding workshop.&quot;</p>
                                 <div className="flex items-center gap-3">
                                     <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-xs font-bold">JD</div>
                                     <div className="text-xs text-gray-400">Jane Doe, CTO @ TechFlow</div>
@@ -191,9 +193,9 @@ export default function ServicesPage() {
                                 <div className="ml-4 text-gray-400">main.tsx — Cursor</div>
                             </div>
                             <div className="p-6 text-gray-300 overflow-x-auto">
-                                <div className="mb-2"><span className="text-purple-400">import</span> {'{ useState }'} <span className="text-purple-400">from</span> <span className="text-green-400">'react'</span>;</div>
-                                <div className="mb-2"><span className="text-purple-400">import</span> {'{ AI_Agent }'} <span className="text-purple-400">from</span> <span className="text-green-400">'@devforge/ai'</span>;</div>
-                                <div className="mb-4 text-gray-500">// AI Generated Component Logic...</div>
+                                <div className="mb-2"><span className="text-purple-400">import</span> {'{ useState }'} <span className="text-purple-400">from</span> <span className="text-green-400">&apos;react&apos;</span>;</div>
+                                <div className="mb-2"><span className="text-purple-400">import</span> {'{ AI_Agent }'} <span className="text-purple-400">from</span> <span className="text-green-400">&apos;@devforge/ai&apos;</span>;</div>
+                                <div className="mb-4 text-gray-500">{`// AI Generated Component Logic...`}</div>
                                 <div className="mb-1"><span className="text-blue-400">const</span> <span className="text-yellow-400">GeneratedWorkflow</span> = () =&gt; {'{'}</div>
                                 <div className="pl-4 mb-1"><span className="text-purple-400">return</span> &lt;<span className="text-yellow-400">AutomatedView</span> /&gt;;</div>
                                 <div>{'}'}</div>
@@ -234,7 +236,7 @@ export default function ServicesPage() {
                                 <div className="border-4 border-black dark:border-white/20 bg-white dark:bg-[#1a1a1a] p-6 rounded-2xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-none">
                                     <span className="material-symbols-outlined text-4xl text-green-500 mb-3">verified</span>
                                     <h4 className="font-black uppercase mb-2">Quality</h4>
-                                    <p className="text-xs text-gray-500">Codebases that don't need rewriting when you scale.</p>
+                                    <p className="text-xs text-gray-500">Codebases that don&apos;t need rewriting when you scale.</p>
                                 </div>
                             </div>
 
