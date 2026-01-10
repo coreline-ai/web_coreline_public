@@ -39,7 +39,7 @@ export default function ProjectDetailPage() {
 
         <main className="container mx-auto max-w-5xl px-4 pt-24 pb-20">
           {/* Header Card */}
-          <div className="relative mb-16 overflow-hidden rounded-[2rem] border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
+          <div className="relative mb-16 overflow-hidden rounded-[2rem] border border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
             <div className="absolute top-0 right-0 hidden h-24 w-24 rounded-bl-[4rem] bg-[#FFD600] p-0 md:block"></div>
 
             <div className="relative z-10 p-8 md:p-12">
@@ -89,9 +89,9 @@ export default function ProjectDetailPage() {
                 {project.techStack.map((tech, index) => (
                   <div
                     key={index}
-                    className="rounded-2xl border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1 dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none dark:hover:bg-[#222]"
+                    className="rounded-2xl border border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1 dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none dark:hover:bg-[#222]"
                   >
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-[#FFD600] text-black dark:border-transparent dark:bg-[#FFD600] dark:text-black">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-black bg-[#FFD600] text-black dark:border-transparent dark:bg-[#FFD600] dark:text-black">
                       <span className="material-symbols-outlined">{tech.icon}</span>
                     </div>
                     <h3 className="mb-1 text-lg font-black">{tech.name}</h3>
@@ -118,7 +118,7 @@ export default function ProjectDetailPage() {
                 {project.visualOverview.map((img, index) => (
                   <div
                     key={index}
-                    className="group relative aspect-video overflow-hidden rounded-2xl border-2 border-black bg-white text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:text-white dark:shadow-none"
+                    className="group relative aspect-video overflow-hidden rounded-2xl border border-black bg-white text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:text-white dark:shadow-none"
                   >
                     <Image
                       src={img}
@@ -133,7 +133,7 @@ export default function ProjectDetailPage() {
           )}
 
           {/* Project Execution & Features */}
-          <div className="rounded-[2.5rem] border-4 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:p-12 dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
+          <div className="rounded-[2.5rem] border border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:p-12 dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
             <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
               {/* Left Column */}
               <div>
@@ -182,7 +182,7 @@ export default function ProjectDetailPage() {
                   ))}
                 </div>
 
-                <div className="mt-12 border-t-2 border-dashed border-gray-200 pt-8 dark:border-white/10">
+                <div className="mt-12 border-t border-dashed border-gray-200 pt-8 dark:border-white/10">
                   <div className="flex items-center justify-between rounded-xl border-2 border-gray-200 bg-gray-50 p-4 font-mono text-xs dark:border-white/10 dark:bg-black dark:text-gray-400">
                     <span>
                       Status:{' '}

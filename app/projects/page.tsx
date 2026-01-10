@@ -133,10 +133,10 @@ export default function ProjectsPage() {
               {allProjects.map((project, index) => (
                 <div
                   key={`${project.id}-${index}`}
-                  className="group flex h-full flex-col rounded-3xl border-3 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform duration-300 hover:-translate-y-2 dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none"
+                  className="group flex h-full flex-col rounded-3xl border border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform duration-300 hover:-translate-y-2 dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none"
                 >
                   {/* Icon / Thumbnail Area */}
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-black bg-black text-white transition-colors group-hover:bg-[#FFD600] group-hover:text-black dark:border-white/20 dark:bg-[#FFD600] dark:text-black dark:group-hover:bg-[#FFD600] dark:group-hover:text-black">
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-black bg-black text-white transition-colors group-hover:bg-[#FFD600] group-hover:text-black dark:border-white/20 dark:bg-[#FFD600] dark:text-black dark:group-hover:bg-[#FFD600] dark:group-hover:text-black">
                     <span className="material-symbols-outlined text-3xl">
                       {index % 4 === 0
                         ? 'terminal'
@@ -168,7 +168,7 @@ export default function ProjectsPage() {
                     ))}
                   </div>
 
-                  <div className="mt-auto flex items-center justify-between border-t-2 border-dashed border-gray-200 pt-4 dark:border-white/10">
+                  <div className="mt-auto flex items-center justify-between border-t border-dashed border-gray-200 pt-4 dark:border-white/10">
                     <div className="flex items-center gap-1 text-xs font-bold tracking-wide text-gray-400 uppercase">
                       <span className="material-symbols-outlined text-sm">schedule</span>
                       Last commit: {['2d ago', '5h ago', '1w ago', '3d ago'][index % 4]}

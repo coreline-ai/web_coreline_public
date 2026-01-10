@@ -1,12 +1,28 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 
 export default function ServicesPage() {
+  // Handle cross-page anchor navigation on mount
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      // Delay slightly to ensure hydration and layout are stable
+      const timer = setTimeout(() => {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-white font-sans text-black selection:bg-[#FFD600] selection:text-black dark:bg-[#111] dark:text-white">
       <SimpleHeader />
@@ -36,7 +52,7 @@ export default function ServicesPage() {
         {/* SECTION 1: FULL-STACK & MOBILE */}
         <section
           id="fullstack-mobile"
-          className="relative border-b-4 border-black px-4 py-24 dark:border-white/10"
+          className="relative scroll-mt-32 border-b-4 border-black px-4 py-24 dark:border-white/10"
         >
           {/* Grid Background */}
           <div
@@ -138,7 +154,7 @@ export default function ServicesPage() {
         {/* SECTION 2: AI/ML & AX CONSULTING */}
         <section
           id="ai-ml-integration"
-          className="relative border-b-4 border-black bg-[#FEFCE8] px-4 py-24 dark:border-white/10 dark:bg-[#111]"
+          className="relative scroll-mt-32 border-b-4 border-black bg-[#FEFCE8] px-4 py-24 dark:border-white/10 dark:bg-[#111]"
         >
           <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:flex-row-reverse">
             {/* Left Content (Actually Right Content in layout but reversed for grid order if needed, but keeping visual order) */}
@@ -226,7 +242,7 @@ export default function ServicesPage() {
         {/* SECTION 3: AI INFRA & VIBE CODING */}
         <section
           id="vibe-coding"
-          className="relative overflow-hidden border-b-4 border-black bg-[#111827] px-4 py-24 text-white dark:border-white/10"
+          className="relative scroll-mt-32 overflow-hidden border-b-4 border-black bg-[#111827] px-4 py-24 text-white dark:border-white/10"
         >
           <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div>
@@ -310,7 +326,7 @@ export default function ServicesPage() {
         {/* SECTION 4: SENIOR-LED MVP */}
         <section
           id="senior-led-mvp"
-          className="relative border-b-4 border-black px-4 py-24 dark:border-white/10"
+          className="relative scroll-mt-32 border-b-4 border-black px-4 py-24 dark:border-white/10"
         >
           {/* Grid Background */}
           <div

@@ -1,5 +1,5 @@
 'use client';
-// Trigger deploy update
+// Trigger deploy update - v3
 
 import React from 'react';
 import dynamic from 'next/dynamic';
@@ -31,6 +31,9 @@ const ProcessSection = dynamic(() => import('./components/home/ProcessSection'),
 const AboutSection = dynamic(() => import('./components/home/AboutSection'), {
   loading: () => <LoadingSkeleton />,
 });
+const CommunitySection = dynamic(() => import('./components/home/CommunitySection'), {
+  loading: () => <LoadingSkeleton />,
+});
 const ContactSection = dynamic(() => import('./components/home/ContactSection'), {
   loading: () => <LoadingSkeleton />,
 });
@@ -53,6 +56,7 @@ export default function Home() {
         <PortfolioSection />
         <ProcessSection />
         <AboutSection />
+        <CommunitySection />
         <ContactSection />
         <FooterSection />
       </div>

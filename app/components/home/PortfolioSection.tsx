@@ -36,9 +36,9 @@ export default function PortfolioSection() {
             <Link
               href={`/project/${p.id}`}
               key={p.id}
-              className="group block overflow-hidden rounded-[2rem] border-2 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:-translate-y-1 dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none dark:hover:border-gray-500"
+              className="group block overflow-hidden rounded-[2rem] border border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:-translate-y-1 dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none dark:hover:border-gray-500"
             >
-              <div className="flex h-10 items-center gap-2 border-b-2 border-black bg-gray-50 px-4 transition-colors dark:border-white/10 dark:bg-[#1A1A1A]">
+              <div className="flex h-10 items-center gap-2 border-b border-black bg-gray-50 px-4 transition-colors dark:border-white/10 dark:bg-[#1A1A1A]">
                 <div className="h-3 w-3 rounded-full bg-red-400"></div>
                 <div className="h-3 w-3 rounded-full bg-yellow-300"></div>
                 <div className="h-3 w-3 rounded-full bg-green-400"></div>
