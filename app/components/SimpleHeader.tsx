@@ -32,6 +32,12 @@ export default function SimpleHeader() {
                     </span>
                 </button>
 
+                <Link href="/login" className="px-4 py-2 rounded-lg border-2 transition-all active:scale-95
+          bg-white text-black border-black hover:bg-gray-50
+          dark:bg-transparent dark:text-white dark:border-white/30 dark:hover:bg-white/10">
+                    Login
+                </Link>
+
                 <Link href="/signup" className="px-4 py-2 rounded-lg border-2 transition-all active:scale-95
           bg-black text-white border-black hover:bg-white hover:text-black
           dark:bg-white dark:text-black dark:border-transparent dark:hover:bg-[#FFD600]">

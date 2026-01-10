@@ -53,8 +53,23 @@ export default function ProfilePage() {
                                 </div>
 
                                 <div className="flex-1 flex flex-col items-center justify-center p-8 relative z-0">
-                                    <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gray-300 border-4 border-white/20 flex items-center justify-center mb-8 relative">
-                                        <span className="material-symbols-outlined text-6xl text-gray-500">person</span>
+                                    <div className="relative mb-8 group">
+                                        {/* Tooltip */}
+                                        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-max max-w-[280px] bg-white text-black px-4 py-3 rounded-2xl shadow-xl border-2 border-black opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-20 pointer-events-none text-center">
+                                            <p className="text-xs font-bold leading-relaxed">
+                                                반갑습니다.<br />
+                                                저는 <span className="text-[#FFD600] bg-black px-1 rounded">코어라인 AI 비서</span> 입니다.<br />
+                                                무엇을 도와 드릴까요?
+                                            </p>
+                                            {/* Triangle */}
+                                            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-b-2 border-r-2 border-black transform rotate-45"></div>
+                                        </div>
+
+                                        {/* Image Container */}
+                                        <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gray-300 border-4 border-white/20 relative overflow-hidden">
+                                            <img src="/images/profile_main.png" alt="Profile" className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 group-hover:opacity-0" />
+                                            <img src="/images/profile_hover.png" alt="Profile Hover" className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
+                                        </div>
                                     </div>
 
                                     <div className="bg-white text-black px-6 py-3 rounded-xl font-black uppercase tracking-wider text-sm border-4 border-gray-200">
@@ -74,9 +89,9 @@ export default function ProfilePage() {
                                         <p className="text-[10px] text-gray-400">Access detailed project repos</p>
                                     </div>
                                 </div>
-                                <button className="bg-[#FFD600] text-black px-4 py-2 rounded-lg text-xs font-black uppercase hover:bg-yellow-400 transition-colors">
+                                <a href="https://github.com/coreline-ai" target="_blank" rel="noopener noreferrer" className="bg-[#FFD600] text-black px-4 py-2 rounded-lg text-xs font-black uppercase hover:bg-yellow-400 transition-colors">
                                     View Profile
-                                </button>
+                                </a>
                             </div>
                         </div>
 

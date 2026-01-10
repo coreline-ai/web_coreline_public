@@ -274,11 +274,11 @@ export default function Home() {
                     <div className="max-w-[1200px] w-full">
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
                             <div className="flex flex-col gap-4">
-                                <div className="flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest w-fit border-2 transition-all
+                                <Link href="/services" className="flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest w-fit border-2 transition-all cursor-pointer hover:scale-105 active:scale-95
                   bg-black text-white border-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
                   dark:bg-[#FFD600] dark:text-black dark:border-none dark:shadow-none">
                                     <span className="material-symbols-outlined text-sm text-[#FFD600] dark:text-black">stars</span> What We Do
-                                </div>
+                                </Link>
                                 <h2 className="text-4xl md:text-6xl font-black leading-tight">
                                     탁월한 기술력, <br />
                                     <span className="transition-all
@@ -293,35 +293,92 @@ export default function Home() {
                             </p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {SERVICES.map((s) => (
-                                <Link href="/services" key={s.id} className="block p-6 rounded-2xl transition-all group cursor-pointer
-                  bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
-                  dark:bg-[#111] dark:border dark:border-white/10 dark:shadow-none hover:dark:border-[#FFD600] hover:dark:-translate-y-1 hover:dark:translate-x-0">
+                            {SERVICES.map((s, i) => {
+                                // Define images for special cards
+                                const specialImage = i === 0
+                                    ? "/images/service_langchain.png"
+                                    : i === 1
+                                        ? "/images/service_rag.png"
+                                        : i === 2
+                                            ? "/images/service_api.png"
+                                            : i === 3
+                                                ? "/images/service_task.png"
+                                                : null;
 
-                                    <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-all group-hover:scale-110
-                    border-2 border-black
-                    dark:border dark:border-white/10"
-                                        style={{ backgroundColor: s.color }}>
-                                        <span className="material-symbols-outlined text-3xl
-                      text-white
-                      dark:text-white"
-                                            style={{ color: !isDarkMode ? '#fff' : undefined }}>
-                                            {s.icon}
-                                        </span>
-                                    </div>
-                                    <h3 className="text-xl font-black mb-3">{s.title}</h3>
-                                    <p className="font-bold text-sm leading-relaxed
-                    text-gray-600
-                    dark:text-gray-400 dark:font-medium">{s.description}</p>
-                                    <div className="mt-8 flex justify-end">
-                                        <div className="w-8 h-8 flex items-center justify-center transition-colors
-                       text-black
-                       dark:rounded-full dark:bg-white/5 dark:text-white group-hover:dark:bg-[#FFD600] group-hover:dark:text-black">
-                                            <span className="material-symbols-outlined text-lg font-black">arrow_forward</span>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
+                                const linkTarget = i === 0 ? '#fullstack-mobile' :
+                                    i === 1 ? '#ai-ml-integration' :
+                                        i === 2 ? '#vibe-coding' :
+                                            i === 3 ? '#senior-led-mvp' : '';
+
+                                return (
+                                    <Link href={`/services${linkTarget}`} key={s.id} className={`block rounded-2xl transition-all group cursor-pointer relative overflow-hidden flex flex-col h-full
+                  bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+                  dark:bg-[#111] dark:border dark:border-white/10 dark:shadow-none hover:dark:border-[#FFD600] hover:dark:-translate-y-1 hover:dark:translate-x-0
+                  ${specialImage ? 'p-0' : 'p-6 sm:p-8'}`}>
+
+                                        {/* Special Layout for First & Second Card */}
+                                        {specialImage ? (
+                                            <>
+                                                {/* Top Section (Image Only) */}
+                                                <div className="relative h-48 w-full border-b-2 border-black dark:border-white/10">
+                                                    <div className="absolute inset-0">
+                                                        <img
+                                                            src={specialImage}
+                                                            alt="Background"
+                                                            className={`w-full h-full object-cover ${(i === 2 || i === 3) ? 'object-[70%_center]' : ''}`}
+                                                        />
+                                                        {/* Subtle gradient for depth, but keep image clear */}
+                                                        {/* Subtle gradient for depth, but keep image clear - REMOVED per user request */}
+                                                    </div>
+                                                </div>
+
+                                                {/* Bottom Section (Text + Icon) */}
+                                                <div className="p-6 flex flex-col flex-1">
+                                                    {/* Icon Moved Here */}
+                                                    <div className="mb-4">
+                                                        <div className="w-14 h-14 rounded-xl flex items-center justify-center border-2 border-white bg-black/20 backdrop-blur-md shadow-lg transition-colors group-hover:bg-[#FFD600] group-hover:border-[#FFD600] group-hover:bg-opacity-100"
+                                                            style={{ borderColor: s.color }}>
+                                                            <span className="material-symbols-outlined text-3xl text-black/80 dark:text-white transition-colors group-hover:text-black">
+                                                                {s.icon}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <h3 className="text-xl font-black mb-3">{s.title}</h3>
+                                                    <p className="font-bold text-sm leading-relaxed text-gray-600 dark:text-gray-400 dark:font-medium flex-1">
+                                                        {s.description}
+                                                    </p>
+                                                    <div className="mt-6 flex justify-end">
+                                                        <div className="w-8 h-8 flex items-center justify-center transition-colors text-black dark:rounded-full dark:bg-white/5 dark:text-white group-hover:dark:bg-[#FFD600] group-hover:dark:text-black">
+                                                            <span className="material-symbols-outlined text-lg font-black">arrow_forward</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            // Standard Layout for other cards
+                                            <div className="flex flex-col h-full">
+                                                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-all group-hover:scale-110 border-2 border-black dark:border dark:border-white/10"
+                                                    style={{ backgroundColor: s.color }}>
+                                                    <span className="material-symbols-outlined text-3xl text-white dark:text-white"
+                                                        style={{ color: !isDarkMode ? '#fff' : undefined }}>
+                                                        {s.icon}
+                                                    </span>
+                                                </div>
+                                                <h3 className="text-xl font-black mb-3">{s.title}</h3>
+                                                <p className="font-bold text-sm leading-relaxed text-gray-600 dark:text-gray-400 dark:font-medium flex-1">
+                                                    {s.description}
+                                                </p>
+                                                <div className="mt-8 flex justify-end">
+                                                    <div className="w-8 h-8 flex items-center justify-center transition-colors text-black dark:rounded-full dark:bg-white/5 dark:text-white group-hover:dark:bg-[#FFD600] group-hover:dark:text-black">
+                                                        <span className="material-symbols-outlined text-lg font-black">arrow_forward</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </Link>
+                                );
+                            })}
                         </div>
                     </div>
                 </section>
@@ -365,7 +422,12 @@ export default function Home() {
                   dark:border-none dark:shadow-none">
                                     Dashboard / Portfolio
                                 </div>
-                                <h2 className="text-4xl md:text-5xl font-black">주요 프로젝트 사례</h2>
+                                <h2 className="text-4xl md:text-5xl font-black">
+                                    <span className="relative inline-block">
+                                        <span className="relative z-10">주요 프로젝트 사례</span>
+                                        <span className="absolute -bottom-3 left-0 w-full h-2 bg-[#FFD600] z-0 transform -rotate-1 rounded-sm"></span>
+                                    </span>
+                                </h2>
                             </div>
                             <Link href="/projects" className="hidden md:flex items-center gap-2 px-6 py-3 rounded-lg font-black transition-all
                 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]
@@ -430,7 +492,7 @@ export default function Home() {
                 dark:border-gray-700 dark:border-t-2"></div>
 
                             {PROCESS_STEPS.map((step) => (
-                                <div key={step.id} className="relative z-10 flex flex-col items-center group">
+                                <Link href="/services#senior-led-mvp" key={step.id} className="relative z-10 flex flex-col items-center group cursor-pointer">
                                     <div className={`w-20 h-20 border-4 flex items-center justify-center mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform group-hover:scale-110
                     bg-white border-black
                     dark:bg-[#111] dark:border-white/20 dark:shadow-2xl dark:shadow-black dark:group-hover:border-[#FFD600] dark:group-hover:text-[#FFD600]
@@ -448,7 +510,7 @@ export default function Home() {
                                     <p className="text-sm font-bold leading-relaxed max-w-[180px] transition-colors
                     text-gray-500
                     dark:text-gray-500 dark:group-hover:text-gray-300">{step.description}</p>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>
@@ -502,12 +564,18 @@ export default function Home() {
                                     <div className="relative w-full h-full rounded-full border-2 overflow-hidden bg-gray-200 transition-colors
                     border-black
                     dark:border-white/20 dark:bg-gray-800">
-                                        <img src="https://picsum.photos/400/400?grayscale" alt="Founder" className="w-full h-full object-cover" />
+                                        {/* Default Image (Fades out on hover) */}
+                                        <img src="/images/intro_profile.png" alt="Founder"
+                                            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" />
+
+                                        {/* Hover Image (Fades in on hover) */}
+                                        <img src="/images/intro_profile_hover.png" alt="Founder Hover"
+                                            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
                                     </div>
                                     <div className="absolute -bottom-4 -right-4 px-4 py-2 rounded-lg font-black rotate-6 transition-all group-hover:rotate-12
                     bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
                     dark:bg-[#111] dark:text-white dark:border dark:border-white/20 dark:shadow-lg">
-                                        Hello! 👋
+                                        Hello! 👋 I am AI assistant
                                     </div>
                                 </Link>
                             </div>
@@ -530,7 +598,7 @@ export default function Home() {
                   dark:text-gray-500">
                                     초기 컨셉부터 최종 배포까지, 당신의 든든한 엔지니어링 파트너가 되어드리겠습니다.
                                 </p>
-                                <Link href="/contact" className="h-16 px-10 border-2 rounded-xl font-black text-xl flex items-center gap-3 transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none
+                                <Link href="/contact" className="h-16 px-8 w-fit border-2 rounded-xl font-black text-xl flex items-center gap-3 transition-all active:translate-x-[4px] active:translate-y-[4px] active:shadow-none
                   border-white shadow-[6px_6px_0px_0px_white] hover:bg-white hover:text-black
                   dark:border-white dark:shadow-none dark:active:scale-95">
                                     프로젝트 문의하기 <span className="material-symbols-outlined">arrow_forward</span>
@@ -563,11 +631,11 @@ export default function Home() {
                         border-2 border-black placeholder-gray-300 focus:border-[#FFD600] text-black bg-white
                         dark:bg-black dark:border-white/20 dark:text-white dark:font-bold dark:placeholder-gray-700" />
                                         </div>
-                                        <button type="button" className="w-full h-12 font-black text-base rounded-xl border-2 transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none mt-4
+                                        <Link href="/contact" className="w-full h-12 font-black text-base rounded-xl border-2 transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none mt-4 flex items-center justify-center
                       bg-black text-white border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
                       dark:bg-[#FFD600] dark:text-black dark:border-transparent dark:hover:bg-yellow-400 dark:active:scale-95 dark:shadow-none">
                                             문의 보내기
-                                        </button>
+                                        </Link>
                                     </form>
                                 </div>
                             </div>

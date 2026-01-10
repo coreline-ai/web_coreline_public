@@ -1,21 +1,19 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 
 export default function ContactPage() {
-    const [isDarkMode, setIsDarkMode] = useState(true);
-
     return (
-        <div className={`${isDarkMode ? 'dark' : ''}`}>
+        <div className="">
             <div className="min-h-screen font-sans transition-colors duration-300
         bg-white text-black selection:bg-black selection:text-white
         bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:2rem_2rem]
         dark:bg-black dark:text-white dark:selection:bg-[#FFD600] dark:selection:text-black
         dark:bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)]">
 
-                <SimpleHeader isDarkMode={isDarkMode} toggleTheme={() => setIsDarkMode(!isDarkMode)} />
+                <SimpleHeader />
 
                 {/* Main Content */}
                 <main className="min-h-screen flex flex-col items-center justify-center p-4 pt-20">

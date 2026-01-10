@@ -30,9 +30,9 @@ export default function ProjectsPage() {
                             </span>
                             <h1 className="text-5xl md:text-7xl font-black mb-6 leading-[0.9] tracking-tighter">
                                 Coreline Project<br />
-                                <span className="relative inline-block">
+                                <span className="relative inline-block dark:text-[#FFD600]">
                                     Collections
-                                    <span className="absolute bottom-2 left-0 w-full h-3 bg-[#FFD600] -z-10 bg-opacity-80 transform -rotate-1 rounded-sm"></span>
+                                    <span className="absolute -bottom-2 left-0 w-full h-1 bg-[#FFD600] dark:bg-white/90 -z-10 bg-opacity-80 transform -rotate-1 rounded-sm"></span>
                                 </span>
                             </h1>
                             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-lg font-medium leading-relaxed">
@@ -40,11 +40,11 @@ export default function ProjectsPage() {
                             </p>
 
                             <div className="mt-10 flex gap-4">
-                                <button className="px-8 py-4 bg-black text-white font-bold rounded-xl shadow-[6px_6px_0px_0px_#FFD600] border-2 border-black hover:-translate-y-1 transition-transform flex items-center gap-2
+                                <a href="#projects-grid" className="px-8 py-4 bg-black text-white font-bold rounded-xl shadow-[6px_6px_0px_0px_#FFD600] border-2 border-black hover:-translate-y-1 transition-transform flex items-center gap-2
                                     dark:bg-[#FFD600] dark:text-black dark:border-[#FFD600] dark:shadow-none">
                                     Browse Projects
                                     <span className="material-symbols-outlined text-sm">arrow_downward</span>
-                                </button>
+                                </a>
                                 <a href="https://github.com/coreline-ai/web_coreline_public" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-white text-black font-bold rounded-xl border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-transform flex items-center gap-2
                                     dark:bg-transparent dark:text-white dark:border-white/20 dark:shadow-none dark:hover:bg-white/10">
                                     View GitHub
@@ -61,12 +61,11 @@ export default function ProjectsPage() {
                                 </div>
                                 <div className="mt-10 h-full w-full relative">
                                     <img
-                                        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2000"
+                                        src="/images/projects_header_right.png"
                                         alt="Team collaboration"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
-                                    {/* Overlay Gradient */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    {/* Overlay Gradient REMOVED */}
                                 </div>
                             </div>
 
@@ -80,7 +79,7 @@ export default function ProjectsPage() {
                 </section>
 
                 {/* Project Grid Section */}
-                <section className="py-20 px-4 bg-[#FFD600] dark:bg-[#111] border-b-4 border-black dark:border-white/10 relative transition-colors">
+                <section id="projects-grid" className="py-20 px-4 bg-[#FFD600] dark:bg-[#111] border-b-4 border-black dark:border-white/10 relative transition-colors">
                     {/* Grid Background Pattern */}
                     <div className="absolute inset-0 opacity-10 pointer-events-none"
                         style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
@@ -113,7 +112,7 @@ export default function ProjectsPage() {
                                 <div key={`${project.id}-${index}`} className="bg-white dark:bg-[#1a1a1a] rounded-3xl border-3 border-black dark:border-white/20 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-none hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full group">
 
                                     {/* Icon / Thumbnail Area */}
-                                    <div className="w-16 h-16 rounded-2xl border-2 border-black dark:border-white/20 bg-gray-50 dark:bg-black flex items-center justify-center mb-6 group-hover:bg-[#FFD600] dark:group-hover:bg-[#FFD600] text-black dark:text-white dark:group-hover:text-black transition-colors">
+                                    <div className="w-16 h-16 rounded-2xl border-2 border-black dark:border-white/20 bg-black dark:bg-[#FFD600] flex items-center justify-center mb-6 group-hover:bg-[#FFD600] dark:group-hover:bg-[#FFD600] text-white dark:text-black group-hover:text-black dark:group-hover:text-black transition-colors">
                                         <span className="material-symbols-outlined text-3xl">
                                             {index % 4 === 0 ? 'terminal' : index % 4 === 1 ? 'smartphone' : index % 4 === 2 ? 'psychology' : 'shopping_cart'}
                                         </span>
@@ -128,7 +127,7 @@ export default function ProjectsPage() {
                                     {/* Tags */}
                                     <div className="flex flex-wrap gap-2 mb-8 mt-auto">
                                         {project.tags.slice(0, 3).map((tag, i) => (
-                                            <span key={i} className="px-2 py-1 rounded-md border border-black dark:border-white/20 text-[10px] font-bold uppercase bg-white text-black dark:bg-black dark:text-gray-300">
+                                            <span key={i} className="px-2 py-1 rounded-md border border-black dark:border-white/20 text-[10px] font-bold uppercase bg-[#FFD600] text-black dark:bg-black dark:text-gray-300">
                                                 {tag}
                                             </span>
                                         ))}

@@ -1,22 +1,20 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 
 export default function SignUpPage() {
-    const [isDarkMode, setIsDarkMode] = useState(true);
-
     return (
-        <div className={`${isDarkMode ? 'dark' : ''}`}>
+        <div className="">
             <div className="min-h-screen font-sans transition-colors duration-300 overflow-hidden relative
         bg-white text-black selection:bg-black selection:text-white
         bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:2rem_2rem]
         dark:bg-black dark:text-white dark:selection:bg-[#FFD600] dark:selection:text-black
         dark:bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)]">
 
-                <SimpleHeader isDarkMode={isDarkMode} toggleTheme={() => setIsDarkMode(!isDarkMode)} />
+                <SimpleHeader />
 
                 {/* Floating Shapes */}
                 <div className="absolute top-32 left-12 w-24 h-24 rounded-full border-4 border-black bg-[#FFD600] hidden md:block animate-bounce duration-[3000ms]"></div>

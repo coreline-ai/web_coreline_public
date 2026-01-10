@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleFooter from '../components/SimpleFooter';
 
@@ -13,10 +14,10 @@ export default function ServicesPage() {
                 {/* HERO SECTION */}
                 <section className="py-20 px-4 text-center border-b-4 border-black dark:border-white/10 relative overflow-hidden">
                     <div className="max-w-4xl mx-auto relative z-10">
-                        <div className="inline-block bg-[#FFD600] border-2 border-black px-3 py-1 text-xs font-black uppercase mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <div className="inline-block bg-[#FFD600] border-2 border-black px-3 py-1 text-xs font-black uppercase mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:text-black">
                             Variant 2 : Service Matrix
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter mb-8 uppercase">
+                        <h1 className="text-5xl md:text-7xl font-black mb-6 leading-[0.9] tracking-tighter">
                             We Build The Future.<br />
                             Faster Than <span className="underline decoration-4 decoration-[#FFD600] underline-offset-8">Ever.</span>
                         </h1>
@@ -27,13 +28,13 @@ export default function ServicesPage() {
                 </section>
 
                 {/* SECTION 1: FULL-STACK & MOBILE */}
-                <section className="py-24 px-4 border-b-4 border-black dark:border-white/10 relative">
+                <section id="fullstack-mobile" className="py-24 px-4 border-b-4 border-black dark:border-white/10 relative">
                     {/* Grid Background */}
                     <div className="absolute inset-0 opacity-5 pointer-events-none"
                         style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
                     </div>
 
-                    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10 mb-12">
                         {/* Left Content */}
                         <div>
                             <div className="flex items-center gap-3 mb-6">
@@ -55,27 +56,36 @@ export default function ServicesPage() {
                                     ))}
                                 </div>
                             </div>
-
-                            <div className="mt-8 bg-gray-50 dark:bg-[#222] border-l-4 border-purple-500 p-4">
-                                <p className="text-xs font-bold uppercase text-purple-600 dark:text-purple-400 mb-1">Success Story</p>
-                                <h4 className="font-black text-lg mb-1">Multi-App Ecosystem</h4>
-                                <p className="text-sm text-gray-600 dark:text-gray-400">Unified 3 apps into one React Native codebase.</p>
-                            </div>
                         </div>
 
                         {/* Right Image */}
                         <div className="rounded-3xl border-4 border-black dark:border-white/20 overflow-hidden shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-none aspect-video relative group">
                             <img
-                                src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=1600"
+                                src="/images/services_fullstack.png"
                                 alt="Developers working"
                                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                             />
                         </div>
                     </div>
+
+                    {/* Success Stories Grid */}
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
+                        <Link href="/projects" className="block bg-gray-50 dark:bg-[#222] border-l-4 border-purple-500 p-4 transition-transform hover:-translate-y-1 cursor-pointer">
+                            <p className="text-xs font-bold uppercase text-purple-600 dark:text-purple-400 mb-1">Success Story</p>
+                            <h4 className="font-black text-lg mb-1">Multi-App Ecosystem</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Unified 3 apps into one React Native codebase.</p>
+                        </Link>
+
+                        <Link href="/projects" className="block bg-gray-50 dark:bg-[#222] border-l-4 border-blue-500 p-4 transition-transform hover:-translate-y-1 cursor-pointer">
+                            <p className="text-xs font-bold uppercase text-blue-600 dark:text-blue-400 mb-1">Success Story</p>
+                            <h4 className="font-black text-lg mb-1">E-Commerce Platform Scale-up</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Handled 10x traffic surge with optimized Next.js architecture.</p>
+                        </Link>
+                    </div>
                 </section>
 
                 {/* SECTION 2: AI/ML & AX CONSULTING */}
-                <section className="py-24 px-4 bg-[#FEFCE8] dark:bg-[#111] border-b-4 border-black dark:border-white/10 relative">
+                <section id="ai-ml-integration" className="py-24 px-4 bg-[#FEFCE8] dark:bg-[#111] border-b-4 border-black dark:border-white/10 relative">
                     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10 lg:flex-row-reverse">
 
                         {/* Left Content (Actually Right Content in layout but reversed for grid order if needed, but keeping visual order) */}
@@ -129,20 +139,20 @@ export default function ServicesPage() {
                                 ))}
                             </ul>
 
-                            <div className="border-2 border-black dark:border-white/20 bg-white dark:bg-[#1a1a1a] p-4 rounded-xl flex items-center justify-between shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                            <Link href="/projects" className="border-2 border-black dark:border-white/20 bg-white dark:bg-[#1a1a1a] p-4 rounded-xl flex items-center justify-between shadow-sm cursor-pointer hover:shadow-md transition-shadow">
                                 <div>
                                     <p className="text-[10px] font-bold uppercase text-gray-500 mb-1">Recent Deployment</p>
                                     <h4 className="font-bold">Predictive Logistics AI</h4>
                                     <p className="text-xs text-gray-500">SupplyChain Inc. • 35% Efficiency Boost</p>
                                 </div>
                                 <span className="material-symbols-outlined">arrow_outward</span>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </section>
 
                 {/* SECTION 3: AI INFRA & VIBE CODING */}
-                <section className="py-24 px-4 bg-[#111827] text-white border-b-4 border-black dark:border-white/10 relative overflow-hidden">
+                <section id="vibe-coding" className="py-24 px-4 bg-[#111827] text-white border-b-4 border-black dark:border-white/10 relative overflow-hidden">
                     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
                         <div>
                             <div className="flex items-center gap-3 mb-6">
@@ -198,7 +208,7 @@ export default function ServicesPage() {
                 </section>
 
                 {/* SECTION 4: SENIOR-LED MVP */}
-                <section className="py-24 px-4 border-b-4 border-black dark:border-white/10 relative">
+                <section id="senior-led-mvp" className="py-24 px-4 border-b-4 border-black dark:border-white/10 relative">
                     {/* Grid Background */}
                     <div className="absolute inset-0 opacity-5 pointer-events-none"
                         style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
@@ -241,7 +251,7 @@ export default function ServicesPage() {
 
                         {/* CASE STUDY TIMELINE CARD */}
                         <div className="bg-white dark:bg-[#1a1a1a] border-4 border-black dark:border-white/20 rounded-3xl p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-none h-full">
-                            <h4 className="font-bold text-xs uppercase text-gray-500 mb-6">Case Study Timeline: 4 Weeks</h4>
+                            <h4 className="font-bold text-xs uppercase text-gray-500 mb-6">Case Study Timeline: 5 Steps</h4>
 
                             <div className="relative border-l-2 border-gray-200 dark:border-white/10 ml-3 space-y-10 pl-8 py-2">
                                 <div className="relative">
@@ -252,11 +262,32 @@ export default function ServicesPage() {
                                     <h5 className="font-bold">Concept & Scope</h5>
                                 </div>
                                 <div className="relative">
+                                    <span className="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-800 border-2 border-gray-400 dark:border-gray-500 z-10 grid place-items-center">
+                                        <span className="material-symbols-outlined text-[10px] text-gray-500">design_services</span>
+                                    </span>
+                                    <span className="inline-block px-2 py-0.5 bg-purple-100 text-purple-700 text-[10px] font-bold uppercase rounded mb-1">Week 2</span>
+                                    <h5 className="font-bold">Design & Prototype</h5>
+                                </div>
+                                <div className="relative">
+                                    <span className="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-800 border-2 border-gray-400 dark:border-gray-500 z-10 grid place-items-center">
+                                        <span className="material-symbols-outlined text-[10px] text-gray-500">code</span>
+                                    </span>
+                                    <span className="inline-block px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded mb-1">Week 3</span>
+                                    <h5 className="font-bold">Development</h5>
+                                </div>
+                                <div className="relative">
                                     <span className="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-[#FFD600] border-2 border-black z-10 grid place-items-center">
                                         <span className="material-symbols-outlined text-[10px] text-black">rocket</span>
                                     </span>
                                     <span className="inline-block px-2 py-0.5 bg-[#FFD600] text-black text-[10px] font-bold uppercase rounded mb-1 border border-black">Week 4</span>
                                     <h5 className="font-black text-lg">MVP Launch</h5>
+                                </div>
+                                <div className="relative">
+                                    <span className="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-800 border-2 border-gray-400 dark:border-gray-500 z-10 grid place-items-center">
+                                        <span className="material-symbols-outlined text-[10px] text-gray-500">build</span>
+                                    </span>
+                                    <span className="inline-block px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] font-bold uppercase rounded mb-1">Ongoing</span>
+                                    <h5 className="font-bold">Maintenance & Scale</h5>
                                 </div>
                             </div>
                         </div>
@@ -271,9 +302,9 @@ export default function ServicesPage() {
                     </h2>
                     <p className="font-bold text-lg mb-12 dark:text-gray-300">Schedule a free 30-min technical roadmap session with a Lead Architect.</p>
 
-                    <button className="px-8 py-4 bg-[#111] text-white font-black text-lg uppercase rounded-xl border-4 border-white dark:border-[#FFD600] dark:text-[#FFD600] hover:-translate-y-1 hover:shadow-xl transition-all shadow-[6px_6px_0px_0px_rgba(255,255,255,0.5)] dark:shadow-[6px_6px_0px_0px_#FFD600]">
+                    <Link href="/contact" className="inline-block px-8 py-4 bg-[#111] text-white font-black text-lg uppercase rounded-xl border-4 border-white dark:border-[#FFD600] dark:text-white hover:-translate-y-1 transition-all shadow-[6px_6px_0px_0px_rgba(255,255,255,0.5)] dark:shadow-none">
                         Consult with a Senior Developer
-                    </button>
+                    </Link>
                 </section>
 
             </main>

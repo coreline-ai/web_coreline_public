@@ -8,7 +8,7 @@ export const PROJECTS: Project[] = [
         version: 'v2.4.0',
         description: 'A robust, scalable message board solution featuring secure user authentication, real-time updates, and a comprehensive admin dashboard.',
         tags: ['FullStack', 'Next.js', 'Node.js'],
-        imageUrl: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=1000', // Code on screen
+        imageUrl: '/images/project_cases_1.png', // Code on screen
         domain: 'fullstack-coreline.app',
         repoUrl: 'https://github.com/coreline-ai/web_coreline_public',
         techStack: [
@@ -18,8 +18,8 @@ export const PROJECTS: Project[] = [
             { name: 'Docker', icon: 'deployed_code', role: 'DEVOPS', description: 'Containerized deployment for consistency.' }
         ],
         visualOverview: [
-            'https://images.unsplash.com/photo-1551288049-bebda4e38f71',
-            'https://images.unsplash.com/photo-1517694712202-14dd9538aa97'
+            '/images/project_1_overview_1.png',
+            '/images/project_1_overview_2.png'
         ],
         features: [
             { title: 'JWT Authentication', description: 'Secure, stateless token-based auth flow.' },
@@ -39,7 +39,7 @@ export const PROJECTS: Project[] = [
         version: 'v1.2.0',
         description: '다양한 네이티브 앱 개발 프로젝트를 직접 참여하여 경험을 쌓았습니다. 사용자 경험을 최우선으로 고려한 모바일 솔루션입니다.',
         tags: ['Android', 'IOS', 'Flutter'],
-        imageUrl: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&q=80&w=1000', // Mobile app development (Working)
+        imageUrl: '/images/project_cases_2.png', // Mobile app development (Working)
         domain: 'application-coreline.sys',
         repoUrl: '#',
         techStack: [
@@ -62,7 +62,7 @@ export const PROJECTS: Project[] = [
         title: 'AI 솔루션 플랫폼',
         description: 'LLM 기반의 자동화 봇과 데이터 분석 대시보드를 구축하였습니다.',
         tags: ['AI', 'Python', 'LangChain'],
-        imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000', // AI/Futuristic
+        imageUrl: '/images/project_cases_3.png', // AI/Futuristic
         domain: 'ai-coreline.tech',
         techStack: [
             { name: 'LangChain', icon: 'psychology', role: 'AI ORCHESTRATION', description: 'Building context-aware LLM applications.' },
@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
         title: '커머스 최적화 시스템',
         description: '대용량 트래픽을 처리하는 마이크로서비스 기반의 커머스 플랫폼입니다.',
         tags: ['Commerce', 'MSA', 'Docker'],
-        imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000', // Dashboard/Data
+        imageUrl: '/images/project_cases_4.png', // Dashboard/Data
         domain: 'commerce-coreline.store'
     }
 ];
