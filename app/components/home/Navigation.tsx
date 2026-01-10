@@ -42,8 +42,9 @@ export default function Navigation() {
             <button
               onClick={toggleTheme}
               className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10"
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             >
-              <span className="material-symbols-outlined">
+              <span className="material-symbols-outlined" aria-hidden="true">
                 {isDarkMode ? 'light_mode' : 'dark_mode'}
               </span>
             </button>
@@ -60,8 +61,11 @@ export default function Navigation() {
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               className="flex h-10 w-10 items-center justify-center rounded-lg transition-all hover:bg-gray-100 active:scale-95 dark:hover:bg-white/10"
+              aria-label="Open main menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
-              <span className="material-symbols-outlined">menu</span>
+              <span className="material-symbols-outlined" aria-hidden="true">menu</span>
             </button>
           </div>
         </div>
@@ -69,7 +73,13 @@ export default function Navigation() {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[100] flex flex-col bg-white p-6 transition-all duration-300 dark:bg-black">
+        <div
+          id="mobile-menu"
+          className="fixed inset-0 z-[100] flex flex-col bg-white p-6 transition-all duration-300 dark:bg-black"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation"
+        >
           <div className="mb-10 flex items-center justify-between">
             <Link href="/" className="group relative z-50 flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center border-2 border-black bg-[#FFD600] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all group-hover:translate-x-[1px] group-hover:translate-y-[1px] group-hover:shadow-none">
@@ -86,8 +96,9 @@ export default function Navigation() {
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all active:scale-95 dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none"
+              aria-label="Close menu"
             >
-              <span className="material-symbols-outlined">close</span>
+              <span className="material-symbols-outlined" aria-hidden="true">close</span>
             </button>
           </div>
 

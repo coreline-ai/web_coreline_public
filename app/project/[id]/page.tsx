@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import SimpleHeader from '../../components/SimpleHeader';
 import SimpleFooter from '../../components/SimpleFooter';
-import { PROJECTS } from '../../constants';
+import { PROJECTS } from '../../data/projects';
 
 export default function ProjectDetailPage() {
   const params = useParams();

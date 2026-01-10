@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { SERVICES } from '../../constants';
+import { SERVICES } from './services.constants';
 import { useTheme } from '../ThemeProvider';
 
 export default function ServicesSection() {

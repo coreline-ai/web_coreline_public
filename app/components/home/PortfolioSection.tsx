@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { PROJECTS } from '../../constants';
+import { PROJECTS } from '../../data/projects';
 
 export default function PortfolioSection() {
   return (

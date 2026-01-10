@@ -34,20 +34,28 @@ export default function ContactSection() {
                             </h3>
                             <form className="flex flex-col gap-5">
                                 <div>
-                                    <label className="mb-1 block text-[10px] font-black text-black uppercase transition-colors dark:text-gray-500">
+                                    <label
+                                        htmlFor="quick-name"
+                                        className="mb-1 block text-[10px] font-black text-black uppercase transition-colors dark:text-gray-500"
+                                    >
                                         Name
                                     </label>
                                     <input
+                                        id="quick-name"
                                         type="text"
                                         placeholder="홍길동"
                                         className="w-full rounded-xl border-2 border-black bg-white p-4 font-black text-black placeholder-gray-300 transition-all outline-none focus:border-[#FFD600] focus:ring-0 dark:border-white/20 dark:bg-black dark:font-bold dark:text-white dark:placeholder-gray-700"
                                     />
                                 </div>
                                 <div>
-                                    <label className="mb-1 block text-[10px] font-black text-black uppercase transition-colors dark:text-gray-500">
+                                    <label
+                                        htmlFor="quick-email"
+                                        className="mb-1 block text-[10px] font-black text-black uppercase transition-colors dark:text-gray-500"
+                                    >
                                         Email
                                     </label>
                                     <input
+                                        id="quick-email"
                                         type="email"
                                         placeholder="hello@company.com"
                                         className="w-full rounded-xl border-2 border-black bg-white p-4 font-black text-black placeholder-gray-300 transition-all outline-none focus:border-[#FFD600] focus:ring-0 dark:border-white/20 dark:bg-black dark:font-bold dark:text-white dark:placeholder-gray-700"

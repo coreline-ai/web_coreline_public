@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { TECH_STACK } from '../../constants';
+import { TECH_STACK } from './tech-stack.constants';
 
 export default function TechStackSection() {
   return (

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { PROCESS_STEPS } from '../../constants';
+import { PROCESS_STEPS } from './process.constants';
 
 export default function ProcessSection() {
   return (
@@ -26,15 +26,14 @@ export default function ProcessSection() {
               className="group relative z-10 flex cursor-pointer flex-col items-center"
             >
               <div
-                className={`mb-8 flex h-20 w-20 items-center justify-center border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform group-hover:scale-110 dark:border-white/20 dark:bg-[#111] dark:shadow-2xl dark:shadow-black dark:group-hover:border-[#FFD600] dark:group-hover:text-[#FFD600] ${
-                  step.shape === 'circle'
+                className={`mb-8 flex h-20 w-20 items-center justify-center border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform group-hover:scale-110 dark:border-white/20 dark:bg-[#111] dark:shadow-2xl dark:shadow-black dark:group-hover:border-[#FFD600] dark:group-hover:text-[#FFD600] ${step.shape === 'circle'
                     ? 'rounded-full'
                     : step.shape === 'polygon'
                       ? 'rounded-tr-3xl rounded-bl-3xl'
                       : step.shape === 'rect'
                         ? 'border-[#FFD600] bg-[#FFD600] text-black group-hover:text-black dark:border-[#FFD600] dark:bg-[#FFD600] dark:text-black dark:group-hover:text-black'
                         : 'rounded-2xl'
-                }`}
+                  }`}
               >
                 {step.shape === 'rect' ? (
                   <span className="material-symbols-outlined text-3xl">rocket_launch</span>
