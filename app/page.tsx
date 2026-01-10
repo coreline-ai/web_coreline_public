@@ -31,6 +31,9 @@ const ProcessSection = dynamic(() => import('./components/home/ProcessSection'),
 const AboutSection = dynamic(() => import('./components/home/AboutSection'), {
   loading: () => <LoadingSkeleton />,
 });
+const ContactSection = dynamic(() => import('./components/home/ContactSection'), {
+  loading: () => <LoadingSkeleton />,
+});
 const FooterSection = dynamic(() => import('./components/home/FooterSection'), {
   loading: () => <LoadingSkeleton />,
 });
@@ -50,6 +53,7 @@ export default function Home() {
         <PortfolioSection />
         <ProcessSection />
         <AboutSection />
+        <ContactSection />
         <FooterSection />
       </div>
     </div>

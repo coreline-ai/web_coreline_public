@@ -29,7 +29,7 @@ export default function ProfilePage() {
             {/* LEFT COLUMN: Profile Card & Actions */}
             <div className="flex flex-col gap-6 lg:col-span-5">
               {/* Profile Card */}
-              <div className="relative flex aspect-[4/5] flex-col overflow-hidden rounded-3xl border-4 border-black bg-[#111] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)]">
+              <div className="relative flex aspect-[3/4] flex-col overflow-hidden rounded-3xl border-4 border-black bg-[#111] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)]">
                 <div className="absolute top-0 right-0 z-10">
                   <div className="border-b-4 border-l-4 border-black bg-[#FFD600] px-4 py-2 text-xs font-black text-black uppercase">
                     PROFILE
@@ -159,14 +159,13 @@ export default function ProfilePage() {
                   ].map((tech) => (
                     <span
                       key={tech}
-                      className={`rounded-xl border-2 border-black px-4 py-2 text-xs font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] ${
-                        tech === 'Enterprise SDK' ||
-                        tech === 'Android SDK' ||
-                        tech === 'Flutter' ||
-                        tech === 'System Level Tuning'
+                      className={`rounded-xl border-2 border-black px-4 py-2 text-xs font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] ${tech === 'Enterprise SDK' ||
+                          tech === 'Android SDK' ||
+                          tech === 'Flutter' ||
+                          tech === 'System Level Tuning'
                           ? 'bg-[#FFD600] text-black'
                           : 'bg-white text-black'
-                      }`}
+                        }`}
                     >
                       {tech}
                     </span>
