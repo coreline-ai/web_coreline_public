@@ -26,7 +26,7 @@ export default function ContactPage() {
                                 </span>
                             </h1>
                             <p className="text-lg md:text-xl font-bold text-gray-500 dark:text-gray-400 max-w-2xl">
-                                Have a question or want to work together? We'd love to hear from you.
+                                Have a question or want to work together? We&apos;d love to hear from you.
                             </p>
                         </div>
 

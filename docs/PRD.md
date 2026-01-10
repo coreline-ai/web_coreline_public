@@ -1,78 +1,87 @@
-# Product Requirements Document (PRD) - Coreline
+# 제품 요구사항 명세서 (PRD) - Coreline
 
-## 1. Introduction
-**Coreline** is an Engineering-first AI & Software Studio portfolio website. The platform serves as a digital showroom for high-quality engineering services, demonstrating capabilities in AI application, software development, and full-cycle product delivery. It emphasizes a "results-oriented" approach, moving beyond simple prototypes to sustainable, production-ready solutions.
+## 1. 서론
+**Coreline**은 엔지니어링 중심의 AI 및 소프트웨어 스튜디오 포트폴리오 웹사이트입니다. 이 플랫폼은 AI 애플리케이션, 소프트웨어 개발, 전체 제품 수명주기 제공에 대한 역량을 보여주는 고품질 엔지니어링 서비스를 위한 디지털 쇼룸 역할을 합니다. 단순한 프로토타입을 넘어 지속 가능하고 프로덕션 준비가 된 솔루션을 지향하는 "결과 중심" 접근 방식을 강조합니다.
 
-## 2. Goals & Objectives
-- **Brand Identity**: Establish Coreline as a premium, engineering-focused studio.
-- **Showcase Capability**: effectively display past projects, technical expertise, and the rigorous development process.
-- **Lead Generation**: Convert visitors into potential clients through clear calls to action and trust-building content.
-- **SEO & Performance**: Ensure maximum reach and accessibility through technical optimization.
+## 2. 목표 및 목적
+- **브랜드 정체성**: Coreline을 프리미엄, 엔지니어링 중심 스튜디오로 확립합니다.
+- **역량 쇼케이스**: 과거 프로젝트, 기술 전문성 및 엄격한 개발 프로세스를 효과적으로 보여줍니다.
+- **리드 생성**: 명확한 행동 유도(CTA)와 신뢰를 구축하는 콘텐츠를 통해 방문자를 잠재 고객으로 전환합니다.
+- **SEO 및 성능**: 기술 최적화를 통해 최대한의 도달 범위와 접근성을 보장합니다.
 
-## 3. Target Audience
-- Founders and companies needing MVP development with architectural dept.
-- Businesses looking to integrate AI/RAG/LLM solutions into existing workflows.
-- Organizations requiring " Rescue & Recovery" for failing projects or legacy codebases.
+## 3. 대상 고객
+- 아키텍처 깊이가 있는 MVP 개발이 필요한 창업자 및 기업.
+- 기존 워크플로에 AI/RAG/LLM 솔루션을 통합하려는 기업.
+- 실패한 프로젝트나 레거시 코드베이스에 대한 "구조 및 복구"가 필요한 조직.
 
-## 4. Functional Requirements
+## 4. 기능 요구사항
 
-### 4.1. Landing Page Structure
-The application is primarily a single-page landing site containing the following sections:
-1.  **Header**: Sticky navigation with logo and links (Projects, Services, Process, About, Contact).
-2.  **Hero Section**: Strong value proposition ("Engineering First"), subtext, and primary/secondary CTA buttons. Includes a visual preview area.
-3.  **Services**: Grid layout card interface describing core offerings (AI Engineering, Software Development, Architecture, DevOps).
-4.  **Projects (Selected Works)**: Detailed case studies highlighting specific problems, technical solutions, and outcomes. Tags for tech stack used.
-5.  **Process**: Step-by-step visualization of the work methodology (Problem Definition -> Operations).
-6.  **Tech Stack**: Categorized display of technical expertise (Frontend, Backend, AI, Infra).
-7.  **About**: Personal introduction and philosophy of the founder.
-8.  **Contact**: Final call to action with email and project links.
+### 4.1. 랜딩 페이지 구조
+이 애플리케이션은 주로 다음 섹션을 포함하는 단일 페이지 랜딩 사이트입니다.
+1.  **헤더**: 로고와 링크(프로젝트, 서비스, 프로세스, 소개, 연락처)가 있는 고정 내비게이션.
+2.  **히어로 섹션**: 강력한 가치 제안("Engineering First"), 부제, 기본/보조 CTA 버튼. 시각적 미리보기 영역을 포함합니다.
+3.  **서비스**: 핵심 제공 서비스(AI 엔지니어링, 소프트웨어 개발, 아키텍처, DevOps)를 설명하는 그리드 레이아웃 카드 인터페이스.
+4.  **프로젝트 (선별된 작업)**: 특정 문제, 기술적 해결책 및 결과를 강조하는 상세한 사례 연구. 사용된 기술 스택에 대한 태그.
+5.  **프로세스**: 작업 방법론의 단계별 시각화 (문제 정의 -> 운영).
+6.  **기술 스택**: 기술 전문성의 분류된 표시 (프론트엔드, 백엔드, AI, 인프라).
+7.  **소개**: 창업자의 개인적인 소개 및 철학.
+8.  **연락처**: 이메일 및 프로젝트 링크가 포함된 최종 행동 유도.
 
-### 4.2. Navigation & Interactions
-- **Sticky Header**: Remains visible on scroll with backdrop blur.
-- **Smooth Scrolling**: Anchor links to smooth scroll to respective sections.
-- **Responsive Design**: Fully adaptive layout for mobile, tablet, and desktop.
-- **Theme Support**: Light mode centric design (based on code analysis), potentially utilizing `next-themes` for toggling if implemented.
+### 4.2. 내비게이션 및 상호작용
+- **고정 헤더**: 스크롤 시 배경 흐림 효과와 함께 계속 표시됩니다.
+- **부드러운 스크롤**: 각 섹션으로 부드럽게 스크롤되는 앵커 링크.
+- **반응형 디자인**: 모바일, 태블릿, 데스크톱을 위한 완전 적응형 레이아웃.
+- **테마 지원**: 라이트 모드 중심 디자인 (코드 분석 기반), 구현 시 `next-themes`를 사용한 토글 가능성.
 
-### 4.3. SEO & Metadata
-- **Dynamic Metadata**: Title, Description, Keywords customization via Next.js Metadata API.
-- **Open Graph (OG)**: Dynamic generation of social media preview images (`opengraph-image.tsx`).
-- **Structured Data (JSON-LD)**: "Organization" and "Person" schema markup for detailed search engine understanding.
-- **Sitemap & Robots**: Automated generation of `sitemap.xml` and `robots.txt`.
+### 4.3. SEO 및 메타데이터
+- **동적 메타데이터**: Next.js 메타데이터 API를 통한 제목, 설명, 키워드 사용자 정의.
+- **오픈 그래프 (OG)**: 소셜 미디어 미리보기 이미지의 동적 생성 (`opengraph-image.tsx`).
+- **구조화된 데이터 (JSON-LD)**: 상세한 검색 엔진 이해를 위한 "Organization" 및 "Person" 스키마 마크업.
+- **사이트맵 및 로봇**: `sitemap.xml` 및 `robots.txt`의 자동 생성.
 
-## 5. Technical Requirements
+## 5. 기술 요구사항
 
-### 5.1. Core Stack
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Package Manager**: npm/yarn/pnpm (Standard Node ecosystem)
+### 5.1. 핵심 스택
+- **프레임워크**: Next.js 16.1.1 (App Router)
+- **라이브러리**: React 19
+- **언어**: TypeScript
+- **스타일링**: Tailwind CSS
+- **아이콘**: Lucide React
+- **패키지 관리자**: npm/yarn/pnpm (표준 노드 생태계)
 
-### 5.2. Architecture
-- **App Router**: Leveraging React Server Components (RSC) for performance.
-- **Edge Runtime**: Used for Open Graph image generation.
-- **Component-Based**: Modular components (layout, header, cards) for maintainability.
+### 5.2. 아키텍처
+- **App Router**: 성능을 위해 React 서버 컴포넌트(RSC) 활용.
+- **Edge 런타임**: 오픈 그래프 이미지 생성에 사용됩니다.
+- **컴포넌트 기반**: 유지보수를 위한 모듈식 컴포넌트 (레이아웃, 헤더, 카드).
 
-### 5.3. Performance Goals
-- Core Web Vitals optimized (LCP, FID, CLS).
-- Fast First Contentful Paint (FCP) using server-side rendering.
-- Accessible HTML structure (ARIA labels, semantic tags).
+### 5.3. 성능 목표
+- 코어 웹 바이탈 최적화 (LCP, FID, CLS).
+- 서버사이드 렌더링을 사용한 빠른 첫 콘텐츠 페인트(FCP).
+- 접근 가능한 HTML 구조 (ARIA 레이블, 시맨틱 태그).
 
-## 6. Folder Structure Strategy
-```
+### 5.4. 개발 현황 (Current Status) - 2026.01.10 기준
+- **성능 최적화 완료**:
+  - `next/image` 전면 적용으로 이미지 로딩 성능 개선.
+  - `next/font/google` 및 `display: optional`로 폰트 최적화.
+  - `viewport` 메타데이터 설정을 통한 모바일 대응 완료.
+- **코드 품질**: ESLint 설정(`eslint .`) 및 전체 코드 베이스 에러 수정 (Zero Errors).
+- **UI/UX 개선**: 다크 모드 최적화, 헤더 스타일링, 섹션 간 앵커 링크 연결 완료.
+
+## 6. 폴더 구조 전략
+`
 app/
-  layout.tsx        # Global layout with SEO & Providers
-  page.tsx          # Main landing page content
-  globals.css       # Global styles & Tailwind directives
-  sitemap.ts        # Sitemap generator
-  robots.ts         # Robots.txt generator
-  opengraph-image.tsx # Dynamic OG Image
-components/         # Reusable UI components
-public/             # Static assets (favicon, etc.)
-docs/               # Documentation (PRD, Outline, etc.)
-```
+  layout.tsx        # SEO 및 Provider가 포함된 전역 레이아웃
+  page.tsx          # 메인 랜딩 페이지 콘텐츠
+  globals.css       # 전역 스타일 및 Tailwind 지시문
+  sitemap.ts        # 사이트맵 생성기
+  robots.ts         # Robots.txt 생성기
+  opengraph-image.tsx # 동적 OG 이미지
+components/         # 재사용 가능한 UI 컴포넌트
+public/             # 정적 자산 (파비콘 등)
+docs/               # 문서 (PRD, 개요 등)
+`
 
-## 7. Future Considerations
-- Blog/Insights section integration.
-- CMS integration for easier project/service updates.
-- Detailed separate pages for individual case studies if content grows.
+## 7. 향후 고려사항
+- 블로그/인사이트 섹션 통합.
+- 더 쉬운 프로젝트/서비스 업데이트를 위한 CMS 통합.
+- 콘텐츠가 늘어날 경우 개별 사례 연구를 위한 상세한 별도 페이지.

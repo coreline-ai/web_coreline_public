@@ -94,7 +94,7 @@ export default function LoginPage() {
                             <div className="mt-8 flex items-center justify-center gap-2 text-sm font-bold transition-colors
                 text-gray-500
                 dark:text-gray-400">
-                                Don't have an account?
+                                Don&apos;t have an account?
                                 <Link href="/signup" className="px-3 py-1 rounded-lg text-xs font-black border-2 transition-all hover:translate-x-[1px] hover:translate-y-[1px]
                   text-black border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none
                   dark:text-white dark:border-white/20 dark:shadow-none dark:hover:bg-white/10 dark:hover:translate-none">

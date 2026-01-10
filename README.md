@@ -35,6 +35,13 @@
     -   **프로세스 인터랙션**: `어떻게 일하나요?` 프로세스 아이템 클릭 시 관련 서비스 설명으로 이동.
     -   **페이지 내 스크롤**: `모든 프로젝트` 버튼 등 주요 CTA의 스크롤 이동 동작 개선.
 
+-   **🚀 성능 최적화 및 코드 품질 (Performance & Code Quality)**:
+    -   **이미지 최적화**: 모든 `<img>` 태그를 `next/image` 컴포넌트로 교체하여 로딩 속도 및 LCP 성능 대폭 개선.
+    -   **폰트 최적화**: `next/font/google` 도입 및 `display: optional` 설정으로 폰트 로딩 지연 방지.
+    -   **모바일 최적화**: `viewport` 메타데이터 설정을 통해 모바일 기기에서의 정확한 스케일링 보장.
+    -   **코드 무결성**: ESLint 설정(`eslint .`) 및 린트 에러 전수 수정 (Zero Errors).
+
+
 ## �🛠 기술 스택 (Tech Stack)
 
 | Category | Technology | Version | Description |
@@ -123,20 +130,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-## ⭐️ 코드 분석 및 개선 사항 (Code Analysis and Improvements)
-
-### 1. 모바일 환경 분석
-
-*   **반응형 디자인:** 프로젝트는 Tailwind CSS의 반응형 프리픽스(`sm:`, `md:`, `lg:`)를 광범위하게 사용하여 반응형 디자인 원칙이 잘 적용되어 있음을 확인했습니다. 이는 모바일 환경에서 레이아웃이 유동적으로 변화하도록 설계되었음을 의미합니다.
-*   **뷰포트 메타 태그:** 모바일 스케일링에 필수적인 `viewport` 메타 태그가 `app/layout.tsx`에 누락되어 있었습니다. 이 문제를 해결하기 위해 `metadata` 객체에 `viewport: 'width=device-width, initial-scale=1'`를 추가하여 수정했습니다.
-*   **호버 효과:** 터치 기반 기기에서 작동하지 않는 `hover:` 효과가 다수 발견되었으나, 기능적인 문제보다는 사용자 경험에 미묘한 영향을 주는 수준으로 확인되었습니다. (예: 터치 시 효과가 없거나 유지됨)
-*   **이미지 최적화:** `<Image />` 컴포넌트 대신 `<img>` 태그를 직접 사용하여 이미지 최적화 경고가 발생했습니다. 이는 LCP(Largest Contentful Paint)를 늦추고 대역폭을 증가시킬 수 있는 요인이었습니다. Next.js의 `<Image />` 컴포넌트는 이미지 지연 로딩, 반응형 크기 조절, 다양한 이미지 형식 지원 등 자동 최적화를 제공하므로 **모든 `<img>` 태그를 `<Image />` 컴포넌트로 교체**하여 해결했습니다.
-
-### 2. 린팅 및 코드 품질 분석
-
-*   **Next.js `lint` 명령어 부재:** `package.json`에 `next lint` 스크립트가 있었으나, 프로젝트에 설치된 Next.js 버전(`16.1.1`)에는 `lint` 명령어가 존재하지 않았습니다. 이 버전은 Next.js의 표준 버전과는 다른 특이한 버전으로 판단됩니다.
-*   **ESLint 수동 설정:** `next lint` 사용이 불가하여, `eslint` 및 `eslint-config-next`를 설치하고 `extends: ["next", "next/core-web-vitals"]`를 포함하는 `.eslintrc.json` 파일을 생성하여 **수동으로 린팅 환경을 구축**했습니다.
-*   **린팅 경고 해결:**
-    *   **폰트 로딩 경고:** Google Fonts(`Plus Jakarta Sans`, `Noto Sans KR`)는 `next/font/google`을 사용하고 `font-display: 'optional'`을 적용하여 해결했습니다. `Material Symbols Outlined` 아이콘 폰트의 경우 `next/font`의 직접적인 지원 제약으로 `<link>` 태그를 유지하되 `display=optional`을 추가했습니다. 이 경고는 현재 App Router의 특성상 허용 가능한 수준으로 판단됩니다.
-    *   **`<img>` 태그 사용 경고:** `app/page.tsx`, `app/profile/page.tsx`, `app/project/[id]/page.tsx`, `app/projects/page.tsx`, `app/services/page.tsx` 파일에서 발견된 모든 `<img>` 태그를 `<Image />` 컴포넌트로 교체하여 **이미지 최적화 경고를 모두 해결**했습니다.
