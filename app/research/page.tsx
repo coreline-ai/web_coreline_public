@@ -6,40 +6,40 @@ import BoardTemplate from '../components/community/BoardTemplate';
 const MOCK_RESEARCH = [
     {
         id: 201,
-        title: "Enhancing OCR Precision with Vision-Language Models",
-        author: "Researcher_A",
-        date: "Oct 24",
+        title: "비전-언어 모델을 활용한 OCR 정밀도 향상",
+        author: "연구원_A",
+        date: "10월 24일",
         views: "12k",
         isAnnouncement: true,
-        category: "Paper"
+        category: "논문"
     },
     {
         id: 200,
-        title: "Multi-Agent Systems for Automated Code Review",
+        title: "자동 코드 리뷰를 위한 멀티 에이전트 시스템",
         author: "research_lab",
-        date: "Oct 22",
+        date: "10월 22일",
         views: "3.2k",
         hasAttachment: true,
-        category: "Experiment"
+        category: "실험"
     },
     {
         id: 199,
-        title: "Low-Latency Inference Patterns for Edge Devices",
+        title: "엣지 디바이스를 위한 저지연 추론 패턴",
         author: "edge_specialist",
-        date: "Oct 20",
+        date: "10월 20일",
         views: "850",
-        category: "Tech Report"
+        category: "기술리포트"
     }
 ];
 
-const RESEARCH_CATEGORIES = ["Paper", "Experiment", "Tech Report", "Case Study"];
+const RESEARCH_CATEGORIES = ["논문", "실험", "기술리포트", "사례연구"];
 
 export default function ResearchPage() {
     return (
         <BoardTemplate
-            title="AI Research"
+            title="AI 연구소"
             highlightedWord="Lab"
-            description="Exploring the boundaries of artificial intelligence through academic rigor and practical experimentation."
+            description="학술적 엄격함과 실질적인 실험을 통해 인공지능의 경계를 확장합니다."
             posts={MOCK_RESEARCH}
             categories={RESEARCH_CATEGORIES}
         />

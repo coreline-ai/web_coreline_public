@@ -33,7 +33,7 @@ export default function BoardTemplate({
     posts,
     categories
 }: BoardTemplateProps) {
-    const [activeCategory, setActiveCategory] = useState('All');
+    const [activeCategory, setActiveCategory] = useState('전체');
     const [searchQuery, setSearchQuery] = useState('');
 
     return (
@@ -65,13 +65,13 @@ export default function BoardTemplate({
                     <div className="mb-8 flex flex-col items-center justify-between gap-6 md:flex-row">
                         <div className="flex flex-wrap items-center gap-3">
                             <button
-                                onClick={() => setActiveCategory('All')}
-                                className={`h-11 rounded-xl border-2 border-black px-6 font-black transition-all ${activeCategory === 'All'
+                                onClick={() => setActiveCategory('전체')}
+                                className={`h-11 rounded-xl border-2 border-black px-6 font-black transition-all ${activeCategory === '전체'
                                         ? 'bg-black text-white dark:bg-white dark:text-black'
                                         : 'bg-white text-black hover:bg-gray-50 dark:bg-black dark:text-white dark:hover:bg-white/5'
                                     }`}
                             >
-                                All
+                                전체
                             </button>
                             {categories.map((cat) => (
                                 <button
@@ -93,7 +93,7 @@ export default function BoardTemplate({
                             </span>
                             <input
                                 type="text"
-                                placeholder="Search posts..."
+                                placeholder="게시글 검색..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 className="h-12 w-full rounded-2xl border-2 border-black bg-white pl-12 pr-4 font-bold text-black focus:outline-none dark:bg-black dark:text-white dark:border-white/20"
@@ -105,11 +105,11 @@ export default function BoardTemplate({
                     <div className="overflow-hidden rounded-[2rem] border-2 border-black bg-white shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/10 dark:bg-[#111] dark:shadow-none">
                         {/* Table Header */}
                         <div className="grid grid-cols-[60px_1fr_120px_120px_100px] border-b-2 border-black bg-black px-6 py-4 text-[11px] font-black tracking-widest text-white uppercase dark:border-white/10">
-                            <div className="text-center">#</div>
-                            <div>TITLE</div>
-                            <div className="text-center">AUTHOR</div>
-                            <div className="text-center">DATE</div>
-                            <div className="text-center">VIEWS</div>
+                            <div className="text-center">번호</div>
+                            <div>제목</div>
+                            <div className="text-center">작성자</div>
+                            <div className="text-center">날짜</div>
+                            <div className="text-center">조회수</div>
                         </div>
 
                         {/* Table Body */}
@@ -129,7 +129,7 @@ export default function BoardTemplate({
                                     <div className="flex items-center gap-3">
                                         {post.isAnnouncement && (
                                             <span className="rounded-lg border border-black bg-[#FFD600] px-2 py-0.5 text-[10px] font-black text-black">
-                                                Announcement
+                                                공지
                                             </span>
                                         )}
                                         <Link href={`#`} className="text-base font-bold text-black group-hover:underline dark:text-white">
