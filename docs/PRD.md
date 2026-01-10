@@ -89,16 +89,18 @@
 
 ## 6. 폴더 구조 전략
 
-`app/
-  layout.tsx        # SEO 및 Provider가 포함된 전역 레이아웃
-  page.tsx          # 메인 랜딩 페이지 콘텐츠
-  globals.css       # 전역 스타일 및 Tailwind 지시문
-  sitemap.ts        # 사이트맵 생성기
-  robots.ts         # Robots.txt 생성기
+```bash
+app/
+  layout.tsx          # SEO 및 Provider가 포함된 전역 레이아웃
+  page.tsx            # 메인 랜딩 페이지 콘텐츠
+  globals.css         # 전역 스타일 및 Tailwind 지시문
+  sitemap.ts          # 사이트맵 생성기
+  robots.ts           # Robots.txt 생성기
   opengraph-image.tsx # 동적 OG 이미지
-components/         # 재사용 가능한 UI 컴포넌트
-public/             # 정적 자산 (파비콘 등)
-docs/               # 문서 (PRD, 개요 등)`
+components/           # 재사용 가능한 UI 컴포넌트
+public/               # 정적 자산 (파비콘 등)
+docs/                 # 문서 (PRD, 개요 등)
+```
 
 ## 7. 향후 고려사항
 
