@@ -9,7 +9,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.1-cyan.svg?logo=tailwind-css)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-**Coreline**은 엔지니어링 중심의 AI 및 소프트웨어 스튜디오를 위한 포트폴리오 웹사이트입니다. 단순한 프로토타입을 넘어, 지속 가능하고 실제 프로덕션 환경에서 운영 가능한 고품질 솔루션을 제공하는 역량을 보여주기 위해 제작되었습니다. - DEMO 개발 진행 중!
+**Coreline**은 엔지니어링 중심의 AI 및 소프트웨어 스튜디오를 위한 포트폴리오 웹사이트입니다. 단순한 프로토타입을 넘어, 지속 가능하고 실제 프로덕션 환경에서 운영 가능한 고품질 솔루션을 제공하는 역량을 보여주기 위해 제작되었습니다. - Demo Web Page + Backend 개발 진행 중!
 
 **Simple Dev Profile** 여기에 심플 풀스택 페이지 https://github.com/coreline-ai/fullstack_profile_public 참고 하시면 됩니다.
 
