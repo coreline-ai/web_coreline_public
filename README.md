@@ -24,34 +24,34 @@
 -   **다크 모드 지원**: 사용자 선호에 따른 라이트/다크 모드 전환이 가능합니다.
 -   **성능 최적화**: Next.js의 기능을 활용하여 빠른 로딩 속도와 우수한 SEO를 보장합니다.
 
-## � 최신 업데이트 (Recent Updates)
+## 🚀 최신 업데이트 (Recent Updates)
 
-### ⚡️ Latest Changes (2026.01.10)
-- **Component Architecture**: Refactored monolithic `page.tsx` into 8 modular components for better maintainability.
-- **Brand Identity**: Deployed new Logo System (`logo.svg`) across Header, Footer, and Navigation for consistent branding.
-- **Accessibility (a11y)**: Enhanced Screen Reader support with descriptive `alt` text for all project images.
-- **Performance & Health**: Replaced all `<img>` tags with `next/image`, optimized loading, and verified zero runtime errors.
-- **Stability**: Secured build pipeline by locking ESLint dependencies to known stable versions (v8).
-- **Maintenance & Type Safety**:
-    - Enforced strict `tsc` checks (removed `ignoreBuildErrors`).
-    - Standardized Header text to Title Case ("Coreline") across all pages.
-    - Streamlined navigation by removing "Sign Up" from sub-pages.
-    - Enhanced Dark Mode UX with signature yellow key interactions (Login hover).
+### ⚡️ 최근 변경 사항 (2026.01.10)
+- **컴포넌트 아키텍처 (Architecture)**: 거대한 단일 파일이었던 `page.tsx`를 8개의 모듈형 컴포넌트로 리팩토링하여 유지보수성을 대폭 향상시켰습니다.
+- **브랜드 아이덴티티 (Identity)**: 헤더, 푸터, 네비게이션 전반에 새로운 로고 시스템(`logo.svg`)을 적용하여 브랜드 일관성을 확보했습니다.
+- **접근성 강화 (Accessibility)**: 스크린 리더 사용자를 위해 모든 프로젝트 이미지에 상세한 설명(`alt` 텍스트)을 추가했습니다.
+- **성능 및 헬스 체크 (Performance)**: 모든 `<img>` 태그를 `next/image`로 교체하여 로딩 속도를 최적화하고, 런타임 에러 0건을 검증했습니다.
+- **안정성 (Stability)**: ESLint 의존성을 안정적인 버전(v8)으로 고정하여 빌드 파이프라인의 안전성을 확보했습니다.
+- **유지보수 및 타입 안전성 (Type Safety)**:
+    - 엄격한 타입스크립트 검사(`tsc`)를 적용했습니다 (`ignoreBuildErrors` 플래그 제거).
+    - 모든 페이지의 헤더 텍스트를 Title Case ("Coreline")로 통일하여 표준화했습니다.
+    - 서브 페이지에서 불필요한 "Sign Up" 메뉴를 제거하여 사용자 흐름을 간소화했습니다.
+    - 다크 모드에서의 사용자 경험을 개선했습니다 (Login 버튼 호버 시 브랜드 시그니처 옐로우 컬러 적용).
 
-### 🎨 Previous Updates
-- **UI Refinements**: Added signature yellow styles to Collections and Headlines.
-- **Navigation**: Enhanced smooth scrolling and deep linking for Services.
-- **Dark Mode**: Optimized color contrast and visual hierarchy.
+### 🎨 이전 업데이트
+- **UI 개선**: 컬렉션 및 헤드라인에 시그니처 옐로우 스타일을 적용했습니다.
+- **네비게이션**: 부드러운 스크롤 및 서비스 딥 링킹 기능을 강화했습니다.
+- **다크 모드**: 명암비 및 시각적 위계를 최적화했습니다.
 
 ## 🛠 기술 스택 (Tech Stack)
 
-| Category | Technology | Version | Description |
+| 분류 | 기술 | 버전 | 설명 |
 |----------|------------|---------|-------------|
-| **Framework** | Next.js | `^16.1.1` | App Router 기반의 서버 사이드 렌더링 및 정적 생성 |
-| **Library** | React | `^19.2.3` | 최신 리액트 기능 및 Hooks 활용 |
-| **Language** | TypeScript | `~5.8.2` | 정적 타입 시스템을 통한 안정성 확보 |
-| **Styling** | Tailwind CSS | `^4.1.18` | 유틸리티 퍼스트 CSS 프레임워크 |
-| **Package Manager** | npm | - | 의존성 관리 |
+| **프레임워크** | Next.js | `^16.1.1` | App Router 기반의 서버 사이드 렌더링 및 정적 생성 |
+| **라이브러리** | React | `^19.2.3` | 최신 리액트 기능 및 Hooks 활용 |
+| **언어** | TypeScript | `~5.8.2` | 정적 타입 시스템을 통한 안정성 확보 |
+| **스타일링** | Tailwind CSS | `^4.1.18` | 유틸리티 퍼스트 CSS 프레임워크 |
+| **패키지 매니저** | npm | - | 의존성 관리 |
 
 ## 🚀 시작하기 (Getting Started)
 
@@ -89,7 +89,6 @@
 ## 📂 폴더 구조 (Folder Structure)
 
 ```bash
-/
 /
 ├── app/                  # 메인 애플리케이션 (App Router)
 │   ├── components/       # UI 컴포넌트
