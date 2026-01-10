@@ -17,6 +17,7 @@ export interface Project {
     description: string;
     tags: string[];
     imageUrl: string;
+    imageAlt?: string; // Descriptive alt text for accessibility
     domain: string;
     // New detailed fields
     version?: string;

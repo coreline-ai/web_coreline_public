@@ -118,7 +118,7 @@ export default function ProjectDetailPage() {
                                     <div key={index} className="rounded-2xl border-2 overflow-hidden bg-white text-black border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:bg-[#1a1a1a] dark:text-white dark:border-white/20 dark:shadow-none group aspect-video relative">
                                         <Image
                                             src={img}
-                                            alt={`Visual Overview ${index + 1}`}
+                                            alt={`${project.imageAlt || project.title} - Screenshot ${index + 1}`}
                                             fill
                                             className="object-cover transition-transform duration-500 group-hover:scale-105"
                                         />

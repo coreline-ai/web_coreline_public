@@ -26,23 +26,24 @@
 
 ## � 최신 업데이트 (Recent Updates)
 
--   **UI 개선 (UI Refinements)**:
-    -   **헤더 스타일링**: `Collections` 및 `주요 프로젝트 사례` 텍스트에 노란색 강조 라인(Gap 포함) 적용.
-    -   **다크 모드 최적화**: 텍스트 가독성 및 노란색 포인트 컬러 일관성 강화.
-    -   **이미지 업데이트**: 프로젝트 헤더 및 상세 페이지(비주얼 오버뷰) 이미지 추가.
--   **네비게이션 강화 (Enhanced Navigation)**:
-    -   **섹션 링크 연결**: Landing 페이지의 서비스 카드(`What We Do`, 4개 카드) 클릭 시 `/services` 페이지의 해당 섹션으로 정확히 스크롤 이동.
-    -   **프로세스 인터랙션**: `어떻게 일하나요?` 프로세스 아이템 클릭 시 관련 서비스 설명으로 이동.
-    -   **페이지 내 스크롤**: `모든 프로젝트` 버튼 등 주요 CTA의 스크롤 이동 동작 개선.
+### ⚡️ Latest Changes (2026.01.10)
+- **Component Architecture**: Refactored monolithic `page.tsx` into 8 modular components for better maintainability.
+- **Brand Identity**: Deployed new Logo System (`logo.svg`) across Header, Footer, and Navigation for consistent branding.
+- **Accessibility (a11y)**: Enhanced Screen Reader support with descriptive `alt` text for all project images.
+- **Performance & Health**: Replaced all `<img>` tags with `next/image`, optimized loading, and verified zero runtime errors.
+- **Stability**: Secured build pipeline by locking ESLint dependencies to known stable versions (v8).
+- **Maintenance & Type Safety**:
+    - Enforced strict `tsc` checks (removed `ignoreBuildErrors`).
+    - Standardized Header text to Title Case ("Coreline") across all pages.
+    - Streamlined navigation by removing "Sign Up" from sub-pages.
+    - Enhanced Dark Mode UX with signature yellow key interactions (Login hover).
 
--   **🚀 성능 최적화 및 코드 품질 (Performance & Code Quality)**:
-    -   **이미지 최적화**: 모든 `<img>` 태그를 `next/image` 컴포넌트로 교체하여 로딩 속도 및 LCP 성능 대폭 개선.
-    -   **폰트 최적화**: `next/font/google` 도입 및 `display: optional` 설정으로 폰트 로딩 지연 방지.
-    -   **모바일 최적화**: `viewport` 메타데이터 설정을 통해 모바일 기기에서의 정확한 스케일링 보장.
-    -   **코드 무결성**: ESLint 설정(`eslint .`) 및 린트 에러 전수 수정 (Zero Errors).
+### 🎨 Previous Updates
+- **UI Refinements**: Added signature yellow styles to Collections and Headlines.
+- **Navigation**: Enhanced smooth scrolling and deep linking for Services.
+- **Dark Mode**: Optimized color contrast and visual hierarchy.
 
-
-## �🛠 기술 스택 (Tech Stack)
+## 🛠 기술 스택 (Tech Stack)
 
 | Category | Technology | Version | Description |
 |----------|------------|---------|-------------|
@@ -90,17 +91,17 @@
 ```bash
 /
 ├── app/                  # 메인 애플리케이션 (App Router)
-│   ├── components/       # (예정) 재사용 가능한 UI 컴포넌트
-│   ├── constants.tsx     # 프로젝트 상수 데이터 (서비스, 포트폴리오 등)
-│   ├── globals.css       # 전역 스타일 및 Tailwind 설정
-│   ├── layout.tsx        # 루트 레이아웃 (폰트, 메타데이터)
-│   ├── page.tsx          # 메인 랜딩 페이지
-│   └── types.ts          # TypeScript 타입 정의
-├── docs/                 # 프로젝트 문서 (PRD, 기획서 등)
-├── public/               # 정적 파일 (이미지, 폰트 등)
+│   ├── components/       # UI 컴포넌트
+│   │   └── home/         # 메인 페이지 섹션별 컴포넌트 (Hero, Services, etc.)
+│   ├── constants.tsx     # 프로젝트 데이터 및 상수
+│   ├── globals.css       # Tailwind v4 & 커스텀 스타일
+│   ├── layout.tsx        # Root Layout & Theme Provider
+│   ├── page.tsx          # 메인 페이지 (Composition Root)
+│   └── types.ts          # TypeScript 정의
+├── docs/                 # 프로젝트 문서
+├── public/               # 정적 파일
 ├── next.config.mjs       # Next.js 설정
-├── package.json          # 의존성 및 스크립트 정보
-└── tsconfig.json         # TypeScript 설정
+└── package.json          # 의존성 정보
 ```
 
 ## 📜 라이센스 (License)

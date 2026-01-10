@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTheme } from './ThemeProvider';
 
 export default function SimpleHeader() {
@@ -10,13 +11,11 @@ export default function SimpleHeader() {
         <header className="fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-6 border-b-2 transition-colors duration-300
       bg-white border-black
       dark:bg-black/80 dark:backdrop-blur-md dark:border-white/20">
-            <Link href="/" className="flex items-center gap-2">
-                <div className="w-8 h-8 flex items-center justify-center rounded-lg border-2 transition-all duration-300
-          bg-[#FFD600] border-black text-black
-          dark:border-transparent">
-                    <span className="material-symbols-outlined font-black text-sm">terminal</span>
+            <Link href="/" className="flex items-center gap-2 group">
+                <div className="w-8 h-8 bg-[#FFD600] flex items-center justify-center border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-[1px] group-hover:translate-y-[1px] group-hover:shadow-none transition-all">
+                    <Image src="/logo.svg" alt="Coreline Logo" width={20} height={20} className="w-5 h-5" />
                 </div>
-                <span className="text-xl font-black tracking-tighter">Coreline</span>
+                <span className="font-black text-xl tracking-tight hidden md:block">Coreline</span>
             </Link>
             <div className="flex items-center gap-6 font-bold text-sm">
                 <Link href="/" className="hover:underline decoration-2 underline-offset-4 decoration-black dark:decoration-[#FFD600]">HOME</Link>
@@ -34,15 +33,11 @@ export default function SimpleHeader() {
 
                 <Link href="/login" className="px-4 py-2 rounded-lg border-2 transition-all active:scale-95
           bg-white text-black border-black hover:bg-gray-50
-          dark:bg-transparent dark:text-white dark:border-white/30 dark:hover:bg-white/10">
+          dark:bg-transparent dark:text-white dark:border-white/30 dark:hover:bg-[#FFD600] dark:hover:text-black dark:hover:border-[#FFD600]">
                     Login
                 </Link>
 
-                <Link href="/signup" className="px-4 py-2 rounded-lg border-2 transition-all active:scale-95
-          bg-black text-white border-black hover:bg-white hover:text-black
-          dark:bg-white dark:text-black dark:border-transparent dark:hover:bg-[#FFD600]">
-                    Sign Up
-                </Link>
+
             </div>
         </header>
     );

@@ -8,7 +8,8 @@ export const PROJECTS: Project[] = [
         version: 'v2.4.0',
         description: 'A robust, scalable message board solution featuring secure user authentication, real-time updates, and a comprehensive admin dashboard.',
         tags: ['FullStack', 'Next.js', 'Node.js'],
-        imageUrl: '/images/project_cases_1.png', // Code on screen
+        imageUrl: '/images/project_cases_1.png',
+        imageAlt: 'Flask Board Application Admin Dashboard displaying user analytics and real-time charts',
         domain: 'fullstack-coreline.app',
         repoUrl: 'https://github.com/coreline-ai/web_coreline_public',
         techStack: [
@@ -39,7 +40,8 @@ export const PROJECTS: Project[] = [
         version: 'v1.2.0',
         description: '다양한 네이티브 앱 개발 프로젝트를 직접 참여하여 경험을 쌓았습니다. 사용자 경험을 최우선으로 고려한 모바일 솔루션입니다.',
         tags: ['Android', 'IOS', 'Flutter'],
-        imageUrl: '/images/project_cases_2.png', // Mobile app development (Working)
+        imageUrl: '/images/project_cases_2.png',
+        imageAlt: 'Mobile App Development screen showing Flutter code editor and device simulator',
         domain: 'application-coreline.sys',
         repoUrl: '#',
         techStack: [
@@ -62,7 +64,8 @@ export const PROJECTS: Project[] = [
         title: 'AI 솔루션 플랫폼',
         description: 'LLM 기반의 자동화 봇과 데이터 분석 대시보드를 구축하였습니다.',
         tags: ['AI', 'Python', 'LangChain'],
-        imageUrl: '/images/project_cases_3.png', // AI/Futuristic
+        imageUrl: '/images/project_cases_3.png',
+        imageAlt: 'AI Solution Platform interface featuring LangChain node visualization and chatbot analytics',
         domain: 'ai-coreline.tech',
         techStack: [
             { name: 'LangChain', icon: 'psychology', role: 'AI ORCHESTRATION', description: 'Building context-aware LLM applications.' },
@@ -74,7 +77,8 @@ export const PROJECTS: Project[] = [
         title: '커머스 최적화 시스템',
         description: '대용량 트래픽을 처리하는 마이크로서비스 기반의 커머스 플랫폼입니다.',
         tags: ['Commerce', 'MSA', 'Docker'],
-        imageUrl: '/images/project_cases_4.png', // Dashboard/Data
+        imageUrl: '/images/project_cases_4.png',
+        imageAlt: 'E-Commerce System Microservices Dashboard showing traffic capability and Docker container status',
         domain: 'commerce-coreline.store'
     }
 ];

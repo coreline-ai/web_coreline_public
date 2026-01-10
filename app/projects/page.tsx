@@ -63,7 +63,7 @@ export default function ProjectsPage() {
                                 <div className="mt-10 h-full w-full relative">
                                     <Image
                                         src="/images/projects_header_right.png"
-                                        alt="Team collaboration"
+                                        alt="Coreline Team collaborating on project development"
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
