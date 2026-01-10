@@ -18,7 +18,7 @@ const communityData = {
             'AI 안전 서밋 개최 - 보안과 윤리에 대한 글로벌 합의',
             'MS Copilot+ PC 발표 - 하드웨어와 AI의 결합'
         ][i],
-        icon: iconPool[Math.floor(Math.random() * iconPool.length)],
+        icon: iconPool[i % iconPool.length],
         href: `/news/${i + 1}`,
         badges: ['Hot'],
         badgeColor: 'bg-red-400',
@@ -35,7 +35,7 @@ const communityData = {
             '클린 코드와 리팩토링: 유지보수 가능한 소프트웨어',
             'CI/CD 파이프라인 자동화 - GitHub Actions 활용'
         ][i],
-        icon: iconPool[Math.floor(Math.random() * iconPool.length)],
+        icon: iconPool[(i + 4) % iconPool.length],
         href: `/blog/${i + 1}`,
         badges: ['Active'],
         badgeColor: 'bg-green-400',
@@ -52,7 +52,7 @@ const communityData = {
             '머신러닝 모델 모니터링 및 재학습 자동화 구축',
             '연합 학습(Federated Learning) 기술 적용 연구'
         ][i],
-        icon: iconPool[Math.floor(Math.random() * iconPool.length)],
+        icon: iconPool[(i + 8) % iconPool.length],
         href: `/research/${i + 1}`,
         badges: ['Research'],
         badgeColor: 'bg-purple-400',
