@@ -90,16 +90,19 @@
 
 ```bash
 /
+/
 ├── app/                  # 메인 애플리케이션 (App Router)
 │   ├── components/       # UI 컴포넌트
-│   │   └── home/         # 메인 페이지 섹션별 컴포넌트 (Hero, Services, etc.)
+│   │   ├── home/         # 랜딩 페이지 섹션 (Hero, Services, Navigation 등 8개 모듈)
+│   │   ├── SimpleHeader.tsx # 서브 페이지용 헤더
+│   │   └── ThemeProvider.tsx # 다크 모드 Provider
 │   ├── constants.tsx     # 프로젝트 데이터 및 상수
 │   ├── globals.css       # Tailwind v4 & 커스텀 스타일
 │   ├── layout.tsx        # Root Layout & Theme Provider
 │   ├── page.tsx          # 메인 페이지 (Composition Root)
 │   └── types.ts          # TypeScript 정의
-├── docs/                 # 프로젝트 문서
-├── public/               # 정적 파일
+├── docs/                 # 프로젝트 문서 (PRD, PRD_ko)
+├── public/               # 정적 파일 (logo.svg, robots.txt, sitemap.xml)
 ├── next.config.mjs       # Next.js 설정
 └── package.json          # 의존성 정보
 ```
