@@ -13,11 +13,11 @@
     "@tailwindcss/postcss": "^4.1.18",
     "autoprefixer": "^10.4.23",
     "material-symbols": "^0.40.2",
-    "next": "15.1.0",
+    "next": "15.1.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "postcss": "^8.5.1",
-    "tailwindcss": "4.0.0"
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
