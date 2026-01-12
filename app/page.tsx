@@ -1,12 +1,10 @@
-'use client';
-// Trigger deploy update - v6 (Fix 404 & Metadata)
+// Trigger deploy update - v7 (Switch to Server Component)
 
 import React from 'react';
 import dynamic from 'next/dynamic';
 import Navigation from './components/home/Navigation';
 import HeroSection from './components/home/HeroSection';
 import ServicesSection from './components/home/ServicesSection';
-import { useTheme } from './components/ThemeProvider';
 
 const LoadingSkeleton = () => (
   <section className="flex justify-center px-4 py-24">
@@ -42,10 +40,6 @@ const FooterSection = dynamic(() => import('./components/home/FooterSection'), {
 });
 
 export default function Home() {
-  // Use global theme context is mainly used in Navigation/ThemeToggle,
-  // but initializing it here ensures context is available if needed at top level.
-  useTheme();
-
   return (
     <div className="">
       <div className="min-h-screen bg-white font-sans text-black transition-colors duration-300 selection:bg-black selection:text-white dark:bg-black dark:text-white dark:selection:bg-[#FFD600] dark:selection:text-black">
@@ -63,3 +57,4 @@ export default function Home() {
     </div>
   );
 }
+
