@@ -1,6 +1,6 @@
 import './globals.css';
 import { ThemeProvider } from './components/ThemeProvider';
-import type { Metadata, Viewport } from 'next';
+import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Noto_Sans_KR } from 'next/font/google';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -17,23 +17,19 @@ const notoSansKR = Noto_Sans_KR({
   display: 'optional', // Add display option
 });
 
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-};
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://coreline-project.vercel.app'),
   title: 'Coreline | Engineering Studio',
   description:
     'Coreline은 비즈니스 성장을 위한 AI 솔루션과 고성능 소프트웨어를 구축하는 엔지니어링 스튜디오입니다.',
   keywords: 'AI 개발, 소프트웨어 개발, 엔지니어링 스튜디오, MVP 개발, 웹 개발, React, Next.js',
+  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
     type: 'website',
     title: 'Coreline | Engineering Studio',
     description:
       '미래를 코딩하는 엔지니어링 스튜디오. 비즈니스 성장을 위한 AI 솔루션과 강력한 소프트웨어를 구축합니다.',
-    url: 'https://coreline-project.vercel.app',
+    url: 'https://web-coreline-public.vercel.app',
   },
   twitter: {
     card: 'summary_large_image',

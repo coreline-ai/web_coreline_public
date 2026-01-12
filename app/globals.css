@@ -1,7 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@import 'tailwindcss';
+@import 'material-symbols/outlined.css';
+@custom-variant dark (&:where(.dark, .dark *));
 
 body {
   font-family: 'Plus Jakarta Sans', 'Noto Sans KR', sans-serif;
