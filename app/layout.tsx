@@ -18,7 +18,7 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://web-coreline-public.vercel.app'),
+  metadataBase: new URL('https://coreline-project.vercel.app'),
   title: 'Coreline | Engineering Studio',
   description:
     'Coreline은 비즈니스 성장을 위한 AI 솔루션과 고성능 소프트웨어를 구축하는 엔지니어링 스튜디오입니다.',
