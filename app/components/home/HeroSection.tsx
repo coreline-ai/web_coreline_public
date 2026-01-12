@@ -18,7 +18,7 @@ export default function HeroSection() {
             </span>
           </div>
 
-          <h1 className="text-5xl leading-tight font-black tracking-tight break-keep transition-colors md:text-7xl">
+          <h1 className="text-3xl leading-tight font-black tracking-tight break-keep transition-colors sm:text-5xl md:text-7xl">
             미래를 코딩하는{' '}
             <span className="dark:bg-gradient-to-r dark:from-[#FFD600] dark:to-yellow-200 dark:bg-clip-text dark:text-transparent">
               AI

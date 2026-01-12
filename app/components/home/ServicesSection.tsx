@@ -29,9 +29,9 @@ export default function ServicesSection() {
               </span>{' '}
               What We Do
             </Link>
-            <h2 className="text-4xl leading-tight font-black md:text-6xl">
+            <h2 className="text-3xl leading-tight font-black sm:text-4xl md:text-5xl">
               탁월한 기술력, <br />
-              <span className="text-white transition-all [text-shadow:2px_2px_0px_black,-2px_-2px_0px_black,2px_-2px_0px_black,-2px_2px_0px_black] dark:text-[#8B5CF6] dark:[text-shadow:none]">
+              <span className="text-white transition-all [text-shadow:2px_2px_0px_black,-2px_-2px_0px_black,2px_-2px_0px_black,-2px_2px_0px_black] dark:text-[#FFD600] dark:[text-shadow:none]">
                 확실한 결과물.
               </span>
             </h2>

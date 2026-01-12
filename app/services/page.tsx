@@ -24,17 +24,21 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white font-sans text-black selection:bg-[#FFD600] selection:text-black dark:bg-[#111] dark:text-white">
+    <div className="min-h-screen bg-white font-sans text-black selection:bg-[#FFD600] selection:text-black dark:bg-[#111] dark:text-white overflow-x-hidden">
       <SimpleHeader />
 
-      <main className="pt-24">
+      <main>
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden border-b-4 border-black px-4 py-20 text-center dark:border-white/10">
+        <section className="relative overflow-hidden border-b-4 border-black bg-white px-4 pt-32 pb-20 text-center dark:border-white/20 dark:bg-black">
+          {/* Grid Background Pattern - Localized to Hero */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-100 dark:bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)]"></div>
+
+          <div className="pointer-events-none absolute top-20 right-[-10%] h-[300px] w-[300px] rounded-full bg-[#FFD600] opacity-20 blur-[100px] dark:opacity-10"></div>
           <div className="relative z-10 mx-auto max-w-4xl">
             <div className="mb-6 inline-block border-2 border-black bg-[#FFD600] px-3 py-1 text-xs font-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:text-black">
               Variant 2 : Service Matrix
             </div>
-            <h1 className="mb-6 text-5xl leading-[0.9] font-black tracking-tighter md:text-7xl">
+            <h1 className="mb-6 text-4xl leading-[0.9] font-black tracking-tighter sm:text-5xl md:text-7xl">
               We Build The Future.
               <br />
               Faster Than{' '}

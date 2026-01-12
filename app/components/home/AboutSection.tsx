@@ -11,12 +11,12 @@ export default function AboutSection() {
       className="flex scroll-mt-32 justify-center border-b-2 border-black bg-[#FFD600] px-4 py-24 transition-colors duration-300 dark:border-white/10 dark:bg-black"
     >
       <div className="w-full max-w-[1200px]">
-        <div className="relative flex flex-col items-center gap-16 overflow-hidden rounded-[3rem] border-4 border-black bg-white p-10 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all md:p-16 lg:flex-row dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none">
+        <div className="relative flex flex-col items-center gap-16 overflow-hidden rounded-[3rem] border-4 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all sm:p-10 sm:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] md:p-16 lg:flex-row dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none">
           <div className="absolute top-0 right-0 h-32 w-32 translate-x-4 -translate-y-4 rounded-bl-full bg-black transition-colors dark:hidden"></div>
           <div className="pointer-events-none absolute top-0 right-0 hidden h-64 w-64 translate-x-12 -translate-y-12 rounded-full bg-gradient-to-br from-[#FFD600]/10 to-transparent blur-3xl dark:block"></div>
 
           <div className="relative z-10 flex-1">
-            <h3 className="mb-8 text-4xl leading-tight font-black md:text-5xl">
+            <h3 className="mb-8 text-3xl leading-tight font-black sm:text-4xl md:text-5xl">
               엔지니어의{' '}
               <span className="bg-black px-3 py-1 text-white transition-colors dark:bg-transparent dark:px-0 dark:text-[#FFD600]">
                 머리

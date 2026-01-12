@@ -12,9 +12,9 @@ export default function PortfolioSection() {
       className="flex scroll-mt-20 justify-center border-b-2 border-black bg-gray-50 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] px-4 py-24 transition-colors duration-300 dark:border-white/10 dark:bg-black dark:bg-none"
     >
       <div className="w-full max-w-[1200px]">
-        <div className="mb-12 flex items-end justify-between">
+        <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="mb-4 w-fit rounded-lg border-2 border-black bg-[#8B5CF6] px-4 py-1 text-xs font-black tracking-widest text-white uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all dark:border-none dark:shadow-none">
+            <div className="mb-4 w-fit rounded-lg border-2 border-black bg-[#FFD600] px-4 py-1 text-xs font-black tracking-widest text-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all dark:border-white/10 dark:shadow-none">
               Dashboard / Portfolio
             </div>
             <h2 className="text-4xl font-black md:text-5xl">
@@ -26,7 +26,7 @@ export default function PortfolioSection() {
           </div>
           <Link
             href="/projects"
-            className="hidden items-center gap-2 rounded-lg border-2 border-black bg-white px-6 py-3 font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none md:flex dark:border dark:border-white/30 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white dark:hover:text-black"
+            className="flex w-fit items-center gap-2 rounded-lg border-2 border-black bg-[#FFD600] px-6 py-3 font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none dark:border-white/10 dark:shadow-none"
           >
             모든 프로젝트 <span className="material-symbols-outlined">arrow_forward</span>
           </Link>
@@ -36,7 +36,7 @@ export default function PortfolioSection() {
             <Link
               href={`/project/${p.id}`}
               key={p.id}
-              className="group block overflow-hidden rounded-[2rem] border border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:-translate-y-1 dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none dark:hover:border-gray-500"
+              className="group block overflow-hidden rounded-[2rem] border border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:-translate-y-1 sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none dark:hover:border-gray-500"
             >
               <div className="flex h-10 items-center gap-2 border-b border-black bg-gray-50 px-4 transition-colors dark:border-white/10 dark:bg-[#1A1A1A]">
                 <div className="h-3 w-3 rounded-full bg-red-400"></div>

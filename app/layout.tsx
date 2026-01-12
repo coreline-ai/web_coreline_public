@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko" className={`${plusJakartaSans.variable} ${notoSansKR.variable}`}>
       <head></head>
-      <body className="bg-black text-white" suppressHydrationWarning>
+      <body className="bg-black text-white overflow-x-hidden" suppressHydrationWarning>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

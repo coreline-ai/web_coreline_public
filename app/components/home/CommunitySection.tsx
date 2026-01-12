@@ -41,7 +41,7 @@ const communityData = {
         badgeColor: 'bg-green-400',
     })),
     lab: Array.from({ length: 8 }).map((_, i) => ({
-        title: `코어라인 AI 연구소 ${i + 1}`,
+        title: `CI AI 연구소 ${i + 1}`,
         description: [
             '다중 에이전트 협업 시스템 연구 - LangChain 활용',
             '검색 증강 생성(RAG) 프레임워크 정확도 개선 실험',
@@ -105,7 +105,7 @@ export default function CommunitySection() {
                                 : 'border border-black bg-white text-black dark:border-white dark:bg-black dark:text-white'
                                 }`}
                         >
-                            코어라인 AI 연구소
+                            CI AI 연구소
                         </button>
                     </div>
 
