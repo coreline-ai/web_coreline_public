@@ -1,5 +1,5 @@
 'use client';
-// Trigger deploy update - v4 (Fix metadataBase)
+// Trigger deploy update - v6 (Fix 404 & Metadata)
 
 import React from 'react';
 import dynamic from 'next/dynamic';
