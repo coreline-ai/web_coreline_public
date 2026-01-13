@@ -46,7 +46,7 @@ export default function ProjectsPage() {
                   className="flex items-center gap-2 rounded-xl border-2 border-black bg-black px-8 py-4 font-bold text-white shadow-[6px_6px_0px_0px_#FFD600] transition-transform hover:-translate-y-1 dark:border-[#FFD600] dark:bg-[#FFD600] dark:text-black dark:shadow-none"
                 >
                   Browse Projects
-                  <span className="material-symbols-outlined text-sm">arrow_downward</span>
+                  <span className="material-symbols-outlined notranslate text-sm">arrow_downward</span>
                 </a>
                 <a
                   href="https://github.com/coreline-ai/web_coreline_public"
@@ -78,7 +78,7 @@ export default function ProjectsPage() {
               </div>
 
               {/* Floating Badge */}
-              <div className="absolute -bottom-8 -left-8 z-20 rotate-[-5deg] rounded-2xl border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform hover:rotate-0 dark:border-white dark:bg-black dark:shadow-[8px_8px_0px_0px_#FFD600]">
+              <div className="absolute -bottom-8 left-0 translate-x-0 lg:left-[-2rem] z-20 rotate-[-5deg] rounded-2xl border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform hover:rotate-0 dark:border-white dark:bg-black dark:shadow-[8px_8px_0px_0px_#FFD600]">
                 <div className="mb-1 text-4xl font-black">12+</div>
                 <div className="text-[10px] font-bold tracking-widest text-gray-500 uppercase">
                   Live Projects
@@ -122,7 +122,7 @@ export default function ProjectsPage() {
                   placeholder="Search projects..."
                   className="w-full rounded-xl border-2 border-black bg-white px-6 py-4 text-lg font-bold text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder:font-medium focus:translate-x-[2px] focus:translate-y-[2px] focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus:outline-none md:w-[320px]"
                 />
-                <span className="material-symbols-outlined pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-black/50">
+                <span className="material-symbols-outlined notranslate pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-black/50">
                   search
                 </span>
               </div>
@@ -137,7 +137,7 @@ export default function ProjectsPage() {
                 >
                   {/* Icon / Thumbnail Area */}
                   <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-black bg-black text-white transition-colors group-hover:bg-[#FFD600] group-hover:text-black dark:border-white/20 dark:bg-[#FFD600] dark:text-black dark:group-hover:bg-[#FFD600] dark:group-hover:text-black">
-                    <span className="material-symbols-outlined text-3xl">
+                    <span className="material-symbols-outlined notranslate text-3xl">
                       {index % 4 === 0
                         ? 'terminal'
                         : index % 4 === 1
@@ -170,7 +170,7 @@ export default function ProjectsPage() {
 
                   <div className="mt-auto flex items-center justify-between border-t border-dashed border-gray-200 pt-4 dark:border-white/10">
                     <div className="flex items-center gap-1 text-xs font-bold tracking-wide text-gray-400 uppercase">
-                      <span className="material-symbols-outlined text-sm">schedule</span>
+                      <span className="material-symbols-outlined notranslate text-sm">schedule</span>
                       Last commit: {['2d ago', '5h ago', '1w ago', '3d ago'][index % 4]}
                     </div>
                     <Link
@@ -190,7 +190,7 @@ export default function ProjectsPage() {
                 className="inline-flex items-center gap-2 rounded-xl border-2 border-black bg-white px-8 py-4 font-black text-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 dark:border-white/20 dark:bg-[#222] dark:text-white dark:shadow-none"
               >
                 View More Projects
-                <span className="material-symbols-outlined">arrow_forward</span>
+                <span className="material-symbols-outlined notranslate">arrow_forward</span>
               </a>
             </div>
           </div>

@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className={`${plusJakartaSans.variable} ${notoSansKR.variable}`}>
+    <html lang="ko" className={`${plusJakartaSans.variable} ${notoSansKR.variable} overflow-x-hidden`}>
       <head></head>
       <body className="bg-black text-white overflow-x-hidden" suppressHydrationWarning>
         <ThemeProvider>{children}</ThemeProvider>

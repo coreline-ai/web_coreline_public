@@ -44,7 +44,7 @@ export default function Navigation() {
               className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10"
               aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             >
-              <span className="material-symbols-outlined" aria-hidden="true">
+              <span className="material-symbols-outlined notranslate" aria-hidden="true">
                 {isDarkMode ? 'light_mode' : 'dark_mode'}
               </span>
             </button>
@@ -65,7 +65,7 @@ export default function Navigation() {
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
             >
-              <span className="material-symbols-outlined" aria-hidden="true">menu</span>
+              <span className="material-symbols-outlined notranslate" aria-hidden="true">menu</span>
             </button>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function Navigation() {
               className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all active:scale-95 dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none"
               aria-label="Close menu"
             >
-              <span className="material-symbols-outlined" aria-hidden="true">close</span>
+              <span className="material-symbols-outlined notranslate" aria-hidden="true">close</span>
             </button>
           </div>
 
@@ -120,7 +120,7 @@ export default function Navigation() {
               onClick={toggleTheme}
               className="flex h-14 w-full items-center justify-center gap-3 rounded-lg border-2 border-black bg-white text-lg font-bold text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all active:scale-95 dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none"
             >
-              <span className="material-symbols-outlined">
+              <span className="material-symbols-outlined notranslate">
                 {isDarkMode ? 'light_mode' : 'dark_mode'}
               </span>
               {isDarkMode ? '라이트 모드' : '다크 모드'}

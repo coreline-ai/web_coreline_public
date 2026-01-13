@@ -22,7 +22,7 @@ export default function ServicesSection() {
               className="flex w-fit cursor-pointer items-center gap-2 rounded-full border-2 border-white bg-black px-3 py-1 text-xs font-black tracking-widest text-white uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:scale-105 active:scale-95 dark:border-none dark:bg-[#FFD600] dark:text-black dark:shadow-none"
             >
               <span
-                className="material-symbols-outlined text-sm text-[#FFD600] dark:text-black"
+                className="material-symbols-outlined notranslate text-sm text-[#FFD600] dark:text-black"
                 aria-hidden="true"
               >
                 stars
@@ -97,7 +97,7 @@ export default function ServicesSection() {
                           style={{ borderColor: s.color }}
                         >
                           <span
-                            className="material-symbols-outlined text-3xl text-black/80 transition-colors group-hover:text-black dark:text-white"
+                            className="material-symbols-outlined notranslate text-3xl text-black/80 transition-colors group-hover:text-black dark:text-white"
                             aria-hidden="true"
                           >
                             {s.icon}
@@ -112,7 +112,7 @@ export default function ServicesSection() {
                       <div className="mt-6 flex justify-end">
                         <div className="flex h-8 w-8 items-center justify-center text-black transition-colors dark:rounded-full dark:bg-white/5 dark:text-white group-hover:dark:bg-[#FFD600] group-hover:dark:text-black">
                           <span
-                            className="material-symbols-outlined text-lg font-black"
+                            className="material-symbols-outlined notranslate text-lg font-black"
                             aria-hidden="true"
                           >
                             arrow_forward
@@ -129,7 +129,7 @@ export default function ServicesSection() {
                       style={{ backgroundColor: s.color }}
                     >
                       <span
-                        className="material-symbols-outlined text-3xl text-white dark:text-white"
+                        className="material-symbols-outlined notranslate text-3xl text-white dark:text-white"
                         style={{ color: !isDarkMode ? '#fff' : undefined }}
                         aria-hidden="true"
                       >
@@ -143,7 +143,7 @@ export default function ServicesSection() {
                     <div className="mt-8 flex justify-end">
                       <div className="flex h-8 w-8 items-center justify-center text-black transition-colors dark:rounded-full dark:bg-white/5 dark:text-white group-hover:dark:bg-[#FFD600] group-hover:dark:text-black">
                         <span
-                          className="material-symbols-outlined text-lg font-black"
+                          className="material-symbols-outlined notranslate text-lg font-black"
                           aria-hidden="true"
                         >
                           arrow_forward

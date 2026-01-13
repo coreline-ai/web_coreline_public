@@ -70,7 +70,7 @@ export default function ProjectDetailPage() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 rounded-xl border-2 border-black bg-black px-8 py-4 font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none dark:border-transparent dark:bg-white dark:text-black dark:hover:bg-[#FFD600]"
                   >
-                    <span className="material-symbols-outlined">code</span>
+                    <span className="material-symbols-outlined notranslate">code</span>
                     GITHUB REPO
                   </a>
                 )}
@@ -92,7 +92,7 @@ export default function ProjectDetailPage() {
                     className="rounded-2xl border border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1 dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none dark:hover:bg-[#222]"
                   >
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-black bg-[#FFD600] text-black dark:border-transparent dark:bg-[#FFD600] dark:text-black">
-                      <span className="material-symbols-outlined">{tech.icon}</span>
+                      <span className="material-symbols-outlined notranslate">{tech.icon}</span>
                     </div>
                     <h3 className="mb-1 text-lg font-black">{tech.name}</h3>
                     <div className="mb-3 text-[10px] font-bold tracking-wider text-gray-400 uppercase">
@@ -168,7 +168,7 @@ export default function ProjectDetailPage() {
                   {project.features?.map((feature, index) => (
                     <div key={index} className="flex gap-4">
                       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-2 border-black bg-[#2DD4BF] shadow-[2px_2px_0px_0px_black] dark:border-transparent dark:shadow-none">
-                        <span className="material-symbols-outlined text-sm font-bold text-black">
+                        <span className="material-symbols-outlined notranslate text-sm font-bold text-black">
                           check
                         </span>
                       </div>

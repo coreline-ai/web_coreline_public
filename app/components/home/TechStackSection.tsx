@@ -19,7 +19,7 @@ export default function TechStackSection() {
                     key={tech.name}
                     className="flex cursor-default items-center gap-3 rounded-lg border-2 border-black bg-gray-100 px-4 py-2 text-sm font-bold transition-colors hover:bg-[#FFD600] dark:border-transparent dark:bg-white/5 dark:text-gray-300 dark:hover:bg-[#FFD600] dark:hover:text-black"
                   >
-                    <span className="material-symbols-outlined text-lg">{tech.icon}</span>
+                    <span className="material-symbols-outlined notranslate text-lg">{tech.icon}</span>
                     {tech.name}
                   </div>
                 ))}

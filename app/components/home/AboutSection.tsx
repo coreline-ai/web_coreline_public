@@ -12,7 +12,7 @@ export default function AboutSection() {
     >
       <div className="w-full max-w-[1200px]">
         <div className="relative flex flex-col items-center gap-16 overflow-hidden rounded-[3rem] border-4 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all sm:p-10 sm:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] md:p-16 lg:flex-row dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none">
-          <div className="absolute top-0 right-0 h-32 w-32 translate-x-4 -translate-y-4 rounded-bl-full bg-black transition-colors dark:hidden"></div>
+          <div className="absolute top-0 right-0 hidden md:block h-32 w-32 translate-x-4 -translate-y-4 rounded-bl-full bg-black transition-colors dark:hidden"></div>
           <div className="pointer-events-none absolute top-0 right-0 hidden h-64 w-64 translate-x-12 -translate-y-12 rounded-full bg-gradient-to-br from-[#FFD600]/10 to-transparent blur-3xl dark:block"></div>
 
           <div className="relative z-10 flex-1">
@@ -34,14 +34,14 @@ export default function AboutSection() {
                 href="/profile"
                 className="flex items-center gap-2 rounded-xl border-2 border-black bg-gray-50 px-6 py-3 font-black transition-colors hover:-translate-y-1 hover:shadow-md dark:border-white/20 dark:bg-white/5 dark:text-gray-300 dark:hover:bg-white/10"
               >
-                <span className="material-symbols-outlined dark:text-[#FFD600]">check_circle</span>{' '}
+                <span className="material-symbols-outlined notranslate dark:text-[#FFD600]">check_circle</span>{' '}
                 100% 인하우스 팀
               </Link>
               <Link
                 href="/profile"
                 className="flex items-center gap-2 rounded-xl border-2 border-black bg-gray-50 px-6 py-3 font-black transition-colors hover:-translate-y-1 hover:shadow-md dark:border-white/20 dark:bg-white/5 dark:text-gray-300 dark:hover:bg-white/10"
               >
-                <span className="material-symbols-outlined dark:text-[#FFD600]">check_circle</span>{' '}
+                <span className="material-symbols-outlined notranslate dark:text-[#FFD600]">check_circle</span>{' '}
                 투명한 가격 정책
               </Link>
             </div>

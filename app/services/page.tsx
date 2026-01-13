@@ -166,32 +166,32 @@ export default function ServicesPage() {
               <div className="relative rounded-3xl border-4 border-black bg-white p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-purple-100 dark:border-white/10 dark:bg-black dark:hover:bg-purple-900/20">
-                    <span className="material-symbols-outlined mb-2 text-4xl text-purple-600">
+                    <span className="material-symbols-outlined notranslate mb-2 text-4xl text-purple-600">
                       psychology
                     </span>
                     <span className="text-xs font-black uppercase">LLM Integration</span>
                   </div>
                   <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-yellow-100 dark:border-white/10 dark:bg-black dark:hover:bg-yellow-900/20">
-                    <span className="material-symbols-outlined mb-2 text-4xl text-yellow-600">
+                    <span className="material-symbols-outlined notranslate mb-2 text-4xl text-yellow-600">
                       auto_fix_high
                     </span>
                     <span className="text-xs font-black uppercase">Auto-Agents</span>
                   </div>
                   <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-green-100 dark:border-white/10 dark:bg-black dark:hover:bg-green-900/20">
-                    <span className="material-symbols-outlined mb-2 text-4xl text-green-600">
+                    <span className="material-symbols-outlined notranslate mb-2 text-4xl text-green-600">
                       database
                     </span>
                     <span className="text-xs font-black uppercase">RAG Pipelines</span>
                   </div>
                   <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-blue-100 dark:border-white/10 dark:bg-black dark:hover:bg-blue-900/20">
-                    <span className="material-symbols-outlined mb-2 text-4xl text-blue-600">
+                    <span className="material-symbols-outlined notranslate mb-2 text-4xl text-blue-600">
                       chat
                     </span>
                     <span className="text-xs font-black uppercase">Conversational UX</span>
                   </div>
                 </div>
                 <div className="absolute top-1/2 left-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full border-4 border-white bg-black text-white dark:border-[#333]">
-                  <span className="material-symbols-outlined">hub</span>
+                  <span className="material-symbols-outlined notranslate">hub</span>
                 </div>
               </div>
             </div>
@@ -218,7 +218,7 @@ export default function ServicesPage() {
                   'AI Safety & Governance',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-sm font-bold">
-                    <span className="material-symbols-outlined filled text-lg text-purple-600">
+                    <span className="material-symbols-outlined notranslate filled text-lg text-purple-600">
                       check_circle
                     </span>
                     {item}
@@ -237,7 +237,7 @@ export default function ServicesPage() {
                   <h4 className="font-bold">Predictive Logistics AI</h4>
                   <p className="text-xs text-gray-500">SupplyChain Inc. • 35% Efficiency Boost</p>
                 </div>
-                <span className="material-symbols-outlined">arrow_outward</span>
+                <span className="material-symbols-outlined notranslate">arrow_outward</span>
               </Link>
             </div>
           </div>
@@ -316,7 +316,7 @@ export default function ServicesPage() {
                 <div>{'}'}</div>
 
                 <div className="mt-4 flex items-center gap-2 rounded border border-purple-500/30 bg-[#2D2D2D]/50 p-3 text-gray-400">
-                  <span className="material-symbols-outlined text-sm text-purple-400">
+                  <span className="material-symbols-outlined notranslate text-sm text-purple-400">
                     auto_awesome
                   </span>
                   AI Suggestion: Refactor this for higher concurrency?{' '}
@@ -359,7 +359,7 @@ export default function ServicesPage() {
 
               <div className="mb-8 grid grid-cols-2 gap-6">
                 <div className="rounded-2xl border-4 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
-                  <span className="material-symbols-outlined mb-3 text-4xl text-red-500">
+                  <span className="material-symbols-outlined notranslate mb-3 text-4xl text-red-500">
                     rocket_launch
                   </span>
                   <h4 className="mb-2 font-black uppercase">Speed</h4>
@@ -368,7 +368,7 @@ export default function ServicesPage() {
                   </p>
                 </div>
                 <div className="rounded-2xl border-4 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
-                  <span className="material-symbols-outlined mb-3 text-4xl text-green-500">
+                  <span className="material-symbols-outlined notranslate mb-3 text-4xl text-green-500">
                     verified
                   </span>
                   <h4 className="mb-2 font-black uppercase">Quality</h4>
@@ -380,7 +380,7 @@ export default function ServicesPage() {
 
               <div className="flex items-center gap-4 rounded-xl border-4 border-black bg-[#FFD600] p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-[#FFD600]">
-                  <span className="material-symbols-outlined">person</span>
+                  <span className="material-symbols-outlined notranslate">person</span>
                 </div>
                 <div>
                   <h5 className="text-sm font-black text-black uppercase">SENIOR-LED ONLY</h5>
@@ -400,7 +400,7 @@ export default function ServicesPage() {
               <div className="relative ml-3 space-y-10 border-l-2 border-gray-200 py-2 pl-8 dark:border-white/10">
                 <div className="relative">
                   <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800">
-                    <span className="material-symbols-outlined text-[10px] text-gray-500">
+                    <span className="material-symbols-outlined notranslate text-[10px] text-gray-500">
                       search
                     </span>
                   </span>
@@ -411,7 +411,7 @@ export default function ServicesPage() {
                 </div>
                 <div className="relative">
                   <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800">
-                    <span className="material-symbols-outlined text-[10px] text-gray-500">
+                    <span className="material-symbols-outlined notranslate text-[10px] text-gray-500">
                       design_services
                     </span>
                   </span>
@@ -422,7 +422,7 @@ export default function ServicesPage() {
                 </div>
                 <div className="relative">
                   <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800">
-                    <span className="material-symbols-outlined text-[10px] text-gray-500">
+                    <span className="material-symbols-outlined notranslate text-[10px] text-gray-500">
                       code
                     </span>
                   </span>
@@ -433,7 +433,7 @@ export default function ServicesPage() {
                 </div>
                 <div className="relative">
                   <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-black bg-[#FFD600]">
-                    <span className="material-symbols-outlined text-[10px] text-black">rocket</span>
+                    <span className="material-symbols-outlined notranslate text-[10px] text-black">rocket</span>
                   </span>
                   <span className="mb-1 inline-block rounded border border-black bg-[#FFD600] px-2 py-0.5 text-[10px] font-bold text-black uppercase">
                     Week 4
@@ -442,7 +442,7 @@ export default function ServicesPage() {
                 </div>
                 <div className="relative">
                   <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800">
-                    <span className="material-symbols-outlined text-[10px] text-gray-500">
+                    <span className="material-symbols-outlined notranslate text-[10px] text-gray-500">
                       build
                     </span>
                   </span>

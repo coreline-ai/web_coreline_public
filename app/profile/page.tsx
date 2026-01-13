@@ -99,7 +99,7 @@ export default function ProfilePage() {
               <div className="flex items-center justify-between rounded-3xl border-4 border-black bg-[#1a1a1a] p-6 text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:shadow-none">
                 <div className="flex items-center gap-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black">
-                    <span className="material-symbols-outlined text-2xl">code</span>
+                    <span className="material-symbols-outlined notranslate text-2xl">code</span>
                   </div>
                   <div>
                     <h3 className="font-bold">GitHub & Resume</h3>
@@ -243,7 +243,7 @@ export default function ProfilePage() {
           <div className="mb-20 pt-10">
             <div className="mb-8 flex items-center gap-4">
               <div className="flex h-10 w-10 items-center justify-center border-2 border-black bg-[#FFD600] text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-transparent dark:shadow-none">
-                <span className="material-symbols-outlined">manage_search</span>
+                <span className="material-symbols-outlined notranslate">manage_search</span>
               </div>
               <h2 className="text-2xl font-black tracking-widest uppercase">TECHNICAL DEEP DIVE</h2>
             </div>
@@ -252,7 +252,7 @@ export default function ProfilePage() {
               {/* Card 1 */}
               <div className="flex h-full flex-col rounded-3xl border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#111] dark:shadow-none">
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-[#FFD600] text-black dark:border-transparent">
-                  <span className="material-symbols-outlined">memory</span>
+                  <span className="material-symbols-outlined notranslate">memory</span>
                 </div>
                 <h3 className="mb-6 text-xl leading-tight font-black uppercase">
                   Mobile & Platform Tuning
@@ -260,7 +260,7 @@ export default function ProfilePage() {
                 <div className="flex-1 space-y-4">
                   {['Android Framework', 'Custom ROMs', 'Kernel optimization'].map((item) => (
                     <div key={item} className="flex items-center gap-3">
-                      <span className="material-symbols-outlined text-purple-600 dark:text-purple-400">
+                      <span className="material-symbols-outlined notranslate text-purple-600 dark:text-purple-400">
                         check_circle
                       </span>
                       <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
@@ -274,7 +274,7 @@ export default function ProfilePage() {
               {/* Card 2 */}
               <div className="flex h-full flex-col rounded-3xl border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#111] dark:shadow-none">
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-purple-500 text-white dark:border-transparent">
-                  <span className="material-symbols-outlined">apartment</span>
+                  <span className="material-symbols-outlined notranslate">apartment</span>
                 </div>
                 <h3 className="mb-6 text-xl leading-tight font-black uppercase">
                   Enterprise Architecture
@@ -283,7 +283,7 @@ export default function ProfilePage() {
                   {['SDK Design', 'Middleware development', 'Large-scale integration'].map(
                     (item) => (
                       <div key={item} className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[#FFD600]">
+                        <span className="material-symbols-outlined notranslate text-[#FFD600]">
                           check_circle
                         </span>
                         <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
@@ -298,7 +298,7 @@ export default function ProfilePage() {
               {/* Card 3 */}
               <div className="flex h-full flex-col rounded-3xl border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#111] dark:shadow-none">
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-blue-500 text-white dark:border-transparent">
-                  <span className="material-symbols-outlined">layers</span>
+                  <span className="material-symbols-outlined notranslate">layers</span>
                 </div>
                 <h3 className="mb-6 text-xl leading-tight font-black uppercase">
                   Full-Stack Ecosystem
@@ -306,7 +306,7 @@ export default function ProfilePage() {
                 <div className="flex-1 space-y-4">
                   {['Node.js', 'FastAPI', 'Next.js & Mobile Integration'].map((item) => (
                     <div key={item} className="flex items-center gap-3">
-                      <span className="material-symbols-outlined text-[#FFD600]">check_circle</span>
+                      <span className="material-symbols-outlined notranslate text-[#FFD600]">check_circle</span>
                       <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
                         {item}
                       </span>

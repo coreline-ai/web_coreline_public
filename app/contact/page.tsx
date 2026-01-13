@@ -32,7 +32,7 @@ export default function ContactPage() {
                 {/* Inquiry Type - Full Width on Mobile, Half on Desktop */}
                 <div className="md:col-span-2">
                   <label className="mb-3 block flex items-center gap-2 text-xs font-black uppercase transition-colors dark:text-gray-400">
-                    <span className="material-symbols-outlined text-sm">category</span>
+                    <span className="material-symbols-outlined notranslate text-sm">category</span>
                     Inquiry Type
                   </label>
                   <div className="relative">
@@ -44,7 +44,7 @@ export default function ContactPage() {
                       <option>Other (기타)</option>
                     </select>
                     <div className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 transform transition-colors dark:text-white">
-                      <span className="material-symbols-outlined">expand_more</span>
+                      <span className="material-symbols-outlined notranslate">expand_more</span>
                     </div>
                   </div>
                 </div>
@@ -52,7 +52,7 @@ export default function ContactPage() {
                 {/* Full Name */}
                 <div>
                   <label className="mb-3 block flex items-center gap-2 text-xs font-black uppercase transition-colors dark:text-gray-400">
-                    <span className="material-symbols-outlined text-sm">person</span>
+                    <span className="material-symbols-outlined notranslate text-sm">person</span>
                     Full Name
                   </label>
                   <input
@@ -65,7 +65,7 @@ export default function ContactPage() {
                 {/* Email Address */}
                 <div>
                   <label className="mb-3 block flex items-center gap-2 text-xs font-black uppercase transition-colors dark:text-gray-400">
-                    <span className="material-symbols-outlined text-sm">mail</span>
+                    <span className="material-symbols-outlined notranslate text-sm">mail</span>
                     Email Address
                   </label>
                   <input
@@ -78,7 +78,7 @@ export default function ContactPage() {
                 {/* Title (Subject) - Full Width */}
                 <div className="md:col-span-2">
                   <label className="mb-3 block flex items-center gap-2 text-xs font-black uppercase transition-colors dark:text-gray-400">
-                    <span className="material-symbols-outlined text-sm">title</span>
+                    <span className="material-symbols-outlined notranslate text-sm">title</span>
                     Title
                   </label>
                   <input
@@ -91,7 +91,7 @@ export default function ContactPage() {
                 {/* Message - Full Width */}
                 <div className="md:col-span-2">
                   <label className="mb-3 block flex items-center gap-2 text-xs font-black uppercase transition-colors dark:text-gray-400">
-                    <span className="material-symbols-outlined text-sm">edit_note</span>
+                    <span className="material-symbols-outlined notranslate text-sm">edit_note</span>
                     Message
                   </label>
                   <textarea
@@ -104,12 +104,12 @@ export default function ContactPage() {
 
               <div className="my-8 w-full border-t-2 border-dashed border-gray-200 dark:border-white/10"></div>
 
-              <div className="flex justify-end gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <button className="rounded-xl border-2 border-black bg-white px-8 py-4 text-lg font-black text-black transition-all hover:bg-gray-50 dark:border-white/30 dark:bg-transparent dark:text-white dark:hover:bg-white/10">
                   CANCEL
                 </button>
-                <button className="flex items-center gap-2 rounded-xl border-2 border-black bg-black px-8 py-4 text-lg font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transition-all hover:scale-105 active:scale-95 dark:border-transparent dark:bg-white dark:text-black dark:shadow-none dark:hover:bg-[#FFD600]">
-                  SEND MESSAGE <span className="material-symbols-outlined">send</span>
+                <button className="flex items-center justify-center gap-2 rounded-xl border-2 border-black bg-black px-8 py-4 text-lg font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transition-all hover:scale-105 active:scale-95 dark:border-transparent dark:bg-white dark:text-black dark:shadow-none dark:hover:bg-[#FFD600]">
+                  SEND MESSAGE <span className="material-symbols-outlined notranslate hidden sm:inline">send</span>
                 </button>
               </div>
             </div>

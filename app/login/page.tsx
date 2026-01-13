@@ -52,7 +52,7 @@ export default function LoginPage() {
                 </div>
 
                 <button className="flex h-14 w-full items-center justify-center gap-2 rounded-xl border-2 border-black bg-[#FFD600] text-lg font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none dark:border-[#FFD600] dark:bg-[#FFD600] dark:text-black dark:shadow-none dark:hover:translate-none dark:hover:bg-yellow-400">
-                  LOG IN <span className="material-symbols-outlined">arrow_forward</span>
+                  LOG IN <span className="material-symbols-outlined notranslate">arrow_forward</span>
                 </button>
               </form>
 

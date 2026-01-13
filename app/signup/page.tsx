@@ -46,7 +46,7 @@ export default function SignUpPage() {
                       placeholder="jdoe123"
                       className="w-full rounded-xl border-2 border-black bg-gray-50 p-3 pr-10 font-bold text-black placeholder-gray-400 transition-colors focus:border-black focus:ring-0 focus:outline-none dark:border-white/20 dark:bg-black dark:text-white dark:placeholder-gray-700 dark:focus:border-[#FFD600]"
                     />
-                    <span className="material-symbols-outlined absolute top-1/2 right-3 -translate-y-1/2 text-black dark:text-gray-500">
+                    <span className="material-symbols-outlined notranslate absolute top-1/2 right-3 -translate-y-1/2 text-black dark:text-gray-500">
                       person
                     </span>
                   </div>
@@ -62,7 +62,7 @@ export default function SignUpPage() {
                       placeholder="name@company.com"
                       className="w-full rounded-xl border-2 border-black bg-gray-50 p-3 pr-10 font-bold text-black placeholder-gray-400 transition-colors focus:border-black focus:ring-0 focus:outline-none dark:border-white/20 dark:bg-black dark:text-white dark:placeholder-gray-700 dark:focus:border-[#FFD600]"
                     />
-                    <span className="material-symbols-outlined absolute top-1/2 right-3 -translate-y-1/2 text-black dark:text-gray-500">
+                    <span className="material-symbols-outlined notranslate absolute top-1/2 right-3 -translate-y-1/2 text-black dark:text-gray-500">
                       mail
                     </span>
                   </div>
@@ -78,7 +78,7 @@ export default function SignUpPage() {
                       placeholder="........"
                       className="w-full rounded-xl border-2 border-black bg-gray-50 p-3 pr-10 font-bold text-black placeholder-gray-400 transition-colors focus:border-black focus:ring-0 focus:outline-none dark:border-white/20 dark:bg-black dark:text-white dark:placeholder-gray-700 dark:focus:border-[#FFD600]"
                     />
-                    <span className="material-symbols-outlined absolute top-1/2 right-3 -translate-y-1/2 text-gray-400">
+                    <span className="material-symbols-outlined notranslate absolute top-1/2 right-3 -translate-y-1/2 text-gray-400">
                       visibility_off
                     </span>
                   </div>

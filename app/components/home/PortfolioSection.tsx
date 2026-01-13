@@ -28,7 +28,7 @@ export default function PortfolioSection() {
             href="/projects"
             className="flex w-fit items-center gap-2 rounded-lg border-2 border-black bg-[#FFD600] px-6 py-3 font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none dark:border-white/10 dark:shadow-none"
           >
-            모든 프로젝트 <span className="material-symbols-outlined">arrow_forward</span>
+            모든 프로젝트 <span className="material-symbols-outlined notranslate">arrow_forward</span>
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">

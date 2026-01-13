@@ -113,7 +113,7 @@ export default function CommunitySection() {
                         href="/login"
                         className="flex h-12 items-center gap-2 rounded-xl border border-black bg-[#FFD600] px-6 font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                     >
-                        <span className="material-symbols-outlined">add</span>
+                        <span className="material-symbols-outlined notranslate">add</span>
                         포스트 추가하기
                     </Link>
                 </div>
@@ -129,7 +129,7 @@ export default function CommunitySection() {
                             <div>
                                 <div className="mb-6 flex items-start justify-between">
                                     <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all group-hover:scale-110 group-hover:bg-[#FFD600] dark:border-white dark:bg-black dark:text-white dark:shadow-none dark:group-hover:text-black">
-                                        <span className="material-symbols-outlined text-3xl">{item.icon}</span>
+                                        <span className="material-symbols-outlined notranslate text-3xl">{item.icon}</span>
                                     </div>
                                     {item.badges.map((badge: string) => (
                                         <span
@@ -156,7 +156,7 @@ export default function CommunitySection() {
                         className="group flex items-center gap-3 rounded-xl border border-black bg-white px-8 py-4 font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1 hover:bg-[#FFD600] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none dark:border-white dark:bg-black dark:text-white dark:hover:bg-[#FFD600] dark:hover:text-black"
                     >
                         더보기
-                        <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">
+                        <span className="material-symbols-outlined notranslate transition-transform group-hover:translate-x-1">
                             arrow_forward
                         </span>
                     </Link>

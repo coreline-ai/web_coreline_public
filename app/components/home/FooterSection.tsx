@@ -30,7 +30,7 @@ export default function FooterSection() {
       {/* Main Footer Content */}
       <div className="w-full bg-gray-50 pt-24 pb-24 text-black transition-colors duration-300 dark:bg-[#111] dark:text-white">
         <div className="mx-auto max-w-[1200px] px-6">
-          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-12">
+          <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:items-start gap-12">
             {/* Left Side: Brand & Description & Social Icons */}
             <div className="max-w-[320px]">
               <Link href="/" className="group mb-8 flex w-fit items-center gap-3">
@@ -45,12 +45,12 @@ export default function FooterSection() {
                 </div>
                 <span className="text-2xl font-black tracking-tight text-black dark:text-white">Coreline</span>
               </Link>
-              <p className="mb-10 text-gray-500 text-sm leading-relaxed font-medium dark:text-gray-400">
+              <p className="mb-10 text-gray-500 text-sm leading-relaxed font-medium dark:text-gray-400 text-center lg:text-left">
                 A modern engineering studio for AI solutions, built with passion and code. We believe in open communication and vibrant collaboration.
               </p>
 
               {/* Social Icons */}
-              <div className="flex gap-3">
+              <div className="flex gap-3 justify-center lg:justify-start">
                 <Link
                   href="#"
                   className="flex h-10 w-10 items-center justify-center rounded-lg bg-white border border-gray-200 text-black hover:scale-105 hover:border-gray-300 transition-all dark:bg-white dark:border-transparent dark:text-black"
@@ -76,7 +76,7 @@ export default function FooterSection() {
             </div>
 
             {/* Right Side: 3 Columns of Links */}
-            <div className="flex gap-12 md:gap-20 lg:gap-24 text-left">
+            <div className="flex w-full justify-center gap-10 md:w-auto md:justify-start md:gap-20 lg:gap-24 text-center md:text-left">
               {/* Column 1: Navigation */}
               <div>
                 <h3 className="mb-6 inline-block rounded-md bg-black px-3 py-1 text-xs font-black tracking-widest text-[#FFD600] uppercase dark:bg-transparent dark:p-0">

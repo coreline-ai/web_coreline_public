@@ -25,8 +25,7 @@ export default function HeroSection() {
             </span>
             <br />
             <span className="relative inline-block">
-              <span className="absolute inset-x-0 bottom-2 -z-10 h-4 -rotate-2 bg-[#FFD600] dark:hidden"></span>
-              <span className="dark:bg-gradient-to-r dark:from-[#FFD600] dark:to-yellow-200 dark:bg-clip-text dark:text-transparent">
+              <span className="inline-block bg-[#FFD600] px-2 text-black dark:text-black">
                 엔지니어링
               </span>
             </span>{' '}
@@ -44,7 +43,7 @@ export default function HeroSection() {
               className="flex h-14 items-center gap-3 rounded-xl border-2 border-black bg-black px-8 text-lg font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95 dark:bg-[#FFD600] dark:text-black dark:shadow-none dark:hover:translate-none dark:hover:bg-yellow-400"
             >
               서비스 보기{' '}
-              <span className="material-symbols-outlined" aria-hidden="true">
+              <span className="material-symbols-outlined notranslate" aria-hidden="true">
                 arrow_forward
               </span>
             </Link>
@@ -54,7 +53,7 @@ export default function HeroSection() {
               rel="noopener noreferrer"
               className="flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-black bg-white px-8 text-lg font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95 dark:border dark:border-white/30 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10"
             >
-              <span className="material-symbols-outlined" aria-hidden="true">
+              <span className="material-symbols-outlined notranslate" aria-hidden="true">
                 hub
               </span>{' '}
               GIT HUB
@@ -100,7 +99,7 @@ export default function HeroSection() {
                 ))}
               </div>
               <span
-                className="material-symbols-outlined animate-pulse text-black/10 dark:text-white/50"
+                className="material-symbols-outlined notranslate animate-pulse text-black/10 dark:text-white/50"
                 style={{ fontSize: '200px' }}
                 aria-hidden="true"
               >
@@ -111,7 +110,7 @@ export default function HeroSection() {
             <div className="absolute right-6 bottom-6 left-6 rounded-xl border-2 border-black bg-white p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] transition-all dark:border dark:border-white/10 dark:bg-[#222]/90 dark:shadow-none dark:backdrop-blur-md">
               <div className="flex items-center gap-4">
                 <span
-                  className="material-symbols-outlined text-black dark:text-[#FFD600]"
+                  className="material-symbols-outlined notranslate text-black dark:text-[#FFD600]"
                   aria-hidden="true"
                 >
                   smart_toy

@@ -36,7 +36,7 @@ export default function ProcessSection() {
                   }`}
               >
                 {step.shape === 'rect' ? (
-                  <span className="material-symbols-outlined text-3xl">rocket_launch</span>
+                  <span className="material-symbols-outlined notranslate text-3xl">rocket_launch</span>
                 ) : (
                   <span className="text-3xl font-black">{step.number}</span>
                 )}

@@ -28,7 +28,7 @@ export default function SimpleHeader() {
           onClick={toggleTheme}
           className="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] active:shadow-none dark:border-white/30 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10"
         >
-          <span className="material-symbols-outlined text-[18px]">
+          <span className="material-symbols-outlined notranslate text-[18px]">
             {isDarkMode ? 'light_mode' : 'dark_mode'}
           </span>
         </button>

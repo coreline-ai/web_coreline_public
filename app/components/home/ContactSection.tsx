@@ -20,7 +20,7 @@ export default function ContactSection() {
                             href="/contact"
                             className="flex h-16 w-fit items-center gap-3 rounded-xl border-2 border-white px-8 text-xl font-black shadow-[6px_6px_0px_0px_white] transition-all hover:bg-white hover:text-black active:translate-x-[4px] active:translate-y-[4px] active:shadow-none dark:border-white dark:shadow-none dark:active:scale-95"
                         >
-                            프로젝트 문의하기 <span className="material-symbols-outlined">arrow_forward</span>
+                            프로젝트 문의하기 <span className="material-symbols-outlined notranslate">arrow_forward</span>
                         </Link>
                     </div>
                     <div className="w-full lg:w-[450px]">
@@ -29,7 +29,7 @@ export default function ContactSection() {
                                 FAST TRACK
                             </div>
                             <h3 className="mb-8 flex items-center gap-2 text-2xl font-black text-black dark:text-white">
-                                <span className="material-symbols-outlined dark:text-[#FFD600]">bolt</span> 빠른
+                                <span className="material-symbols-outlined notranslate dark:text-[#FFD600]">bolt</span> 빠른
                                 문의
                             </h3>
                             <form className="flex flex-col gap-5">
