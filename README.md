@@ -1,6 +1,6 @@
 # Coreline - Engineering First AI & Software Studio
 
-<a href=https://web-coreline-public.vercel.app/><img width="175" height="67" alt="스크린샷 2026-01-10 오후 2 31 57" src="https://github.com/user-attachments/assets/4c3c9f3e-a214-4947-9436-d1b37fe2cc64" /><a/>
+<a href=https://coreline-project.vercel.app/><img width="175" height="67" alt="스크린샷 2026-01-10 오후 2 31 57" src="https://github.com/user-attachments/assets/4c3c9f3e-a214-4947-9436-d1b37fe2cc64" /><a/>
 
 ![Coreline](https://img.shields.io/badge/Coreline-Engineering%20Studio-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-16.1-black.svg?logo=next.js)
