@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HeroSection() {
   return (
@@ -78,36 +79,51 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="relative w-full max-w-[500px] flex-1">
+        <div className="relative w-full max-w-[500px] flex-1 lg:translate-y-10">
           <div className="pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full bg-[#FFD600] opacity-0 blur-[100px] transition-opacity duration-500 dark:opacity-20"></div>
           <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-blue-500 opacity-0 blur-[100px] transition-opacity duration-500 dark:opacity-20"></div>
 
-          <div className="relative aspect-square overflow-hidden rounded-[2rem] border-2 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 dark:border dark:border-white/20 dark:bg-[#111] dark:shadow-2xl dark:shadow-blue-500/10">
+          <div className="group relative aspect-square overflow-hidden rounded-[2rem] border-2 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 dark:border dark:border-white/20 dark:bg-[#111] dark:shadow-2xl dark:shadow-blue-500/10">
             <div className="flex h-10 w-full items-center gap-2 border-b-2 border-black bg-black px-4 transition-colors dark:border-white/10 dark:bg-[#222]">
               <div className="h-3 w-3 rounded-full bg-red-500"></div>
               <div className="h-3 w-3 rounded-full bg-yellow-400"></div>
               <div className="h-3 w-3 rounded-full bg-green-400"></div>
             </div>
 
-            <div className="relative flex h-full items-center justify-center overflow-hidden bg-gray-50 p-8 dark:bg-black/50">
-              <div className="pointer-events-none absolute inset-0 grid grid-cols-[repeat(20,minmax(0,1fr))] grid-rows-[repeat(20,minmax(0,1fr))] opacity-20">
-                {Array.from({ length: 400 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="border-[0.5px] border-black/10 dark:border-white/10"
-                  ></div>
-                ))}
+            <div className="relative flex h-full items-center justify-center overflow-hidden bg-gray-50 dark:bg-black/50">
+              {/* Default State: Image + Grid + Icon */}
+              <div className="absolute inset-0 z-0 flex items-center justify-center transition-opacity duration-500 group-hover:opacity-0">
+                <div className="pointer-events-none absolute inset-0 grid grid-cols-[repeat(20,minmax(0,1fr))] grid-rows-[repeat(20,minmax(0,1fr))] opacity-25">
+                  {Array.from({ length: 400 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="border-[0.5px] border-black/10 dark:border-white/10"
+                    ></div>
+                  ))}
+                </div>
+                <span
+                  className="material-symbols-outlined notranslate relative z-10 animate-pulse text-black/20 dark:text-white/40"
+                  style={{ fontSize: '225px' }}
+                  aria-hidden="true"
+                >
+                  code_blocks
+                </span>
               </div>
-              <span
-                className="material-symbols-outlined notranslate animate-pulse text-black/10 dark:text-white/50"
-                style={{ fontSize: '200px' }}
-                aria-hidden="true"
-              >
-                code_blocks
-              </span>
+
+              {/* Hover State: Video */}
+              <video
+                src="/images/render_video.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 z-10 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              />
+
+              <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/5 via-transparent to-transparent dark:from-black/40"></div>
             </div>
 
-            <div className="absolute right-6 bottom-6 left-6 rounded-xl border-2 border-black bg-white p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] transition-all dark:border dark:border-white/10 dark:bg-[#222]/90 dark:shadow-none dark:backdrop-blur-md">
+            <div className="absolute right-6 bottom-6 left-6 z-30 rounded-xl border-2 border-black bg-white p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] transition-all dark:border dark:border-white/10 dark:bg-[#222]/90 dark:shadow-none dark:backdrop-blur-md">
               <div className="flex items-center gap-4">
                 <span
                   className="material-symbols-outlined notranslate text-black dark:text-[#FFD600]"

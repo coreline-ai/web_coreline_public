@@ -126,9 +126,13 @@ export default function Navigation() {
               {isDarkMode ? '라이트 모드' : '다크 모드'}
             </button>
 
-            <button className="h-14 w-full rounded-lg border-2 border-black bg-black text-lg font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transition-all active:scale-95 dark:border-transparent dark:bg-white dark:text-black dark:shadow-none">
+            <Link
+              href="/login"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex h-14 w-full items-center justify-center rounded-lg border-2 border-black bg-black text-lg font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transition-all active:scale-95 dark:border-transparent dark:bg-white dark:text-black dark:shadow-none"
+            >
               프로젝트 시작하기
-            </button>
+            </Link>
           </div>
         </div>
       )}
