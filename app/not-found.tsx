@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-white p-6 text-center text-black dark:bg-black dark:text-white">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-white p-6 text-center text-black dark:bg-black dark:text-white bw:bg-white bw:text-black">
       <div className="relative mb-6 h-24 w-24">
         <Image src="/logo.svg" alt="Coreline Logo" fill className="object-contain" priority />
       </div>

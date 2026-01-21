@@ -24,17 +24,21 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white font-sans text-black selection:bg-[#FFD600] selection:text-black dark:bg-[#111] dark:text-white">
+    <div className="min-h-screen bg-white font-sans text-black selection:bg-[#FFD600] selection:text-black dark:bg-[#111] dark:text-white overflow-x-hidden bw:bg-white bw:text-black">
       <SimpleHeader />
 
-      <main className="pt-24">
+      <main>
         {/* HERO SECTION */}
-        <section className="relative overflow-hidden border-b-4 border-black px-4 py-20 text-center dark:border-white/10">
+        <section className="relative overflow-hidden border-b-4 border-black bg-white px-4 pt-32 pb-20 text-center dark:border-white/20 dark:bg-black bw:border-black bw:bg-white">
+          {/* Grid Background Pattern - Localized to Hero */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-100 dark:bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] bw:bg-[linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)]"></div>
+
+          <div className="pointer-events-none absolute top-20 right-[-10%] h-[300px] w-[300px] rounded-full bg-[#FFD600] opacity-20 blur-[100px] dark:opacity-10 bw:hidden"></div>
           <div className="relative z-10 mx-auto max-w-4xl">
-            <div className="mb-6 inline-block border-2 border-black bg-[#FFD600] px-3 py-1 text-xs font-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:text-black">
+            <div className="mb-6 inline-block border-2 border-black bg-[#FFD600] px-3 py-1 text-xs font-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:text-black bw:text-black">
               Variant 2 : Service Matrix
             </div>
-            <h1 className="mb-6 text-5xl leading-[0.9] font-black tracking-tighter md:text-7xl">
+            <h1 className="mb-6 text-4xl leading-[0.9] font-black tracking-tighter sm:text-5xl md:text-7xl">
               We Build The Future.
               <br />
               Faster Than{' '}
@@ -42,7 +46,7 @@ export default function ServicesPage() {
                 Ever.
               </span>
             </h1>
-            <p className="mx-auto max-w-2xl text-lg leading-relaxed font-medium text-gray-600 dark:text-gray-400">
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed font-medium text-gray-600 dark:text-gray-400 bw:text-gray-600">
               Full-stack engineering, AI integration, and developer training for the next generation
               of startups.
             </p>
@@ -52,7 +56,7 @@ export default function ServicesPage() {
         {/* SECTION 1: FULL-STACK & MOBILE */}
         <section
           id="fullstack-mobile"
-          className="relative scroll-mt-32 border-b-4 border-black px-4 py-24 dark:border-white/10"
+          className="relative scroll-mt-32 border-b-4 border-black px-4 py-24 dark:border-white/10 bw:border-black"
         >
           {/* Grid Background */}
           <div
@@ -73,14 +77,14 @@ export default function ServicesPage() {
                 </div>
                 <h2 className="text-3xl font-black uppercase">Full-Stack & Mobile</h2>
               </div>
-              <p className="mb-10 text-lg leading-relaxed font-medium text-gray-700 dark:text-gray-300">
+              <p className="mb-10 text-lg leading-relaxed font-medium text-gray-700 dark:text-gray-300 bw:text-gray-700">
                 Scalable, robust architectures built for growth. From complex web dashboards to
                 responsive mobile applications, we leverage a modern, type-safe stack to ensure
                 reliability and performance.
               </p>
 
               {/* Tech Stack Grid */}
-              <div className="relative border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
+              <div className="relative border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <div className="absolute -top-3 -right-3 border-2 border-black bg-[#FFD600] px-3 py-1 text-xs font-black text-black uppercase">
                   The Stack
                 </div>
@@ -101,7 +105,7 @@ export default function ServicesPage() {
                   ].map((tech) => (
                     <span
                       key={tech}
-                      className="cursor-default border-2 border-black bg-gray-50 px-3 py-1.5 text-xs font-bold text-black uppercase transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:bg-black dark:text-gray-300 dark:hover:bg-white dark:hover:text-black"
+                      className="cursor-default border-2 border-black bg-gray-50 px-3 py-1.5 text-xs font-bold text-black uppercase transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:bg-black dark:text-gray-300 dark:hover:bg-white dark:hover:text-black bw:border-black bw:bg-gray-50 bw:text-black bw:hover:bg-black bw:hover:text-white"
                     >
                       {tech}
                     </span>
@@ -111,7 +115,7 @@ export default function ServicesPage() {
             </div>
 
             {/* Right Image */}
-            <div className="group relative aspect-video overflow-hidden rounded-3xl border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:shadow-none">
+            <div className="group relative aspect-video overflow-hidden rounded-3xl border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:shadow-none bw:border-black bw:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
               <Image
                 src="/images/services_fullstack.png"
                 alt="Developers working"
@@ -125,26 +129,26 @@ export default function ServicesPage() {
           <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-2">
             <Link
               href="/projects"
-              className="block cursor-pointer border-l-4 border-purple-500 bg-gray-50 p-4 transition-transform hover:-translate-y-1 dark:bg-[#222]"
+              className="block cursor-pointer border-l-4 border-purple-500 bg-gray-50 p-4 transition-transform hover:-translate-y-1 dark:bg-[#222] bw:bg-gray-50"
             >
-              <p className="mb-1 text-xs font-bold text-purple-600 uppercase dark:text-purple-400">
+              <p className="mb-1 text-xs font-bold text-purple-600 uppercase dark:text-purple-400 bw:text-purple-600">
                 Success Story
               </p>
               <h4 className="mb-1 text-lg font-black">Multi-App Ecosystem</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-600 dark:text-gray-400 bw:text-gray-600">
                 Unified 3 apps into one React Native codebase.
               </p>
             </Link>
 
             <Link
               href="/projects"
-              className="block cursor-pointer border-l-4 border-blue-500 bg-gray-50 p-4 transition-transform hover:-translate-y-1 dark:bg-[#222]"
+              className="block cursor-pointer border-l-4 border-blue-500 bg-gray-50 p-4 transition-transform hover:-translate-y-1 dark:bg-[#222] bw:bg-gray-50"
             >
-              <p className="mb-1 text-xs font-bold text-blue-600 uppercase dark:text-blue-400">
+              <p className="mb-1 text-xs font-bold text-blue-600 uppercase dark:text-blue-400 bw:text-blue-600">
                 Success Story
               </p>
               <h4 className="mb-1 text-lg font-black">E-Commerce Platform Scale-up</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-600 dark:text-gray-400 bw:text-gray-600">
                 Handled 10x traffic surge with optimized Next.js architecture.
               </p>
             </Link>
@@ -154,40 +158,40 @@ export default function ServicesPage() {
         {/* SECTION 2: AI/ML & AX CONSULTING */}
         <section
           id="ai-ml-integration"
-          className="relative scroll-mt-32 border-b-4 border-black bg-[#FEFCE8] px-4 py-24 dark:border-white/10 dark:bg-[#111]"
+          className="relative scroll-mt-32 border-b-4 border-black bg-[#FEFCE8] px-4 py-24 dark:border-white/10 dark:bg-[#111] bw:border-black bw:bg-gray-50"
         >
           <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:flex-row-reverse">
             {/* Left Content (Actually Right Content in layout but reversed for grid order if needed, but keeping visual order) */}
             <div className="order-2 lg:order-1">
-              <div className="relative rounded-3xl border-4 border-black bg-white p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
+              <div className="relative rounded-3xl border-4 border-black bg-white p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-purple-100 dark:border-white/10 dark:bg-black dark:hover:bg-purple-900/20">
-                    <span className="material-symbols-outlined mb-2 text-4xl text-purple-600">
+                  <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-purple-100 dark:border-white/10 dark:bg-black dark:hover:bg-purple-900/20 bw:border-black bw:bg-gray-50 bw:hover:bg-gray-200">
+                    <span className="material-symbols-outlined notranslate mb-2 text-4xl text-purple-600">
                       psychology
                     </span>
                     <span className="text-xs font-black uppercase">LLM Integration</span>
                   </div>
-                  <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-yellow-100 dark:border-white/10 dark:bg-black dark:hover:bg-yellow-900/20">
-                    <span className="material-symbols-outlined mb-2 text-4xl text-yellow-600">
+                  <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-yellow-100 dark:border-white/10 dark:bg-black dark:hover:bg-yellow-900/20 bw:border-black bw:bg-gray-50 bw:hover:bg-gray-200">
+                    <span className="material-symbols-outlined notranslate mb-2 text-4xl text-yellow-600">
                       auto_fix_high
                     </span>
                     <span className="text-xs font-black uppercase">Auto-Agents</span>
                   </div>
-                  <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-green-100 dark:border-white/10 dark:bg-black dark:hover:bg-green-900/20">
-                    <span className="material-symbols-outlined mb-2 text-4xl text-green-600">
+                  <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-green-100 dark:border-white/10 dark:bg-black dark:hover:bg-green-900/20 bw:border-black bw:bg-gray-50 bw:hover:bg-gray-200">
+                    <span className="material-symbols-outlined notranslate mb-2 text-4xl text-green-600">
                       database
                     </span>
                     <span className="text-xs font-black uppercase">RAG Pipelines</span>
                   </div>
-                  <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-blue-100 dark:border-white/10 dark:bg-black dark:hover:bg-blue-900/20">
-                    <span className="material-symbols-outlined mb-2 text-4xl text-blue-600">
+                  <div className="flex aspect-square flex-col items-center justify-center rounded-xl border-2 border-black bg-gray-50 p-4 text-center transition-colors hover:bg-blue-100 dark:border-white/10 dark:bg-black dark:hover:bg-blue-900/20 bw:border-black bw:bg-gray-50 bw:hover:bg-gray-200">
+                    <span className="material-symbols-outlined notranslate mb-2 text-4xl text-blue-600">
                       chat
                     </span>
                     <span className="text-xs font-black uppercase">Conversational UX</span>
                   </div>
                 </div>
-                <div className="absolute top-1/2 left-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full border-4 border-white bg-black text-white dark:border-[#333]">
-                  <span className="material-symbols-outlined">hub</span>
+                <div className="absolute top-1/2 left-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full border-4 border-white bg-black text-white dark:border-[#333] bw:border-black bw:bg-white bw:text-black">
+                  <span className="material-symbols-outlined notranslate">hub</span>
                 </div>
               </div>
             </div>
@@ -201,7 +205,7 @@ export default function ServicesPage() {
                 <h2 className="text-3xl font-black uppercase">AI/ML & AX Consulting</h2>
               </div>
               <h3 className="mb-4 text-xl font-bold">Automated Experience (AX) Design</h3>
-              <p className="mb-8 text-lg leading-relaxed font-medium text-gray-700 dark:text-gray-300">
+              <p className="mb-8 text-lg leading-relaxed font-medium text-gray-700 dark:text-gray-300 bw:text-gray-700">
                 We don&apos;t just add a chatbot. We re-engineer your workflows with intelligent
                 agents. From Large Language Model fine-tuning to vector database implementation, we
                 turn &quot;AI hype&quot; into measurable business automation.
@@ -214,7 +218,7 @@ export default function ServicesPage() {
                   'AI Safety & Governance',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-sm font-bold">
-                    <span className="material-symbols-outlined filled text-lg text-purple-600">
+                    <span className="material-symbols-outlined notranslate filled text-lg text-purple-600">
                       check_circle
                     </span>
                     {item}
@@ -224,7 +228,7 @@ export default function ServicesPage() {
 
               <Link
                 href="/projects"
-                className="flex cursor-pointer items-center justify-between rounded-xl border-2 border-black bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:border-white/20 dark:bg-[#1a1a1a]"
+                className="flex cursor-pointer items-center justify-between rounded-xl border-2 border-black bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:border-white/20 dark:bg-[#1a1a1a] bw:border-black bw:bg-white bw:shadow-sm"
               >
                 <div>
                   <p className="mb-1 text-[10px] font-bold text-gray-500 uppercase">
@@ -233,7 +237,7 @@ export default function ServicesPage() {
                   <h4 className="font-bold">Predictive Logistics AI</h4>
                   <p className="text-xs text-gray-500">SupplyChain Inc. • 35% Efficiency Boost</p>
                 </div>
-                <span className="material-symbols-outlined">arrow_outward</span>
+                <span className="material-symbols-outlined notranslate">arrow_outward</span>
               </Link>
             </div>
           </div>
@@ -242,7 +246,7 @@ export default function ServicesPage() {
         {/* SECTION 3: AI INFRA & VIBE CODING */}
         <section
           id="vibe-coding"
-          className="relative scroll-mt-32 overflow-hidden border-b-4 border-black bg-[#111827] px-4 py-24 text-white dark:border-white/10"
+          className="relative scroll-mt-32 overflow-hidden border-b-4 border-black bg-[#111827] px-4 py-24 text-white dark:border-white/10 bw:border-black bw:bg-gray-800 bw:text-white"
         >
           <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div>
@@ -312,7 +316,7 @@ export default function ServicesPage() {
                 <div>{'}'}</div>
 
                 <div className="mt-4 flex items-center gap-2 rounded border border-purple-500/30 bg-[#2D2D2D]/50 p-3 text-gray-400">
-                  <span className="material-symbols-outlined text-sm text-purple-400">
+                  <span className="material-symbols-outlined notranslate text-sm text-purple-400">
                     auto_awesome
                   </span>
                   AI Suggestion: Refactor this for higher concurrency?{' '}
@@ -326,7 +330,7 @@ export default function ServicesPage() {
         {/* SECTION 4: SENIOR-LED MVP */}
         <section
           id="senior-led-mvp"
-          className="relative scroll-mt-32 border-b-4 border-black px-4 py-24 dark:border-white/10"
+          className="relative scroll-mt-32 border-b-4 border-black px-4 py-24 dark:border-white/10 bw:border-black"
         >
           {/* Grid Background */}
           <div
@@ -347,15 +351,15 @@ export default function ServicesPage() {
                 <h2 className="text-3xl font-black uppercase">SENIOR-LED MVP</h2>
               </div>
               <h3 className="mb-4 text-xl font-bold">Validate fast. Scale faster.</h3>
-              <p className="mb-10 text-lg leading-relaxed font-medium text-gray-700 dark:text-gray-300">
+              <p className="mb-10 text-lg leading-relaxed font-medium text-gray-700 dark:text-gray-300 bw:text-gray-700">
                 We specialize in Minimum Viable Products that are actually viable. We strip away the
                 non-essentials to focus on your core value proposition, delivering a product that
                 investors love and users actually use.
               </p>
 
               <div className="mb-8 grid grid-cols-2 gap-6">
-                <div className="rounded-2xl border-4 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
-                  <span className="material-symbols-outlined mb-3 text-4xl text-red-500">
+                <div className="rounded-2xl border-4 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+                  <span className="material-symbols-outlined notranslate mb-3 text-4xl text-red-500">
                     rocket_launch
                   </span>
                   <h4 className="mb-2 font-black uppercase">Speed</h4>
@@ -363,8 +367,8 @@ export default function ServicesPage() {
                     Market-ready MVPs in 4-6 weeks. No bloated timelines.
                   </p>
                 </div>
-                <div className="rounded-2xl border-4 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
-                  <span className="material-symbols-outlined mb-3 text-4xl text-green-500">
+                <div className="rounded-2xl border-4 border-black bg-white p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+                  <span className="material-symbols-outlined notranslate mb-3 text-4xl text-green-500">
                     verified
                   </span>
                   <h4 className="mb-2 font-black uppercase">Quality</h4>
@@ -376,7 +380,7 @@ export default function ServicesPage() {
 
               <div className="flex items-center gap-4 rounded-xl border-4 border-black bg-[#FFD600] p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-[#FFD600]">
-                  <span className="material-symbols-outlined">person</span>
+                  <span className="material-symbols-outlined notranslate">person</span>
                 </div>
                 <div>
                   <h5 className="text-sm font-black text-black uppercase">SENIOR-LED ONLY</h5>
@@ -388,15 +392,15 @@ export default function ServicesPage() {
             </div>
 
             {/* CASE STUDY TIMELINE CARD */}
-            <div className="h-full rounded-3xl border-4 border-black bg-white p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none">
+            <div className="h-full rounded-3xl border-4 border-black bg-white p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#1a1a1a] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
               <h4 className="mb-6 text-xs font-bold text-gray-500 uppercase">
                 Case Study Timeline: 5 Steps
               </h4>
 
-              <div className="relative ml-3 space-y-10 border-l-2 border-gray-200 py-2 pl-8 dark:border-white/10">
+              <div className="relative ml-3 space-y-10 border-l-2 border-gray-200 py-2 pl-8 dark:border-white/10 bw:border-gray-200">
                 <div className="relative">
-                  <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800">
-                    <span className="material-symbols-outlined text-[10px] text-gray-500">
+                  <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800 bw:border-gray-400 bw:bg-gray-100">
+                    <span className="material-symbols-outlined notranslate text-[10px] text-gray-500">
                       search
                     </span>
                   </span>
@@ -406,8 +410,8 @@ export default function ServicesPage() {
                   <h5 className="font-bold">Concept & Scope</h5>
                 </div>
                 <div className="relative">
-                  <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800">
-                    <span className="material-symbols-outlined text-[10px] text-gray-500">
+                  <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800 bw:border-gray-400 bw:bg-gray-100">
+                    <span className="material-symbols-outlined notranslate text-[10px] text-gray-500">
                       design_services
                     </span>
                   </span>
@@ -417,8 +421,8 @@ export default function ServicesPage() {
                   <h5 className="font-bold">Design & Prototype</h5>
                 </div>
                 <div className="relative">
-                  <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800">
-                    <span className="material-symbols-outlined text-[10px] text-gray-500">
+                  <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800 bw:border-gray-400 bw:bg-gray-100">
+                    <span className="material-symbols-outlined notranslate text-[10px] text-gray-500">
                       code
                     </span>
                   </span>
@@ -429,7 +433,7 @@ export default function ServicesPage() {
                 </div>
                 <div className="relative">
                   <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-black bg-[#FFD600]">
-                    <span className="material-symbols-outlined text-[10px] text-black">rocket</span>
+                    <span className="material-symbols-outlined notranslate text-[10px] text-black">rocket</span>
                   </span>
                   <span className="mb-1 inline-block rounded border border-black bg-[#FFD600] px-2 py-0.5 text-[10px] font-bold text-black uppercase">
                     Week 4
@@ -437,8 +441,8 @@ export default function ServicesPage() {
                   <h5 className="text-lg font-black">MVP Launch</h5>
                 </div>
                 <div className="relative">
-                  <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800">
-                    <span className="material-symbols-outlined text-[10px] text-gray-500">
+                  <span className="absolute top-0 -left-[41px] z-10 grid h-6 w-6 place-items-center rounded-full border-2 border-gray-400 bg-gray-100 dark:border-gray-500 dark:bg-gray-800 bw:border-gray-400 bw:bg-gray-100">
+                    <span className="material-symbols-outlined notranslate text-[10px] text-gray-500">
                       build
                     </span>
                   </span>
@@ -453,19 +457,19 @@ export default function ServicesPage() {
         </section>
 
         {/* BOTTOM CTA */}
-        <section className="border-t-4 border-black bg-[#FFD600] px-4 py-28 text-center dark:border-white/20 dark:bg-[#111]">
-          <h2 className="mb-6 text-4xl font-black uppercase md:text-6xl dark:text-white">
+        <section className="border-t-4 border-black bg-[#FFD600] px-4 py-28 text-center dark:border-white/20 dark:bg-[#111] bw:border-black bw:bg-gray-200">
+          <h2 className="mb-6 text-4xl font-black uppercase md:text-6xl dark:text-white bw:text-black">
             Stop Planning.
             <br />
             Start Shipping.
           </h2>
-          <p className="mb-12 text-lg font-bold dark:text-gray-300">
+          <p className="mb-12 text-lg font-bold dark:text-gray-300 bw:text-black">
             Schedule a free 30-min technical roadmap session with a Lead Architect.
           </p>
 
           <Link
             href="/contact"
-            className="inline-block rounded-xl border-4 border-white bg-[#111] px-8 py-4 text-lg font-black text-white uppercase shadow-[6px_6px_0px_0px_rgba(255,255,255,0.5)] transition-all hover:-translate-y-1 dark:border-[#FFD600] dark:text-white dark:shadow-none"
+            className="inline-block rounded-xl border-4 border-white bg-[#111] px-8 py-4 text-lg font-black text-white uppercase shadow-[6px_6px_0px_0px_rgba(255,255,255,0.5)] transition-all hover:-translate-y-1 dark:border-[#FFD600] dark:text-white dark:shadow-none bw:border-black bw:bg-black bw:text-white bw:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
           >
             Consult with a Senior Developer
           </Link>

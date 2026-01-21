@@ -9,7 +9,7 @@ import SimpleFooter from '../components/SimpleFooter';
 export default function ProfilePage() {
   return (
     <div className="">
-      <div className="min-h-screen bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:2rem_2rem] font-sans text-black transition-colors duration-300 selection:bg-black selection:text-white dark:bg-black dark:bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] dark:text-white dark:selection:bg-[#FFD600] dark:selection:text-black">
+      <div className="min-h-screen bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:2rem_2rem] font-sans text-black transition-colors duration-300 selection:bg-black selection:text-white dark:bg-black dark:bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] dark:text-white dark:selection:bg-[#FFD600] dark:selection:text-black bw:bg-white bw:text-black">
         <SimpleHeader />
 
         <main className="container mx-auto max-w-6xl px-4 pt-24 pb-20">
@@ -17,19 +17,19 @@ export default function ProfilePage() {
           <div className="mb-8 flex items-center gap-2 text-xs font-bold tracking-widest text-gray-400 uppercase">
             <Link
               href="/projects"
-              className="transition-colors hover:text-black dark:hover:text-white"
+              className="transition-colors hover:text-black dark:hover:text-white bw:hover:text-black"
             >
               Portfolio
             </Link>
-            <span className="text-gray-300 dark:text-gray-700">/</span>
-            <span className="text-black dark:text-white">Senior Engineer Profile</span>
+            <span className="text-gray-300 dark:text-gray-700 bw:text-gray-300">/</span>
+            <span className="text-black dark:text-white bw:text-black">Senior Engineer Profile</span>
           </div>
 
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             {/* LEFT COLUMN: Profile Card & Actions */}
             <div className="flex flex-col gap-6 lg:col-span-5">
               {/* Profile Card */}
-              <div className="relative flex aspect-[3/4] flex-col overflow-hidden rounded-3xl border-4 border-black bg-[#111] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)]">
+              <div className="relative flex aspect-[3/4] flex-col overflow-hidden rounded-3xl border-4 border-black bg-[#111] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)] bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <div className="absolute top-0 right-0 z-10">
                   <div className="border-b-4 border-l-4 border-black bg-[#FFD600] px-4 py-2 text-xs font-black text-black uppercase">
                     PROFILE
@@ -96,10 +96,10 @@ export default function ProfilePage() {
               </div>
 
               {/* Links Card */}
-              <div className="flex items-center justify-between rounded-3xl border-4 border-black bg-[#1a1a1a] p-6 text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:shadow-none">
+              <div className="flex items-center justify-between rounded-3xl border-4 border-black bg-[#1a1a1a] p-6 text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:shadow-none bw:border-black bw:bg-white bw:text-black bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <div className="flex items-center gap-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black">
-                    <span className="material-symbols-outlined text-2xl">code</span>
+                    <span className="material-symbols-outlined notranslate text-2xl">code</span>
                   </div>
                   <div>
                     <h3 className="font-bold">GitHub & Resume</h3>
@@ -122,11 +122,11 @@ export default function ProfilePage() {
               {/* Header Info */}
               <div className="mb-10 flex flex-col gap-4">
                 <div className="mb-2 flex flex-wrap gap-4">
-                  <span className="flex items-center gap-2 rounded-full border-2 border-black bg-white px-3 py-1 text-xs font-black text-green-700 uppercase dark:border-white dark:bg-black dark:text-green-400">
+                  <span className="flex items-center gap-2 rounded-full border-2 border-black bg-white px-3 py-1 text-xs font-black text-green-700 uppercase dark:border-white dark:bg-black dark:text-green-400 bw:border-black bw:bg-white bw:text-green-700">
                     <div className="h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
                     Open to Work
                   </span>
-                  <span className="rounded-full border-2 border-black bg-white px-3 py-1 text-xs font-black uppercase dark:border-white dark:bg-black">
+                  <span className="rounded-full border-2 border-black bg-white px-3 py-1 text-xs font-black uppercase dark:border-white dark:bg-black bw:border-black bw:bg-white">
                     Senior Level
                   </span>
                 </div>
@@ -134,7 +134,7 @@ export default function ProfilePage() {
                   20-Year Senior Mobile &<br />
                   Web Engineer
                 </h1>
-                <p className="text-lg leading-relaxed font-medium text-gray-600 dark:text-gray-300">
+                <p className="text-lg leading-relaxed font-medium text-gray-600 dark:text-gray-300 bw:text-gray-600">
                   Specializing in Android framework tuning, custom platforms, and high-performance
                   mobile/web applications.
                 </p>
@@ -159,7 +159,7 @@ export default function ProfilePage() {
                   ].map((tech) => (
                     <span
                       key={tech}
-                      className={`rounded-xl border-2 border-black px-4 py-2 text-xs font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] ${tech === 'Enterprise SDK' ||
+                      className={`rounded-xl border-2 border-black px-4 py-2 text-xs font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${tech === 'Enterprise SDK' ||
                           tech === 'Android SDK' ||
                           tech === 'Flutter' ||
                           tech === 'System Level Tuning'
@@ -176,21 +176,21 @@ export default function ProfilePage() {
               {/* Career Highlights */}
               <div className="mb-12">
                 <div className="mb-8 flex items-center gap-3">
-                  <div className="h-1 w-8 bg-black dark:bg-white"></div>
+                  <div className="h-1 w-8 bg-black dark:bg-white bw:bg-black"></div>
                   <h3 className="text-sm font-black tracking-widest uppercase">
                     Career Highlights
                   </h3>
                 </div>
 
-                <div className="relative ml-2 space-y-10 border-l-2 border-gray-200 pl-4 dark:border-gray-800">
+                <div className="relative ml-2 space-y-10 border-l-2 border-gray-200 pl-4 dark:border-gray-800 bw:border-gray-200">
                   {/* Item 1 */}
                   <div className="relative pl-8">
-                    <div className="absolute top-1 -left-[9px] h-4 w-4 rounded-full border-2 border-white bg-black dark:border-black dark:bg-white"></div>
+                    <div className="absolute top-1 -left-[9px] h-4 w-4 rounded-full border-2 border-white bg-black dark:border-black dark:bg-white bw:border-white bw:bg-black"></div>
                     <h4 className="text-xl font-black">Team Lead</h4>
-                    <p className="mb-2 text-[10px] font-bold text-purple-600 uppercase dark:text-purple-400">
+                    <p className="mb-2 text-[10px] font-bold text-purple-600 uppercase dark:text-purple-400 bw:text-purple-600">
                       Real Estate Tech Company
                     </p>
-                    <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                    <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400 bw:text-gray-600">
                       Led new App dev & stability enhancements. Directed the engineering team in
                       modernizing legacy systems.
                     </p>
@@ -198,12 +198,12 @@ export default function ProfilePage() {
 
                   {/* Item 2 */}
                   <div className="relative pl-8">
-                    <div className="absolute top-1 -left-[9px] h-4 w-4 rounded-full border-2 border-white bg-black dark:border-black dark:bg-white"></div>
+                    <div className="absolute top-1 -left-[9px] h-4 w-4 rounded-full border-2 border-white bg-black dark:border-black dark:bg-white bw:border-white bw:bg-black"></div>
                     <h4 className="text-xl font-black">Team Lead / Deputy Manager</h4>
-                    <p className="mb-2 text-[10px] font-bold text-pink-600 uppercase dark:text-pink-400">
+                    <p className="mb-2 text-[10px] font-bold text-pink-600 uppercase dark:text-pink-400 bw:text-pink-600">
                       R&D Center (Large Enterprise)
                     </p>
-                    <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                    <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400 bw:text-gray-600">
                       Designed device-linked apps & platform modules. Managed cross-functional teams
                       for flagship product integration.
                     </p>
@@ -211,12 +211,12 @@ export default function ProfilePage() {
 
                   {/* Item 3 */}
                   <div className="relative pl-8">
-                    <div className="absolute top-1 -left-[9px] h-4 w-4 rounded-full border-2 border-white bg-black dark:border-black dark:bg-white"></div>
+                    <div className="absolute top-1 -left-[9px] h-4 w-4 rounded-full border-2 border-white bg-black dark:border-black dark:bg-white bw:border-white bw:bg-black"></div>
                     <h4 className="text-xl font-black">Senior Researcher</h4>
-                    <p className="mb-2 text-[10px] font-bold text-blue-600 uppercase dark:text-blue-400">
+                    <p className="mb-2 text-[10px] font-bold text-blue-600 uppercase dark:text-blue-400 bw:text-blue-600">
                       Global R&D Centers
                     </p>
-                    <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                    <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400 bw:text-gray-600">
                       Developed device-linked Android apps & control software. Focused on low-level
                       optimization and hardware integration.
                     </p>
@@ -224,12 +224,12 @@ export default function ProfilePage() {
 
                   {/* Item 4 */}
                   <div className="relative pl-8">
-                    <div className="absolute top-1 -left-[9px] h-4 w-4 rounded-full border-2 border-white bg-green-500 dark:border-black"></div>
+                    <div className="absolute top-1 -left-[9px] h-4 w-4 rounded-full border-2 border-white bg-green-500 dark:border-black bw:border-white"></div>
                     <h4 className="text-xl font-black">Associate Researcher</h4>
-                    <p className="mb-2 text-[10px] font-bold text-green-600 uppercase dark:text-green-400">
+                    <p className="mb-2 text-[10px] font-bold text-green-600 uppercase dark:text-green-400 bw:text-green-600">
                       OMA Standard Startup
                     </p>
-                    <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                    <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400 bw:text-gray-600">
                       Implemented standard protocols & mobile test tools. Contributed to early
                       mobile internet standards.
                     </p>
@@ -242,17 +242,17 @@ export default function ProfilePage() {
           {/* Technical Deep Dive */}
           <div className="mb-20 pt-10">
             <div className="mb-8 flex items-center gap-4">
-              <div className="flex h-10 w-10 items-center justify-center border-2 border-black bg-[#FFD600] text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-transparent dark:shadow-none">
-                <span className="material-symbols-outlined">manage_search</span>
+              <div className="flex h-10 w-10 items-center justify-center border-2 border-black bg-[#FFD600] text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-transparent dark:shadow-none bw:border-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <span className="material-symbols-outlined notranslate">manage_search</span>
               </div>
               <h2 className="text-2xl font-black tracking-widest uppercase">TECHNICAL DEEP DIVE</h2>
             </div>
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
               {/* Card 1 */}
-              <div className="flex h-full flex-col rounded-3xl border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#111] dark:shadow-none">
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-[#FFD600] text-black dark:border-transparent">
-                  <span className="material-symbols-outlined">memory</span>
+              <div className="flex h-full flex-col rounded-3xl border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#111] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-[#FFD600] text-black dark:border-transparent bw:border-black">
+                  <span className="material-symbols-outlined notranslate">memory</span>
                 </div>
                 <h3 className="mb-6 text-xl leading-tight font-black uppercase">
                   Mobile & Platform Tuning
@@ -260,10 +260,10 @@ export default function ProfilePage() {
                 <div className="flex-1 space-y-4">
                   {['Android Framework', 'Custom ROMs', 'Kernel optimization'].map((item) => (
                     <div key={item} className="flex items-center gap-3">
-                      <span className="material-symbols-outlined text-purple-600 dark:text-purple-400">
+                      <span className="material-symbols-outlined notranslate text-purple-600 dark:text-purple-400 bw:text-purple-600">
                         check_circle
                       </span>
-                      <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
+                      <span className="text-sm font-bold text-gray-700 dark:text-gray-300 bw:text-gray-700">
                         {item}
                       </span>
                     </div>
@@ -272,9 +272,9 @@ export default function ProfilePage() {
               </div>
 
               {/* Card 2 */}
-              <div className="flex h-full flex-col rounded-3xl border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#111] dark:shadow-none">
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-purple-500 text-white dark:border-transparent">
-                  <span className="material-symbols-outlined">apartment</span>
+              <div className="flex h-full flex-col rounded-3xl border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#111] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-purple-500 text-white dark:border-transparent bw:border-black">
+                  <span className="material-symbols-outlined notranslate">apartment</span>
                 </div>
                 <h3 className="mb-6 text-xl leading-tight font-black uppercase">
                   Enterprise Architecture
@@ -283,10 +283,10 @@ export default function ProfilePage() {
                   {['SDK Design', 'Middleware development', 'Large-scale integration'].map(
                     (item) => (
                       <div key={item} className="flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[#FFD600]">
+                        <span className="material-symbols-outlined notranslate text-[#FFD600]">
                           check_circle
                         </span>
-                        <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
+                        <span className="text-sm font-bold text-gray-700 dark:text-gray-300 bw:text-gray-700">
                           {item}
                         </span>
                       </div>
@@ -296,9 +296,9 @@ export default function ProfilePage() {
               </div>
 
               {/* Card 3 */}
-              <div className="flex h-full flex-col rounded-3xl border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#111] dark:shadow-none">
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-blue-500 text-white dark:border-transparent">
-                  <span className="material-symbols-outlined">layers</span>
+              <div className="flex h-full flex-col rounded-3xl border-2 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white/20 dark:bg-[#111] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-black bg-blue-500 text-white dark:border-transparent bw:border-black">
+                  <span className="material-symbols-outlined notranslate">layers</span>
                 </div>
                 <h3 className="mb-6 text-xl leading-tight font-black uppercase">
                   Full-Stack Ecosystem
@@ -306,8 +306,8 @@ export default function ProfilePage() {
                 <div className="flex-1 space-y-4">
                   {['Node.js', 'FastAPI', 'Next.js & Mobile Integration'].map((item) => (
                     <div key={item} className="flex items-center gap-3">
-                      <span className="material-symbols-outlined text-[#FFD600]">check_circle</span>
-                      <span className="text-sm font-bold text-gray-700 dark:text-gray-300">
+                      <span className="material-symbols-outlined notranslate text-[#FFD600]">check_circle</span>
+                      <span className="text-sm font-bold text-gray-700 dark:text-gray-300 bw:text-gray-700">
                         {item}
                       </span>
                     </div>
@@ -318,7 +318,7 @@ export default function ProfilePage() {
           </div>
 
           {/* Bottom Stats */}
-          <div className="mt-10 border-t-2 border-black pt-10 dark:border-white/20">
+          <div className="mt-10 border-t-2 border-black pt-10 dark:border-white/20 bw:border-black">
             <div className="mb-8">
               <h2 className="mb-2 text-2xl font-black">Career Impact</h2>
               <p className="text-sm text-gray-500">Key achievements and milestones.</p>
@@ -333,7 +333,7 @@ export default function ProfilePage() {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 dark:border-white/20 dark:bg-[#111] dark:shadow-none"
+                  className="rounded-2xl border-2 border-black bg-white p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 dark:border-white/20 dark:bg-[#111] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                 >
                   <div className={`text-4xl font-black ${stat.color} mb-2`}>{stat.val}</div>
                   <div className="text-xs font-bold text-gray-500 uppercase">{stat.label}</div>

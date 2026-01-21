@@ -1,5 +1,6 @@
 import './globals.css';
 import { ThemeProvider } from './components/ThemeProvider';
+import { AuthProvider } from './components/AuthProvider';
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Noto_Sans_KR } from 'next/font/google';
 
@@ -18,7 +19,7 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://web-coreline-public.vercel.app'),
+  metadataBase: new URL('https://coreline-project.vercel.app'),
   title: 'Coreline | Engineering Studio',
   description:
     'Coreline은 비즈니스 성장을 위한 AI 솔루션과 고성능 소프트웨어를 구축하는 엔지니어링 스튜디오입니다.',
@@ -38,10 +39,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className={`${plusJakartaSans.variable} ${notoSansKR.variable}`}>
+    <html lang="ko" className={`${plusJakartaSans.variable} ${notoSansKR.variable} overflow-x-hidden`}>
       <head></head>
-      <body className="bg-black text-white" suppressHydrationWarning>
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className="bg-black text-white overflow-x-hidden" suppressHydrationWarning>
+        <AuthProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,77 +1,129 @@
-'use client';
-
 import React, { useState } from 'react';
 import Link from 'next/link';
+import useSWR from 'swr';
+import { useRequest } from '../../lib/use-request';
+import { Post } from '../../lib/types/api';
+
+const slugs: Record<string, string> = {
+    news: 'news',
+    blog: 'blog',
+    lab: 'research'
+};
 
 const iconPool = ['breaking_news', 'code_blocks', 'science', 'psychology', 'hub', 'rocket_launch', 'memory', 'auto_awesome', 'terminal', 'analytics', 'architecture', 'database'];
 
-const communityData = {
-    news: Array.from({ length: 8 }).map((_, i) => ({
-        title: `AI 5분 최신뉴스 ${i + 1}`,
-        description: [
-            'OpenAI, 신규 소라 모델 업데이트 - 비디오 생성 기술의 혁신',
-            '구글 제미나이 1.5 프로 공개 - 200만 토큰 컨텍스트 지원',
-            '엔비디아 차세대 블랙웰 GPU 발표 - 연산 성능의 진화',
-            '애플 온디바이스 AI 기능 애플 인텔리전스 공개',
-            '메타 라마 3 공개 - 오픈소스 LLM의 새로운 기준',
-            '국내 AI 스타트업 연합 발족 - 글로벌 경쟁력 강화',
-            'AI 안전 서밋 개최 - 보안과 윤리에 대한 글로벌 합의',
-            'MS Copilot+ PC 발표 - 하드웨어와 AI의 결합'
-        ][i],
-        icon: iconPool[i % iconPool.length],
-        href: `/news/${i + 1}`,
-        badges: ['Hot'],
-        badgeColor: 'bg-red-400',
-    })),
-    blog: Array.from({ length: 8 }).map((_, i) => ({
-        title: `기술 블로그 ${i + 1}`,
-        description: [
-            'Next.js 14 App Router 전환기 - 서버 컴포넌트 활용',
-            'Rust로 구현하는 고성능 AI 추론 엔진 및 성능 비교',
-            '마이크로서비스 아키텍처에서의 분산 트랜잭션 전략',
-            'Tailwind CSS 활용 효율적인 디자인 시스템 구축',
-            'LLM 파인튜닝 실무 가이드 - 최적화 노하우 공유',
-            '프론트엔드 성능 최적화: 유저 경험을 좌우하는 0.1초',
-            '클린 코드와 리팩토링: 유지보수 가능한 소프트웨어',
-            'CI/CD 파이프라인 자동화 - GitHub Actions 활용'
-        ][i],
-        icon: iconPool[(i + 4) % iconPool.length],
-        href: `/blog/${i + 1}`,
-        badges: ['Active'],
-        badgeColor: 'bg-green-400',
-    })),
-    lab: Array.from({ length: 8 }).map((_, i) => ({
-        title: `코어라인 AI 연구소 ${i + 1}`,
-        description: [
-            '다중 에이전트 협업 시스템 연구 - LangChain 활용',
-            '검색 증강 생성(RAG) 프레임워크 정확도 개선 실험',
-            '효율적인 모델 양자화 기법 - 실시간 추론 실현',
-            '감성 분석 기반 대화형 AI 고도화 - 사용자 맥락 파악',
-            '비정형 데이터 정규화 알고리즘 및 파이프라인 혁신',
-            '멀티모달 AI 시스템 설계 - 텍스트와 이미지 융합',
-            '머신러닝 모델 모니터링 및 재학습 자동화 구축',
-            '연합 학습(Federated Learning) 기술 적용 연구'
-        ][i],
-        icon: iconPool[(i + 8) % iconPool.length],
-        href: `/research/${i + 1}`,
-        badges: ['Research'],
-        badgeColor: 'bg-purple-400',
-    })),
-};
+// External API Types
+interface ExternalNewsItem {
+    id: string;
+    title: string;
+    url: string;
+    source: string;
+    summary: string;
+    topic: string;
+    why_it_matters: string;
+}
+
+interface ExternalApiResponse {
+    date: string;
+    top_news: ExternalNewsItem[];
+    generated_at: string;
+}
+
+// Unified Display Type
+interface DisplayPost {
+    id: string | number;
+    title: string;
+    content: string;
+    categoryName: string;
+    linkUrl: string;
+    isExternal: boolean;
+    iconIndex: number; // to keep icon consistent
+    analysis?: string; // New field for 'why_it_matters'
+}
+
+// Module-level variable to persist state during SPA navigation (client-side only)
+// This resets on page reload, but persists when navigating between pages.
+let globalActiveTab: 'news' | 'blog' | 'lab' = 'news';
 
 export default function CommunitySection() {
-    const [activeTab, setActiveTab] = useState<'news' | 'blog' | 'lab'>('news');
+    const [activeTab, setActiveTabState] = useState<'news' | 'blog' | 'lab'>(globalActiveTab);
+
+    // Wrapper to update both local state and global variable
+    const setActiveTab = (tab: 'news' | 'blog' | 'lab') => {
+        globalActiveTab = tab;
+        setActiveTabState(tab);
+    };
+
+    const slug = slugs[activeTab];
+
+    // 1. Internal Fetch
+    // NOW: News is external, Blog & Lab are internal.
+    const shouldFetchInternal = activeTab !== 'news';
+    const { data: internalRes, isLoading: internalLoading } = useRequest<any>(
+        shouldFetchInternal ? `/api/boards/${slug}?page=1` : ''
+    );
+
+    // 2. External Fetch (for AI News)
+    // Use local proxy to avoid CORS
+    const externalApiUrl = '/api/proxy/ai-news?limit=8';
+    const fetcher = (url: string) => fetch(url).then(r => r.json());
+    const { data: externalData, isLoading: externalLoading } = useSWR<ExternalApiResponse>(
+        activeTab === 'news' ? externalApiUrl : null,
+        fetcher
+    );
+
+    const isLoading = activeTab === 'news' ? externalLoading : internalLoading;
+
+    console.log('[CommunitySection] State:', { activeTab, shouldFetchInternal, internalRes, externalData });
+
+    // 3. Normalize Data
+    let displayPosts: DisplayPost[] = [];
+
+    // Debug logging for normalized posts
+    const setDisplayPosts = (posts: DisplayPost[]) => {
+        console.log('[CommunitySection] setDisplayPosts:', posts);
+        displayPosts = posts;
+    };
+
+    if (activeTab === 'news' && externalData?.top_news) {
+        setDisplayPosts(externalData.top_news.map((item, idx) => ({
+            id: item.id,
+            title: item.title,
+            content: item.summary,
+            categoryName: item.topic || item.source,
+            linkUrl: item.url,
+            isExternal: true,
+            iconIndex: idx,
+            analysis: item.why_it_matters // Map analysis content
+        })));
+    } else if (shouldFetchInternal && internalRes?.data?.posts) {
+        console.log('[CommunitySection] internal posts found:', internalRes.data.posts);
+        setDisplayPosts(internalRes.data.posts.slice(0, 8).map((post: Post) => ({
+            id: post.id,
+            title: post.title,
+            content: post.content,
+            categoryName: post.category?.name || 'General',
+            linkUrl: `/boards/${slug}/posts/${post.id}`,
+            isExternal: false,
+            iconIndex: typeof post.id === 'number' ? post.id : 0
+        })));
+    } else {
+        console.log('[CommunitySection] No data matched conditions');
+    }
+
+    // Helper to get random icon (consistent per post ID or index)
+    const getIcon = (idx: number) => iconPool[idx % iconPool.length];
 
     return (
-        <section className="border-b border-black bg-white px-4 py-24 dark:border-white/10 dark:bg-black">
-            <div className="mx-auto max-w-[1400px]">
+        <section className="border-b border-black bg-white px-4 py-24 dark:border-white/10 dark:bg-black bw:border-black bw:bg-white">
+            <div className="mx-auto max-w-[1200px]">
                 {/* Header */}
                 <div className="mb-16">
-                    <div className="mb-4 inline-flex items-center rounded-full border border-black bg-white px-4 py-1.5 text-xs font-black tracking-widest text-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:bg-black dark:text-white dark:shadow-none">
+                    <div className="mb-4 inline-flex items-center rounded-full border border-black bg-white px-4 py-1.5 text-xs font-black tracking-widest text-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:bg-black dark:text-white dark:shadow-none bw:border-black bw:bg-white bw:text-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                         <div className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
                         LIVE UPDATES
                     </div>
-                    <h2 className="text-4xl font-black uppercase tracking-tighter text-black md:text-5xl dark:text-white">
+                    <h2 className="text-4xl font-black uppercase tracking-tighter text-black md:text-5xl dark:text-white bw:text-black">
                         인사이트 & <span className="bg-[#FFD600] text-black px-2">AI 연구소</span>
                     </h2>
                 </div>
@@ -83,17 +135,17 @@ export default function CommunitySection() {
                         <button
                             onClick={() => setActiveTab('news')}
                             className={`h-12 w-fit whitespace-nowrap rounded-xl px-6 font-bold transition-transform hover:-translate-y-1 ${activeTab === 'news'
-                                ? 'bg-black text-white dark:bg-white dark:text-black'
-                                : 'border border-black bg-white text-black dark:border-white dark:bg-black dark:text-white'
+                                ? 'bg-black text-white dark:bg-white dark:text-black bw:bg-black bw:text-white'
+                                : 'border border-black bg-white text-black dark:border-white dark:bg-black dark:text-white bw:border-black bw:bg-white bw:text-black'
                                 }`}
                         >
-                            AI 5분 최신뉴스
+                            AI 오늘 최신뉴스
                         </button>
                         <button
                             onClick={() => setActiveTab('blog')}
                             className={`h-12 w-fit whitespace-nowrap rounded-xl px-6 font-bold transition-transform hover:-translate-y-1 ${activeTab === 'blog'
-                                ? 'bg-black text-white dark:bg-white dark:text-black'
-                                : 'border border-black bg-white text-black dark:border-white dark:bg-black dark:text-white'
+                                ? 'bg-black text-white dark:bg-white dark:text-black bw:bg-black bw:text-white'
+                                : 'border border-black bg-white text-black dark:border-white dark:bg-black dark:text-white bw:border-black bw:bg-white bw:text-black'
                                 }`}
                         >
                             기술 블로그
@@ -101,11 +153,11 @@ export default function CommunitySection() {
                         <button
                             onClick={() => setActiveTab('lab')}
                             className={`h-12 w-fit whitespace-nowrap rounded-xl px-6 font-bold transition-transform hover:-translate-y-1 ${activeTab === 'lab'
-                                ? 'bg-black text-white dark:bg-white dark:text-black'
-                                : 'border border-black bg-white text-black dark:border-white dark:bg-black dark:text-white'
+                                ? 'bg-black text-white dark:bg-white dark:text-black bw:bg-black bw:text-white'
+                                : 'border border-black bg-white text-black dark:border-white dark:bg-black dark:text-white bw:border-black bw:bg-white bw:text-black'
                                 }`}
                         >
-                            코어라인 AI 연구소
+                            CI AI 연구소
                         </button>
                     </div>
 
@@ -113,51 +165,72 @@ export default function CommunitySection() {
                         href="/login"
                         className="flex h-12 items-center gap-2 rounded-xl border border-black bg-[#FFD600] px-6 font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                     >
-                        <span className="material-symbols-outlined">add</span>
+                        <span className="material-symbols-outlined notranslate">add</span>
                         포스트 추가하기
                     </Link>
                 </div>
 
-                {/* Grid: 4x2 Layout (Mobile: 1col, Tablet: 2col, Desktop: 4col) */}
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    {communityData[activeTab].map((item: any, index: number) => (
-                        <Link
-                            key={`${activeTab}-${index}`}
-                            href={item.href}
-                            className="group relative flex flex-col justify-between rounded-3xl border border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/10 dark:bg-[#111] dark:shadow-none"
-                        >
-                            <div>
-                                <div className="mb-6 flex items-start justify-between">
-                                    <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all group-hover:scale-110 group-hover:bg-[#FFD600] dark:border-white dark:bg-black dark:text-white dark:shadow-none dark:group-hover:text-black">
-                                        <span className="material-symbols-outlined text-3xl">{item.icon}</span>
+                {/* Grid: 4x2 Layout */}
+                {isLoading ? (
+                    <div className="flex h-64 items-center justify-center font-bold text-gray-500">로딩 중...</div>
+                ) : displayPosts.length === 0 ? (
+                    <div className="flex h-64 items-center justify-center font-bold text-gray-500">게시글이 없습니다.</div>
+                ) : (
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                        {displayPosts.map((post) => {
+                            const CardContent = (
+                                <div className="group relative flex h-full flex-col justify-between rounded-3xl border border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/10 dark:bg-[#111] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                                    <div>
+                                        <div className="mb-6 flex items-start justify-between">
+                                            <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all group-hover:scale-110 group-hover:bg-[#FFD600] dark:border-white dark:bg-black dark:text-white dark:shadow-none dark:group-hover:text-black bw:border-black bw:bg-white bw:text-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:group-hover:text-black">
+                                                <span className="material-symbols-outlined notranslate text-3xl">{getIcon(post.iconIndex)}</span>
+                                            </div>
+                                            <span className="rounded border border-black px-2 py-0.5 text-[10px] font-black uppercase text-black bg-gray-100 dark:bg-[#FFD600] bw:bg-gray-200">
+                                                {post.categoryName}
+                                            </span>
+                                        </div>
+                                        <h3 className="mb-3 text-lg font-black text-black leading-tight line-clamp-2 dark:text-white bw:text-black">{post.title}</h3>
+                                        <p className="mb-8 text-sm font-bold leading-relaxed text-gray-500 line-clamp-3 dark:text-gray-400 bw:text-gray-500">
+                                            {(post.content || '').slice(0, 100)}...
+                                        </p>
                                     </div>
-                                    {item.badges.map((badge: string) => (
-                                        <span
-                                            key={badge}
-                                            className={`rounded border border-black px-2 py-0.5 text-[10px] font-black uppercase text-black ${item.badgeColor} dark:bg-[#FFD600]`}
-                                        >
-                                            {badge}
-                                        </span>
-                                    ))}
+
+                                    {/* Analysis Section (Replaces Read Source) */}
+                                    {post.analysis && (
+                                        <div className="mt-auto border-l-4 border-[#FFD600] bg-gray-900 p-4 dark:bg-white/5">
+                                            <h4 className="mb-1 text-[10px] font-black tracking-widest text-[#FFD600] uppercase">ANALYSIS</h4>
+                                            <p className="text-xs font-bold leading-relaxed text-gray-300">
+                                                {post.analysis}
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
-                                <h3 className="mb-3 text-2xl font-black text-black dark:text-white">{item.title}</h3>
-                                <p className="mb-8 text-sm font-bold leading-relaxed text-gray-500 dark:text-gray-400">
-                                    {item.description}
-                                </p>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
+                            );
+
+                            return post.isExternal ? (
+                                <a key={post.id} href={post.linkUrl} target="_blank" rel="noopener noreferrer" className="block h-full">
+                                    {CardContent}
+                                </a>
+                            ) : (
+                                <Link key={post.id} href={post.linkUrl} className="block h-full">
+                                    {CardContent}
+                                </Link>
+                            );
+                        })}
+                    </div>
+                )}
 
                 {/* More Button */}
                 <div className="mt-16 flex justify-center">
                     <Link
-                        href={activeTab === 'news' ? '/news' : activeTab === 'blog' ? '/blog' : '/research'}
-                        className="group flex items-center gap-3 rounded-xl border border-black bg-white px-8 py-4 font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1 hover:bg-[#FFD600] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none dark:border-white dark:bg-black dark:text-white dark:hover:bg-[#FFD600] dark:hover:text-black"
+                        href={activeTab === 'news' ? 'https://ai-news-5min-dashboard.netlify.app/' : (activeTab === 'blog' ? '/blog' : '/research')}
+                        target={activeTab === 'news' ? '_blank' : undefined}
+                        rel={activeTab === 'news' ? 'noopener noreferrer' : undefined}
+                        className="group flex items-center gap-3 rounded-xl border border-black bg-white px-8 py-4 font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1 hover:bg-[#FFD600] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none dark:border-white dark:bg-black dark:text-white dark:hover:bg-[#FFD600] dark:hover:text-black bw:border-black bw:bg-white bw:text-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-100"
                     >
-                        더보기
-                        <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">
-                            arrow_forward
+                        {activeTab === 'news' ? '전체 AI 최신뉴스 보기' : '더보기'}
+                        <span className="material-symbols-outlined notranslate transition-transform group-hover:translate-x-1">
+                            {activeTab === 'news' ? 'open_in_new' : 'arrow_forward'}
                         </span>
                     </Link>
                 </div>
