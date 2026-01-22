@@ -1,6 +1,6 @@
 import './globals.css';
-import { ThemeProvider } from './components/ThemeProvider';
-import { AuthProvider } from './components/AuthProvider';
+import { ThemeProvider } from './components/providers/ThemeProvider';
+import { AuthProvider } from './components/providers/AuthProvider';
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Noto_Sans_KR } from 'next/font/google';
 

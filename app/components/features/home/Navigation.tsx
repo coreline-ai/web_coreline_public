@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTheme } from '../ThemeProvider';
+import { useTheme } from '../../providers/ThemeProvider';
 
 export default function Navigation() {
   const { theme, setTheme } = useTheme();

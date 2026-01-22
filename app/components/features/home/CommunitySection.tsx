@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import useSWR from 'swr';
-import { useRequest } from '../../lib/use-request';
-import { Post } from '../../lib/types/api';
+import { useRequest } from '../../../lib/use-request';
+import { Post } from '../../../lib/types/api';
 
 const slugs: Record<string, string> = {
     news: 'news',

@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import SimpleHeader from '../../components/SimpleHeader';
-import SimpleFooter from '../../components/SimpleFooter';
+import SimpleHeader from '../../components/layout/SimpleHeader';
+import SimpleFooter from '../../components/layout/SimpleFooter';
 import { api } from '../../lib/api-client';
 import { User, ApiResponse } from '../../lib/types/api';
 import { format } from 'date-fns';

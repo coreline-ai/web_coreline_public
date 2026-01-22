@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import BoardTemplate from '../components/community/BoardTemplate';
+import BoardTemplate from '../components/features/community/BoardTemplate';
 
 export default function ResearchPage() {
     return (

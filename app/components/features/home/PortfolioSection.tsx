@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { PROJECTS } from '../../data/projects';
+import { PROJECTS } from '../../../data/projects';
 
 export default function PortfolioSection() {
   return (
@@ -34,7 +34,7 @@ export default function PortfolioSection() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {PROJECTS.map((p) => (
             <Link
-              href={`/project/${p.id}`}
+              href={`/projects/${p.id}`}
               key={p.id}
               className="group block overflow-hidden rounded-[2rem] border border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:-translate-y-1 sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none dark:hover:border-gray-500 bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >

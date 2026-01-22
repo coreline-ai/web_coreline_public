@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import SimpleHeader from '../SimpleHeader';
-import SimpleFooter from '../SimpleFooter';
-import { api } from '../../lib/api-client';
-import { Post, Board, BoardCategory } from '../../lib/types/api';
-import { useRequest } from '../../lib/use-request';
+import SimpleHeader from '../../layout/SimpleHeader';
+import SimpleFooter from '../../layout/SimpleFooter';
+import { api } from '../../../lib/api-client';
+import { Post, Board, BoardCategory } from '../../../lib/types/api';
+import { useRequest } from '../../../lib/use-request';
 
 interface BoardTemplateProps {
     slug: string;

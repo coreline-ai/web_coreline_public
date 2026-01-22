@@ -3,8 +3,8 @@
 import React from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import SimpleHeader from '../components/SimpleHeader';
-import SimpleFooter from '../components/SimpleFooter';
+import SimpleHeader from '../components/layout/SimpleHeader';
+import SimpleFooter from '../components/layout/SimpleFooter';
 import Link from 'next/link';
 
 export default function AdminPage() {

@@ -6,13 +6,13 @@ import { useRouter, useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import SimpleHeader from '../../../../components/SimpleHeader';
-import SimpleFooter from '../../../../components/SimpleFooter';
+import SimpleHeader from '../../../../components/layout/SimpleHeader';
+import SimpleFooter from '../../../../components/layout/SimpleFooter';
 import { api } from '../../../../lib/api-client';
 import { Post, Comment } from '../../../../lib/types/api';
-import { CommentSection } from '../../../../components/community/CommentSection';
-import { LikeButton } from '../../../../components/community/LikeButton';
-import { MarkdownViewer } from '@/app/components/common/MarkdownViewer';
+import { CommentSection } from '../../../../components/features/community/CommentSection';
+import { LikeButton } from '../../../../components/features/community/LikeButton';
+import { MarkdownViewer } from '@/app/components/ui/MarkdownViewer';
 
 export default function PostDetailPage() {
     const router = useRouter();

@@ -4,9 +4,9 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSession, signOut } from 'next-auth/react';
-import { useTheme } from './ThemeProvider';
+import { useTheme } from '../providers/ThemeProvider';
 import { useRouter } from 'next/navigation';
-import { NotificationDropdown } from './common/NotificationDropdown';
+import { NotificationDropdown } from '../features/notifications/NotificationDropdown';
 
 export default function SimpleHeader() {
   const router = useRouter();

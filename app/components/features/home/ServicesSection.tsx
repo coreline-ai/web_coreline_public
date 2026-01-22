@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SERVICES } from './services.constants';
-import { useTheme } from '../ThemeProvider';
+import { useTheme } from '../../providers/ThemeProvider';
 
 export default function ServicesSection() {
   const { theme } = useTheme();

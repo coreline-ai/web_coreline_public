@@ -4,8 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PROJECTS } from '../data/projects';
-import SimpleHeader from '../components/SimpleHeader';
-import SimpleFooter from '../components/SimpleFooter';
+import SimpleHeader from '../components/layout/SimpleHeader';
+import SimpleFooter from '../components/layout/SimpleFooter';
 
 export default function ProjectsPage() {
   // Duplicate projects to simulate "12+" items for visual fullness as requested
@@ -174,7 +174,7 @@ export default function ProjectsPage() {
                       Last commit: {['2d ago', '5h ago', '1w ago', '3d ago'][index % 4]}
                     </div>
                     <Link
-                      href={`/project/${project.id}`}
+                      href={`/projects/${project.id}`}
                       className="rounded-lg border-2 border-black px-4 py-2 text-xs font-bold text-black transition-colors hover:bg-black hover:text-white dark:border-white/20 dark:text-white dark:hover:bg-white dark:hover:text-black bw:border-black bw:text-black bw:hover:bg-black bw:hover:text-white"
                     >
                       View Details

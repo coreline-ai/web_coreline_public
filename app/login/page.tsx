@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn, getSession } from 'next-auth/react';
-import SimpleHeader from '../components/SimpleHeader';
-import SimpleFooter from '../components/SimpleFooter';
+import SimpleHeader from '../components/layout/SimpleHeader';
+import SimpleFooter from '../components/layout/SimpleFooter';
 
 export default function LoginPage() {
   const router = useRouter();

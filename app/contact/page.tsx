@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import SimpleHeader from '../components/SimpleHeader';
-import SimpleFooter from '../components/SimpleFooter';
+import SimpleHeader from '../components/layout/SimpleHeader';
+import SimpleFooter from '../components/layout/SimpleFooter';
 
 export default function ContactPage() {
   return (

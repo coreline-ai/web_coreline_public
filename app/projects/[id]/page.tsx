@@ -4,8 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
-import SimpleHeader from '../../components/SimpleHeader';
-import SimpleFooter from '../../components/SimpleFooter';
+import SimpleHeader from '../../components/layout/SimpleHeader';
+import SimpleFooter from '../../components/layout/SimpleFooter';
 import { PROJECTS } from '../../data/projects';
 
 export default function ProjectDetailPage() {

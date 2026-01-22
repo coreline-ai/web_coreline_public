@@ -3,10 +3,10 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-import Navigation from './components/home/Navigation';
-import HeroSection from './components/home/HeroSection';
-import ServicesSection from './components/home/ServicesSection';
-import { useTheme } from './components/ThemeProvider';
+import Navigation from './components/features/home/Navigation';
+import HeroSection from './components/features/home/HeroSection';
+import ServicesSection from './components/features/home/ServicesSection';
+import { useTheme } from './components/providers/ThemeProvider';
 
 const LoadingSkeleton = () => (
   <section className="flex justify-center px-4 py-24">
@@ -19,25 +19,25 @@ const LoadingSkeleton = () => (
   </section>
 );
 
-const TechStackSection = dynamic(() => import('./components/home/TechStackSection'), {
+const TechStackSection = dynamic(() => import('./components/features/home/TechStackSection'), {
   loading: () => <LoadingSkeleton />,
 });
-const PortfolioSection = dynamic(() => import('./components/home/PortfolioSection'), {
+const PortfolioSection = dynamic(() => import('./components/features/home/PortfolioSection'), {
   loading: () => <LoadingSkeleton />,
 });
-const ProcessSection = dynamic(() => import('./components/home/ProcessSection'), {
+const ProcessSection = dynamic(() => import('./components/features/home/ProcessSection'), {
   loading: () => <LoadingSkeleton />,
 });
-const AboutSection = dynamic(() => import('./components/home/AboutSection'), {
+const AboutSection = dynamic(() => import('./components/features/home/AboutSection'), {
   loading: () => <LoadingSkeleton />,
 });
-const CommunitySection = dynamic(() => import('./components/home/CommunitySection'), {
+const CommunitySection = dynamic(() => import('./components/features/home/CommunitySection'), {
   loading: () => <LoadingSkeleton />,
 });
-const ContactSection = dynamic(() => import('./components/home/ContactSection'), {
+const ContactSection = dynamic(() => import('./components/features/home/ContactSection'), {
   loading: () => <LoadingSkeleton />,
 });
-const FooterSection = dynamic(() => import('./components/home/FooterSection'), {
+const FooterSection = dynamic(() => import('./components/features/home/FooterSection'), {
   loading: () => <LoadingSkeleton />,
 });
 

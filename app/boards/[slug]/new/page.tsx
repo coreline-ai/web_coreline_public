@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import SimpleHeader from '../../../components/SimpleHeader';
-import SimpleFooter from '../../../components/SimpleFooter';
+import SimpleHeader from '../../../components/layout/SimpleHeader';
+import SimpleFooter from '../../../components/layout/SimpleFooter';
 import { api } from '../../../lib/api-client';
 import { BoardCategory, ApiResponse } from '../../../lib/types/api';
-import { FileUpload } from '@/app/components/common/FileUpload';
+import { FileUpload } from '@/app/components/ui/FileUpload';
 
 export default function NewPostPage() {
     const router = useRouter();
