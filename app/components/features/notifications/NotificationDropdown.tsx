@@ -113,7 +113,7 @@ export function NotificationDropdown() {
                                                     {notification.post && (
                                                         <Link
                                                             href={`/boards/${notification.post.slug || 'blog'}/posts/${notification.post_id}`}
-                                                            className="text-xs font-black text-gray-500 mt-1 block hover:text-[#FFD600] dark:text-gray-400 dark:hover:text-[#FFD600] truncate"
+                                                            className="text-xs font-black text-gray-500 mt-1 block hover:text-[#FFD600] dark:text-gray-400 dark:hover:text-[#FFD600] break-words"
                                                         >
                                                             "{notification.post.title}"
                                                         </Link>

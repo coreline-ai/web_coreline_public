@@ -3,16 +3,25 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { signIn, getSession } from 'next-auth/react';
+import { signIn, getSession, useSession } from 'next-auth/react';
 import SimpleHeader from '../components/layout/SimpleHeader';
 import SimpleFooter from '../components/layout/SimpleFooter';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (status === 'authenticated') {
+      router.replace('/');
+    }
+  }, [status, router]);
+
+  if (status === 'authenticated') return null; // Prevent flicker
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +40,12 @@ export default function LoginPage() {
     } else {
       // Check for admin role
       const session = await getSession();
-      if ((session?.user as any)?.isAdmin) {
+
+      const callbackUrl = new URLSearchParams(window.location.search).get('callbackUrl');
+
+      if (callbackUrl) {
+        router.push(callbackUrl);
+      } else if ((session?.user as any)?.isAdmin) {
         router.push('/admin');
       } else {
         router.push('/');

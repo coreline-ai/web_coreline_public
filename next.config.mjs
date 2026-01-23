@@ -1,5 +1,41 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    async rewrites() {
+        return [
+            {
+                source: '/api/auth/token',
+                destination: 'http://localhost:8000/api/auth/token',
+            },
+            {
+                source: '/api/auth/register',
+                destination: 'http://localhost:8000/api/auth/register',
+            },
+            {
+                source: '/api/boards/:path*',
+                destination: 'http://localhost:8000/api/boards/:path*',
+            },
+            {
+                source: '/api/posts/:path*',
+                destination: 'http://localhost:8000/api/posts/:path*',
+            },
+            {
+                source: '/api/admin/:path*',
+                destination: 'http://localhost:8000/api/admin/:path*',
+            },
+            {
+                source: '/api/comments/:path*',
+                destination: 'http://localhost:8000/api/comments/:path*',
+            },
+            {
+                source: '/api/notifications/:path*',
+                destination: 'http://localhost:8000/api/notifications/:path*',
+            },
+            {
+                source: '/api/files/:path*',
+                destination: 'http://localhost:8000/api/files/:path*',
+            },
+        ];
+    },
     async headers() {
         return [
             {

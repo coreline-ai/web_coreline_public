@@ -84,35 +84,6 @@ async def create_post(req: PostCreate, db: AsyncSession = Depends(get_db), curre
         }
     )
 
-@router.get("/api/posts/{post_id}")
-async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), current_user: Optional[User] = Depends(get_current_user)):
-    # Note: get_current_user in original code likely threw 401 if missing, but for public read it might be optional
-    # Checking original `api/posts/post_id.py`: `current_user: User = Depends(get_current_user)` was NOT in the arguments for `get_post`!
-    # Wait, Step 1744 output for `get_post` shows: `async def get_post(post_id: int, db: AsyncSession = Depends(get_db)):`
-    # BUT inside it logic checks `if current_user:`? 
-    # Ah, I need to check how `current_user` is retrieved. 
-    # In Step 1744 output: `# Get current user (optional)` -> `try: ... get_current_user ... except: current_user = None`.
-    # I should reproduce that logical pattern or use a Depends(get_current_user_optional) if available.
-    # Looking at `api/_lib/auth.py` in Step 1749: `get_current_user_optional` exists! I should use that.
-    
-    # Re-reading `api/posts/post_id.py` snippet in Step 1744...
-    # It shows:
-    #   query = select(Post).where(Post.id == post_id) ...
-    #   if current_user: ...
-    # But where does `current_user` come from in the params?
-    # The snippet I see in Step 1744 starts at `board = ...`. It's truncated.
-    # I will assume `get_current_user_optional` is the clean way to do it given I saw it in `api/_lib/auth.py`.
-    pass 
-
-# Redefining get_post_detail properly with optional auth
-@router.get("/api/posts/{post_id}")
-async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), token: Optional[str] = None):
-    # Retrieve user manually if usage of get_current_user_optional is tricky or if I want to match original logic exactly.
-    # Actually, better to import get_current_user_optional.
-    # I'll update the imports.
-    pass
-
-# ... rethinking imports ...
 from api._lib.auth import get_current_user_optional
 
 @router.get("/api/posts/{post_id}")
@@ -125,9 +96,7 @@ async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), curr
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
     
-    # Increment view count
-    post.view_count += 1
-    await db.commit()
+    # Increment view count logic moved to POST /api/posts/{post_id}/view
     
     # Fetch author
     author_result = await db.execute(select(User).where(User.id == post.user_id))
@@ -228,9 +197,25 @@ async def delete_post(post_id: int, db: AsyncSession = Depends(get_db), current_
 
 @router.get("/api/posts/{post_id}/comments")
 async def get_comments(post_id: int, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Comment).where(Comment.post_id == post_id).order_by(Comment.created_at.asc()))
-    comments = result.scalars().all()
-    return ResponseModel.success_res(comments)
+    stmt = select(Comment, User).join(User, Comment.user_id == User.id).where(Comment.post_id == post_id).order_by(Comment.created_at.asc())
+    result = await db.execute(stmt)
+    rows = result.all()
+    
+    comments_data = []
+    for comment, user in rows:
+        comments_data.append({
+            "id": comment.id,
+            "content": comment.content,
+            "created_at": comment.created_at.isoformat() if comment.created_at else None,
+            "user_id": str(comment.user_id),
+            "post_id": comment.post_id,
+            "author": {
+                "id": str(user.id),
+                "nickname": user.nickname
+            }
+        })
+        
+    return ResponseModel.success_res(comments_data)
 
 @router.post("/api/posts/{post_id}/comments")
 async def create_comment(post_id: int, req: CommentCreate, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
@@ -319,3 +304,15 @@ async def toggle_like(post_id: int, db: AsyncSession = Depends(get_db), current_
         "liked": liked,
         "like_count": count
     })
+
+@router.post("/api/posts/{post_id}/view")
+async def increment_view_count(post_id: int, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Post).where(Post.id == post_id))
+    post = result.scalars().first()
+    if not post:
+        raise HTTPException(status_code=404, detail="Post not found")
+    
+    post.view_count += 1
+    await db.commit()
+    
+    return ResponseModel.success_res({"view_count": post.view_count})

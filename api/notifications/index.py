@@ -33,12 +33,19 @@ async def get_unread_notifications(limit: int = 10, db: AsyncSession = Depends(g
                 actor = {"id": str(actor_user.id), "nickname": actor_user.nickname}
         
         # Fetch post
-        post = None
         if n.post_id:
-            post_result = await db.execute(select(Post).where(Post.id == n.post_id))
-            post_obj = post_result.scalars().first()
-            if post_obj:
-                post = {"id": post_obj.id, "title": post_obj.title}
+            # Join Post and Board to get slug
+            stmt = select(Post, Board).join(Board, Post.board_id == Board.id).where(Post.id == n.post_id)
+            post_result = await db.execute(stmt)
+            row = post_result.first()
+            if row:
+                post_obj, board_obj = row
+                post = {
+                    "id": post_obj.id, 
+                    "title": post_obj.title,
+                    "slug": board_obj.slug,
+                    "board_id": board_obj.id
+                }
         
         notifications_data.append({
             "id": n.id,

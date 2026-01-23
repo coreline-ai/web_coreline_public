@@ -20,6 +20,7 @@ class BoardCreate(BaseModel):
     slug: str
     description: Optional[str] = None
     access_level: str = "PUBLIC"
+    categories: List[str] = []
 
 class BoardUpdate(BaseModel):
     name: Optional[str] = None
@@ -66,7 +67,7 @@ async def serialize_post(post: Post, db: AsyncSession, categories_map: dict, use
 
 @router.get("/api/boards")
 async def get_boards(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Board))
+    result = await db.execute(select(Board).order_by(Board.id.desc())) # Ordered by newest first usually better for admin
     boards = result.scalars().all()
     return JSONResponse(content={
         "success": True,
@@ -93,8 +94,18 @@ async def create_board(req: BoardCreate, db: AsyncSession = Depends(get_db), adm
         access_level=req.access_level
     )
     db.add(new_board)
+    await db.flush() # Get ID before commit (to add categories)
+    
+    # Add Categories
+    if req.categories:
+        for cat_name in req.categories:
+            if cat_name.strip():
+                new_cat = BoardCategory(board_id=new_board.id, name=cat_name.strip())
+                db.add(new_cat)
+    
     await db.commit()
     await db.refresh(new_board)
+    
     new_board_dict = {
         "id": new_board.id, "name": new_board.name, "slug": new_board.slug, 
         "description": new_board.description, "access_level": new_board.access_level

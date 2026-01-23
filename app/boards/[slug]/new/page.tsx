@@ -69,11 +69,11 @@ export default function NewPostPage() {
                 file_url: fileUrl || undefined
             });
 
-            if (res.success && res.data) {
+            if (res && res.success && res.data) {
                 alert('게시글이 성공적으로 등록되었습니다.');
                 router.push(`/boards/${slug}/posts/${res.data.id}`);
             } else {
-                setError(res.error || 'Failed to create post');
+                setError(res?.error || 'Failed to create post');
             }
         } catch (err: any) {
             setError(err.message || 'Something went wrong');
@@ -86,7 +86,7 @@ export default function NewPostPage() {
 
     return (
         <div className="min-h-screen bg-white font-sans text-black dark:bg-[#111] dark:text-white bw:bg-white bw:text-black">
-            <SimpleHeader />
+            <SimpleHeader redirectOnLogout={slug === 'CL_Project_QnA' ? '/' : undefined} />
             <main className="relative pt-32 pb-24">
                 <div className="mx-auto max-w-[1000px] px-4">
                     <div className="mb-12 border-l-[6px] border-[#FFD600] pl-6">
@@ -108,17 +108,20 @@ export default function NewPostPage() {
                                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                                     <div>
                                         <label className="mb-2 block text-xs font-black uppercase text-gray-400">카테고리</label>
-                                        <select
-                                            value={categoryId || ''}
-                                            onChange={(e) => setCategoryId(Number(e.target.value))}
-                                            required
-                                            className="w-full rounded-xl border-2 border-black bg-gray-50 p-3 font-bold text-black focus:outline-none dark:border-white/20 dark:bg-black dark:text-white bw:border-black bw:bg-gray-50 bw:text-black"
-                                        >
-                                            <option value="" disabled>카테고리 선택</option>
+                                        <div className="flex flex-wrap gap-2">
                                             {categories.map((cat) => (
-                                                <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                                <button
+                                                    key={cat.id}
+                                                    type="button"
+                                                    onClick={() => setCategoryId(cat.id)}
+                                                    className={`rounded-xl border-2 border-black px-4 py-2 font-bold transition-all ${categoryId === cat.id
+                                                        ? 'bg-[#FFD600] text-black hover:bg-white dark:text-black bw:bg-[#FFD600] bw:text-black'
+                                                        : 'bg-white text-black hover:bg-white active:bg-gray-200 dark:bg-black dark:text-white dark:border-white/20 dark:hover:bg-white/10 bw:bg-white bw:text-black hover:text-black'}`}
+                                                >
+                                                    {cat.name}
+                                                </button>
                                             ))}
-                                        </select>
+                                        </div>
                                     </div>
                                     {session?.user?.isAdmin && (
                                         <div className="flex items-center gap-3 pt-6">
@@ -172,14 +175,14 @@ export default function NewPostPage() {
                             <button
                                 type="button"
                                 onClick={() => router.back()}
-                                className="rounded-xl border-2 border-black bg-white px-8 py-3 text-sm font-black uppercase shadow-[4px_4px_0px_0px_black] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none dark:bg-transparent dark:border-white/20 dark:text-white bw:bg-white bw:border-black bw:text-black"
+                                className="rounded-xl border-2 border-black bg-white px-8 py-3 text-sm font-black uppercase shadow-[4px_4px_0px_0px_black] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none dark:shadow-none dark:bg-transparent dark:border-white/20 dark:text-white bw:bg-white bw:border-black bw:text-black"
                             >
                                 취소
                             </button>
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="rounded-xl border-2 border-black bg-[#FFD600] px-12 py-3 text-sm font-black uppercase shadow-[4px_4px_0px_0px_black] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none disabled:opacity-50 dark:text-black bw:bg-black bw:text-white"
+                                className="rounded-xl border-2 border-black bg-[#FFD600] px-12 py-3 text-sm font-black uppercase shadow-[4px_4px_0px_0px_black] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none disabled:opacity-50 dark:shadow-none dark:text-black bw:bg-black bw:text-white"
                             >
                                 {isLoading ? '등록 중...' : '게시글 등록하기'}
                             </button>

@@ -63,6 +63,17 @@ export default function HeroSection() {
               </span>{' '}
               GIT HUB
             </a>
+            <a
+              href="https://gitlab.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-black bg-white px-8 text-lg font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95 dark:border dark:border-white/30 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10 bw:border-black bw:bg-white bw:text-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-100"
+            >
+              <span className="material-symbols-outlined notranslate" aria-hidden="true">
+                deployed_code
+              </span>{' '}
+              GIT LAB
+            </a>
           </div>
 
           <div className="flex gap-8 pt-4">
@@ -140,7 +151,7 @@ export default function HeroSection() {
                     <span className="text-[10px] font-black text-gray-500 uppercase dark:text-gray-400 bw:text-gray-500">
                       AI System Analysis
                     </span>
-                    <span className="text-[10px] font-black text-green-600 dark:text-green-400 bw:text-green-600">
+                    <span className="text-[10px] font-black text-green-600 animate-pulse dark:text-green-400 bw:text-green-600">
                       LIVE
                     </span>
                   </div>

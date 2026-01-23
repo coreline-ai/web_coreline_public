@@ -3,12 +3,13 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import SimpleHeader from '../components/layout/SimpleHeader';
 import SimpleFooter from '../components/layout/SimpleFooter';
 import { api } from '../lib/api-client';
 
 export default function SignUpPage() {
+  const { data: session, status } = useSession();
   const router = useRouter();
   const [formData, setFormData] = useState({
     username: '',
@@ -19,6 +20,14 @@ export default function SignUpPage() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (status === 'authenticated') {
+      router.replace('/');
+    }
+  }, [status, router]);
+
+  if (status === 'authenticated') return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -53,7 +62,8 @@ export default function SignUpPage() {
           username: formData.username,
           password: formData.password,
           redirect: true,
-          callbackUrl: '/',
+          redirect: true,
+          callbackUrl: '/signup/success',
         });
       } else {
         setError('Registration succeeded but no token returned');

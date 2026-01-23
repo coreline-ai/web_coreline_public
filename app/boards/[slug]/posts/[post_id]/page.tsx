@@ -30,8 +30,10 @@ export default function PostDetailPage() {
         try {
             const postRes = await api.get<Post>(`/api/posts/${postId}`);
 
-            if (postRes.success && postRes.data) {
+            if (postRes && postRes.success && postRes.data) {
                 setPost(postRes.data);
+            } else {
+                setError('Failed to load post data');
             }
         } catch (err: any) {
             setError(err.message || 'Failed to load post');
@@ -41,29 +43,49 @@ export default function PostDetailPage() {
     }, [postId]);
 
     useEffect(() => {
-        if (postId) fetchPostData();
+        if (postId) {
+            fetchPostData();
+
+            // Handle view count increment (Unique per session)
+            const viewKey = `viewed_post_${postId}`;
+            if (!sessionStorage.getItem(viewKey)) {
+                api.post(`/api/posts/${postId}/view`, {}).then(() => {
+                    sessionStorage.setItem(viewKey, 'true');
+                }).catch(err => console.error(err));
+            }
+        }
     }, [postId, fetchPostData]);
 
     const handleDeletePost = async () => {
         if (!confirm('정말 이 게시글을 삭제하시겠습니까?')) return;
         try {
-            const res = await api.delete(`/api/posts/${postId}`);
+            const token = (session as any)?.accessToken;
+            const headers: HeadersInit = {};
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            const res = await api.delete(`/api/posts/${postId}`, { headers });
             if (res.success) {
                 router.push(`/boards/${slug}`);
             }
-        } catch (err) {
+        } catch (err: any) {
             console.error("Delete failed", err);
+            alert(`삭제 실패: ${err.message}`);
         }
     };
 
     if (isLoading) return <div className="min-h-screen animate-pulse bg-white dark:bg-black bw:bg-white" />;
     if (error || !post) return <div className="p-20 text-center font-black text-red-500">{error || 'Post not found'}</div>;
 
-    const isOwner = session?.user?.id === post.user_id;
+    const isRestrictedBoard = ['blog', 'research'].includes(slug);
+    const canManage = isRestrictedBoard
+        ? session?.user?.isAdmin
+        : (session?.user?.id === post.user_id || session?.user?.isAdmin);
 
     return (
         <div className="min-h-screen bg-white font-sans text-black dark:bg-[#111] dark:text-white bw:bg-white bw:text-black">
-            <SimpleHeader />
+            <SimpleHeader redirectOnLogout={slug === 'CL_Project_QnA' ? '/' : undefined} />
             <main className="relative pt-32 pb-24">
                 <div className="mx-auto max-w-[900px] px-4">
                     {/* Post Header */}
@@ -87,7 +109,7 @@ export default function PostDetailPage() {
                                 </div>
                             </div>
                             <div className="flex gap-2">
-                                {isOwner && (
+                                {canManage && (
                                     <>
                                         <Link href={`/boards/${slug}/posts/${postId}/edit`} className="rounded-lg border-2 border-black bg-white p-2 hover:bg-gray-50 dark:bg-black dark:border-white/20 dark:hover:bg-white/5 bw:border-black bw:bg-white bw:hover:bg-gray-100">
                                             <span className="material-symbols-outlined notranslate text-gray-500">edit</span>

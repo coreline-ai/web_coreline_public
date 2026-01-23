@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 import { useTheme } from '../../providers/ThemeProvider';
 
 export default function Navigation() {
   const { theme, setTheme } = useTheme();
+  const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleTheme = () => {
@@ -16,6 +18,8 @@ export default function Navigation() {
       setTheme('light');
     }
   };
+
+  const projectLink = session ? '/boards/CL_Project_QnA' : '/login?callbackUrl=/boards/CL_Project_QnA';
 
   return (
     <>
@@ -49,7 +53,7 @@ export default function Navigation() {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10 bw:border-black bw:bg-white bw:text-black bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] active:shadow-none dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10 bw:border-black bw:bg-white bw:text-black bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
               aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
               <span className="material-symbols-outlined notranslate" aria-hidden="true">
@@ -58,7 +62,7 @@ export default function Navigation() {
             </button>
 
             <Link
-              href="/login"
+              href={projectLink}
               className="rounded-lg border-2 border-black bg-black px-6 py-3 text-sm font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95 dark:border-transparent dark:bg-white dark:text-black dark:shadow-none dark:hover:translate-none dark:hover:bg-[#FFD600] bw:border-black bw:bg-black bw:text-white bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-800"
             >
               프로젝트 시작하기
@@ -135,7 +139,7 @@ export default function Navigation() {
             </button>
 
             <Link
-              href="/login"
+              href={projectLink}
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex h-14 w-full items-center justify-center rounded-lg border-2 border-black bg-black text-lg font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transition-all active:scale-95 dark:border-transparent dark:bg-white dark:text-black dark:shadow-none bw:border-black bw:bg-black bw:text-white"
             >

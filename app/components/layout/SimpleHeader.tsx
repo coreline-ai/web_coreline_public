@@ -8,7 +8,11 @@ import { useTheme } from '../providers/ThemeProvider';
 import { useRouter } from 'next/navigation';
 import { NotificationDropdown } from '../features/notifications/NotificationDropdown';
 
-export default function SimpleHeader() {
+interface SimpleHeaderProps {
+  redirectOnLogout?: string;
+}
+
+export default function SimpleHeader({ redirectOnLogout }: SimpleHeaderProps) {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const { data: session } = useSession();
@@ -74,7 +78,14 @@ export default function SimpleHeader() {
               )}
             </div>
             <button
-              onClick={() => signOut()}
+              onClick={async () => {
+                await signOut({ redirect: false });
+                if (redirectOnLogout) {
+                  router.push(redirectOnLogout);
+                } else {
+                  window.location.reload();
+                }
+              }}
               className="rounded-lg border-2 border-black bg-black px-4 py-2 text-white transition-all hover:bg-gray-800 active:scale-95 dark:border-white/30 dark:bg-white dark:text-black dark:hover:bg-[#FFD600] bw:border-black bw:bg-black bw:text-white bw:hover:bg-gray-800"
             >
               Logout

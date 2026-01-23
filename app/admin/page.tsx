@@ -19,8 +19,35 @@ export default function AdminPage() {
         }
     }, [status, session, router]);
 
-    if (status === 'loading' || !session?.user?.isAdmin) {
-        return <div className="min-h-screen bg-white dark:bg-black animate-pulse bw:bg-white" />;
+    // Prevent infinite loading state
+    React.useEffect(() => {
+        if (status === 'loading') {
+            const timer = setTimeout(() => {
+                window.location.reload();
+            }, 5000); // Reload if loading > 5s
+            return () => clearTimeout(timer);
+        }
+    }, [status]);
+
+    if (status === 'loading') {
+        return (
+            <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:bg-black bw:bg-white">
+                <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-black dark:border-white/20 dark:border-t-[#FFD600] bw:border-black bw:border-t-transparent" />
+                <p className="mt-4 animate-pulse font-bold text-gray-400">Loading Admin Console...</p>
+            </div>
+        );
+    }
+
+    if (!session?.user?.isAdmin) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black">
+                <h1 className="text-4xl font-black mb-4 dark:text-white">Admin Access Required</h1>
+                <p className="mb-8 font-bold text-gray-500">이 페이지에 접근할 권한이 없습니다.</p>
+                <Link href="/" className="px-6 py-3 bg-black text-white font-bold rounded-xl dark:bg-white dark:text-black">
+                    홈으로 돌아가기
+                </Link>
+            </div>
+        );
     }
 
     const adminModules = [

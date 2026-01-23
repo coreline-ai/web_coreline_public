@@ -1,7 +1,7 @@
 import { getSession } from 'next-auth/react';
 import { ApiResponse } from './types/api';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
+const BASE_URL = '';
 
 async function request<T>(
     endpoint: string,
@@ -14,8 +14,10 @@ async function request<T>(
     const token = (session as any)?.accessToken || (typeof window !== 'undefined' ? localStorage.getItem('access_token') : null);
 
     const headers = new Headers(options.headers);
-    if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+    if (!headers.has('Authorization')) {
+        if (token) {
+            headers.set('Authorization', `Bearer ${token}`);
+        }
     }
     if (!headers.has('Content-Type') && !(options.body instanceof FormData)) {
         headers.set('Content-Type', 'application/json');
