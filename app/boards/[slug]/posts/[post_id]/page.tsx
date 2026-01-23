@@ -78,8 +78,7 @@ export default function PostDetailPage() {
     if (isLoading) return <div className="min-h-screen animate-pulse bg-white dark:bg-black bw:bg-white" />;
     if (error || !post) return <div className="p-20 text-center font-black text-red-500">{error || 'Post not found'}</div>;
 
-    const isRestrictedBoard = ['blog', 'research'].includes(slug);
-    const canManage = isRestrictedBoard
+    const canManage = post.board?.access_level === 'ADMIN'
         ? session?.user?.isAdmin
         : (session?.user?.id === post.user_id || session?.user?.isAdmin);
 

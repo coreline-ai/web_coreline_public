@@ -49,6 +49,10 @@ async def create_post(req: PostCreate, db: AsyncSession = Depends(get_db), curre
     
     # Only admin can set is_notice = True
     notice_val = req.is_notice if current_user.is_admin else False
+
+    # Check Board Access Level
+    if board.access_level == 'ADMIN' and not current_user.is_admin:
+        raise HTTPException(status_code=403, detail="Only administrators can post to this board.")
     
     new_post = Post(
         title=req.title,
@@ -136,7 +140,8 @@ async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), curr
         "board": {
             "id": board.id,
             "slug": board.slug,
-            "name": board.name
+            "name": board.name,
+            "access_level": board.access_level
         } if board else None,
         "category": {
             "id": category.id,
@@ -164,6 +169,12 @@ async def update_post(post_id: int, req: PostUpdate, db: AsyncSession = Depends(
     # Check ownership or admin
     if post.user_id != current_user.id and not current_user.is_admin:
         raise HTTPException(status_code=403, detail="Not authorized to update this post")
+
+    # Fetch board to check access level
+    board_res = await db.execute(select(Board).where(Board.id == post.board_id))
+    board = board_res.scalars().first()
+    if board and board.access_level == 'ADMIN' and not current_user.is_admin:
+         raise HTTPException(status_code=403, detail="Only administrators can update posts on this board.")
     
     if req.title is not None:
         post.title = req.title
@@ -190,6 +201,12 @@ async def delete_post(post_id: int, db: AsyncSession = Depends(get_db), current_
     # Check ownership or admin
     if post.user_id != current_user.id and not current_user.is_admin:
         raise HTTPException(status_code=403, detail="Not authorized to delete this post")
+
+    # Fetch board to check access level
+    board_res = await db.execute(select(Board).where(Board.id == post.board_id))
+    board = board_res.scalars().first()
+    if board and board.access_level == 'ADMIN' and not current_user.is_admin:
+         raise HTTPException(status_code=403, detail="Only administrators can delete posts on this board.")
     
     await db.delete(post)
     await db.commit()

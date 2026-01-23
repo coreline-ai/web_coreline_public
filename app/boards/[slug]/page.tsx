@@ -142,13 +142,15 @@ export default function BoardDetailPage() {
                             </div>
                         </div>
 
-                        <Link
-                            href={`/boards/${slug}/new`}
-                            className="flex items-center gap-2 rounded-xl border-2 border-black bg-[#FFD600] px-6 py-2 text-sm font-black uppercase text-black shadow-[4px_4px_0px_0px_black] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none dark:shadow-none bw:bg-black bw:text-white"
-                        >
-                            <span className="material-symbols-outlined notranslate text-lg">edit</span>
-                            Write Post
-                        </Link>
+                        {(data.board.access_level !== 'ADMIN' || (session as any)?.user?.isAdmin) && (
+                            <Link
+                                href={`/boards/${slug}/new`}
+                                className="flex items-center gap-2 rounded-xl border-2 border-black bg-[#FFD600] px-6 py-2 text-sm font-black uppercase text-black shadow-[4px_4px_0px_0px_black] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none dark:shadow-none bw:bg-black bw:text-white"
+                            >
+                                <span className="material-symbols-outlined notranslate text-lg">edit</span>
+                                Write Post
+                            </Link>
+                        )}
                     </div>
 
                     {/* Notices */}

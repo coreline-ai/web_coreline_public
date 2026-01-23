@@ -47,6 +47,12 @@ export interface Post {
         nickname: string;
     };
     category?: BoardCategory;
+    board?: {
+        id: number;
+        slug: string;
+        name: string;
+        access_level: string;
+    };
 }
 
 export interface Comment {
