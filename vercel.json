@@ -1,6 +1,14 @@
 {
     "rewrites": [
         {
+            "source": "/api/auth/:path*",
+            "destination": "/api/auth/:path*"
+        },
+        {
+            "source": "/api/proxy/:path*",
+            "destination": "/api/proxy/:path*"
+        },
+        {
             "source": "/api/py-auth/:path*",
             "destination": "/api/index.py"
         },
