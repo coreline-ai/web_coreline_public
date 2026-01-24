@@ -13,7 +13,10 @@ export const authOptions: NextAuthOptions = {
                 if (!credentials?.username || !credentials?.password) return null;
 
                 try {
-                    const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXTAUTH_URL || 'http://localhost:8000';
+                    // Use NEXTAUTH_URL for server-side internal API calls
+                    // Vercel rewrites will route /api/py-auth/* to Python backend
+                    const apiUrl = process.env.NEXTAUTH_URL || 'http://localhost:8000';
+                    console.log(`[NextAuth] Calling auth API: ${apiUrl}/api/py-auth/token`);
                     const res = await fetch(`${apiUrl}/api/py-auth/token`, {
                         method: "POST",
                         body: JSON.stringify({
