@@ -20,12 +20,21 @@ if DATABASE_URL:
         DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+asyncpg://", 1)
     elif DATABASE_URL.startswith("postgresql://"):
         DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
+    
+    # Remove sslmode and channel_binding from URL (asyncpg uses different SSL handling)
+    if "?" in DATABASE_URL:
+        base_url, params = DATABASE_URL.split("?", 1)
+        param_list = params.split("&")
+        # Filter out problematic params for asyncpg
+        filtered_params = [p for p in param_list if not p.startswith("sslmode=") and not p.startswith("channel_binding=")]
+        DATABASE_URL = base_url + ("?" + "&".join(filtered_params) if filtered_params else "")
 
 
-# SSL configuration for production
+# SSL configuration - Enable for cloud databases (Neon, Supabase, etc.)
 connect_args = {}
-if os.getenv("ENVIRONMENT") == "production":
-    connect_args["ssl"] = "require"
+# Enable SSL if URL contains cloud database indicators or if explicitly set
+if DATABASE_URL and ("neon.tech" in DATABASE_URL or "supabase" in DATABASE_URL or os.getenv("ENVIRONMENT") == "production"):
+    connect_args["ssl"] = True
 
 engine = create_async_engine(DATABASE_URL, connect_args=connect_args, echo=os.getenv("ENVIRONMENT") != "production") if DATABASE_URL else None
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False) if engine else None
@@ -37,3 +46,4 @@ async def get_db():
         raise Exception("DATABASE_URL is not set.")
     async with AsyncSessionLocal() as session:
         yield session
+
