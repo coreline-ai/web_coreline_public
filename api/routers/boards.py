@@ -143,13 +143,22 @@ async def get_board_detail_and_posts(
     page: int = 1, 
     category_id: Optional[int] = None, 
     keyword: Optional[str] = None,
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_optional)
 ):
     # Get Board
     result = await db.execute(select(Board).where(Board.slug == slug))
     board = result.scalars().first()
     if not board:
         raise HTTPException(status_code=404, detail="Board not found")
+
+    # Check Access Level
+    if board.access_level == "AUTHENTICATED":
+        if not current_user:
+            raise HTTPException(status_code=401, detail="Authentication required to view this board")
+    elif board.access_level == "ADMIN":
+        if not current_user or not current_user.is_admin:
+            raise HTTPException(status_code=403, detail="Admin access required")
     
     # Get Categories and build map
     cat_result = await db.execute(select(BoardCategory).where(BoardCategory.board_id == board.id))

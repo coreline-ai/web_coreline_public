@@ -1,7 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     async rewrites() {
-        return [];
+        if (process.env.NODE_ENV === 'production') return [];
+
+        const backendUrl = process.env.BACKEND_URL || 'http://localhost:8000';
+
+        return [
+            // Backend-managed auth routes
+            { source: '/api/auth/token', destination: `${backendUrl}/api/auth/token` },
+            { source: '/api/auth/register', destination: `${backendUrl}/api/auth/register` },
+            { source: '/api/auth/logout', destination: `${backendUrl}/api/auth/logout` },
+            // Other API routes
+            { source: '/api/boards/:path*', destination: `${backendUrl}/api/boards/:path*` },
+            { source: '/api/posts/:path*', destination: `${backendUrl}/api/posts/:path*` },
+            { source: '/api/admin/:path*', destination: `${backendUrl}/api/admin/:path*` },
+            { source: '/api/comments/:path*', destination: `${backendUrl}/api/comments/:path*` },
+            { source: '/api/notifications/:path*', destination: `${backendUrl}/api/notifications/:path*` },
+            { source: '/api/files/:path*', destination: `${backendUrl}/api/files/:path*` },
+            { source: '/api/health/', destination: `${backendUrl}/api/health` },
+            { source: '/api/health', destination: `${backendUrl}/api/health` },
+            { source: '/api', destination: `${backendUrl}/api` },
+        ];
     },
     async headers() {
         const isDev = process.env.NODE_ENV === 'development';
