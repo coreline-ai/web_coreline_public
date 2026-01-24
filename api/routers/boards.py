@@ -6,6 +6,7 @@ from sqlalchemy import func
 from api._lib.db import get_db
 from api._lib.models import Board, User, BoardCategory, Post, PostLike
 from api._lib.auth import get_current_user, admin_required, get_current_user_optional
+from api._lib.access_control import check_board_access
 from api._lib.schemas import ResponseModel
 from api._lib.limiter import limiter
 from pydantic import BaseModel
@@ -152,13 +153,8 @@ async def get_board_detail_and_posts(
     if not board:
         raise HTTPException(status_code=404, detail="Board not found")
 
-    # Check Access Level
-    if board.access_level == "AUTHENTICATED":
-        if not current_user:
-            raise HTTPException(status_code=401, detail="Authentication required to view this board")
-    elif board.access_level == "ADMIN":
-        if not current_user or not current_user.is_admin:
-            raise HTTPException(status_code=403, detail="Admin access required")
+    # Check Access Level (AWAITED centralized helper)
+    await check_board_access(board, current_user, action="view")
     
     # Get Categories and build map
     cat_result = await db.execute(select(BoardCategory).where(BoardCategory.board_id == board.id))

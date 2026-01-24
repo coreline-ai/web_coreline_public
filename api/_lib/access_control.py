@@ -15,13 +15,13 @@ async def check_board_access(
 ) -> None:
     """
     Check if user has access to the board based on access_level.
-    Raises HTTPException if access denied.
-    
-    Args:
-        board: The board to check access for
-        current_user: The current user (None if not authenticated)
-        action: Description of action for error message (e.g., "read", "write", "comment")
+    Special Rule: blog and research boards are ALWAYS PUBLIC for viewing/reading.
     """
+    # 1. Special Case: Officialboards allow guest reading
+    if board.slug in ['blog', 'research'] and action in ["view", "read"]:
+        return
+
+    # 2. Standard Access Level Checks
     if board.access_level == 'ADMIN':
         if not current_user or not current_user.is_admin:
             raise HTTPException(
@@ -37,6 +37,37 @@ async def check_board_access(
     # PUBLIC boards allow all access
 
 
+async def check_board_write_access(
+    board: Board, 
+    current_user: Optional[User]
+) -> None:
+    """
+    Check if user has permission to write/modify content on the board.
+    Special Rule: blog and research boards are ADMIN-ONLY for writing.
+    Other boards follow access_level or standard authentication.
+    """
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Authentication required to perform this action")
+
+    # 1. Check Special Official Boards (blog, research) - STRICT ADMIN ONLY
+    if board.slug in ['blog', 'research']:
+        if not current_user.is_admin:
+            raise HTTPException(
+                status_code=403, 
+                detail="Only administrators can post or modify content on the official blog/research boards."
+            )
+        return
+
+    # 2. Check Standard ADMIN boards
+    if board.access_level == 'ADMIN':
+        if not current_user.is_admin:
+            raise HTTPException(status_code=403, detail="Admin privileges required for this board")
+        return
+
+    # 3. PUBLIC or AUTHENTICATED boards allow any authenticated user to write
+    return
+
+
 async def get_post_with_board_access_check(
     post_id: int, 
     db: AsyncSession, 
@@ -45,20 +76,6 @@ async def get_post_with_board_access_check(
 ) -> Post:
     """
     Get a post and verify the user has access to its board.
-    Returns the post if access is granted.
-    
-    Args:
-        post_id: The post ID to fetch
-        db: Database session
-        current_user: The current user (None if not authenticated)
-        action: Description of action for error message
-    
-    Returns:
-        Post object if found and access granted
-        
-    Raises:
-        HTTPException 404 if post not found
-        HTTPException 401/403 if access denied
     """
     post_result = await db.execute(select(Post).where(Post.id == post_id))
     post = post_result.scalars().first()

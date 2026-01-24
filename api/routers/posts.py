@@ -5,7 +5,8 @@ from sqlalchemy.future import select
 from sqlalchemy import func
 from api._lib.db import get_db
 from api._lib.models import Post, Board, BoardCategory, User, Comment, Notification, PostLike
-from api._lib.auth import get_current_user
+from api._lib.auth import get_current_user, get_current_user_optional
+from api._lib.access_control import check_board_access, check_board_write_access
 from api._lib.schemas import ResponseModel
 from api._lib.limiter import limiter
 from pydantic import BaseModel
@@ -52,9 +53,8 @@ async def create_post(request: Request, req: PostCreate, db: AsyncSession = Depe
     # Only admin can set is_notice = True
     notice_val = req.is_notice if current_user.is_admin else False
 
-    # Check Board Access Level
-    if board.access_level == 'ADMIN' and not current_user.is_admin:
-        raise HTTPException(status_code=403, detail="Only administrators can post to this board.")
+    # Check Board Write Access (Centralized helper handles blog/research/ADMIN special rules)
+    await check_board_write_access(board, current_user)
     
     new_post = Post(
         title=req.title,
@@ -108,10 +108,8 @@ async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), curr
     board = board_result.scalars().first()
 
     if board:
-        from api._lib.access_control import get_post_with_board_access_check
-        # This helper usually takes post and checks access, let's reuse logic manually or use the helper if adapted
-        from api._lib.access_control import check_board_access
-        check_board_access(board, current_user)
+        # Check Access Level (AWAITED centralized helper)
+        await check_board_access(board, current_user, action="read")
     
     # Fetch author
     author_result = await db.execute(select(User).where(User.id == post.user_id))
@@ -181,8 +179,9 @@ async def update_post(request: Request, post_id: int, req: PostUpdate, db: Async
     # Fetch board to check access level
     board_res = await db.execute(select(Board).where(Board.id == post.board_id))
     board = board_res.scalars().first()
-    if board and board.access_level == 'ADMIN' and not current_user.is_admin:
-         raise HTTPException(status_code=403, detail="Only administrators can update posts on this board.")
+
+    # Check Board Write Access (Centralized helper)
+    await check_board_write_access(board, current_user)
     
     if req.title is not None:
         post.title = req.title
@@ -214,8 +213,9 @@ async def delete_post(request: Request, post_id: int, db: AsyncSession = Depends
     # Fetch board to check access level
     board_res = await db.execute(select(Board).where(Board.id == post.board_id))
     board = board_res.scalars().first()
-    if board and board.access_level == 'ADMIN' and not current_user.is_admin:
-         raise HTTPException(status_code=403, detail="Only administrators can delete posts on this board.")
+
+    # Check Board Write Access (Centralized helper)
+    await check_board_write_access(board, current_user)
     
     await db.delete(post)
     await db.commit()
