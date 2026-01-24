@@ -15,7 +15,15 @@ export default withAuth(
     },
     {
         callbacks: {
-            authorized: ({ token }) => !!token,
+            authorized: ({ token, req }) => {
+                const { pathname } = req.nextUrl;
+                // Pages that REQUIRE login
+                if (pathname.endsWith("/new") || pathname.startsWith("/admin")) {
+                    return !!token;
+                }
+                // All other pages (including boards, blog, research) are public
+                return true;
+            },
         },
     }
 );

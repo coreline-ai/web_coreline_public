@@ -22,7 +22,12 @@ if DATABASE_URL:
         DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
 
 
-engine = create_async_engine(DATABASE_URL, echo=True) if DATABASE_URL else None
+# SSL configuration for production
+connect_args = {}
+if os.getenv("ENVIRONMENT") == "production":
+    connect_args["ssl"] = "require"
+
+engine = create_async_engine(DATABASE_URL, connect_args=connect_args, echo=os.getenv("ENVIRONMENT") != "production") if DATABASE_URL else None
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False) if engine else None
 
 Base = declarative_base()
