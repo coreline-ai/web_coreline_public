@@ -95,12 +95,7 @@ export default function ProjectsPage() {
         >
           {/* Grid Background Pattern */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-10"
-            style={{
-              backgroundImage:
-                'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
-              backgroundSize: '40px 40px',
-            }}
+            className="pointer-events-none absolute inset-0 opacity-10 bg-[linear-gradient(#000_1px,transparent_1px),linear-gradient(90deg,#000_1px,transparent_1px)] bg-[size:40px_40px]"
           ></div>
 
           <div className="relative z-10 mx-auto max-w-7xl">

@@ -50,12 +50,16 @@ const nextConfig = {
         // CSP: Strict in production, relaxed in development
         const cspValue = isDev
             ? "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: cdn.jsdelivr.net coreline-media.s3.ap-northeast-2.amazonaws.com; font-src 'self' data:; connect-src 'self' http://localhost:8000 https://coreline-media.s3.ap-northeast-2.amazonaws.com; frame-ancestors 'none';"
-            : `default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: cdn.jsdelivr.net coreline-media.s3.ap-northeast-2.amazonaws.com; font-src 'self' data:; connect-src 'self' ${backendUrl} https://coreline-media.s3.ap-northeast-2.amazonaws.com; frame-ancestors 'none';`;
+            : `default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: cdn.jsdelivr.net coreline-media.s3.ap-northeast-2.amazonaws.com; font-src 'self' data:; connect-src 'self' ${backendUrl} https://coreline-media.s3.ap-northeast-2.amazonaws.com; frame-ancestors 'none'; form-action 'self';`;
 
         const headers = [
             {
                 key: 'X-Frame-Options',
                 value: 'DENY',
+            },
+            {
+                key: 'X-XSS-Protection',
+                value: '1; mode=block',
             },
             {
                 key: 'X-Content-Type-Options',

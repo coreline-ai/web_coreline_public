@@ -1,12 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Response
+from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import func
 from api._lib.db import get_db
 from api._lib.models import Board, User, BoardCategory, Post, PostLike
-from api._lib.auth import get_current_user, admin_required
+from api._lib.auth import get_current_user, admin_required, get_current_user_optional
 from api._lib.schemas import ResponseModel
+from api._lib.limiter import limiter
 from pydantic import BaseModel
 from typing import List, Optional, Any
 import json
@@ -66,22 +67,39 @@ async def serialize_post(post: Post, db: AsyncSession, categories_map: dict, use
 # --- Endpoints ---
 
 @router.get("/api/boards")
-async def get_boards(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Board).order_by(Board.id.desc())) # Ordered by newest first usually better for admin
+async def get_boards(
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_optional)
+):
+    result = await db.execute(select(Board).order_by(Board.id.desc()))
     boards = result.scalars().all()
+    
+    # Filter boards based on access level
+    filtered_boards = []
+    for b in boards:
+        if b.access_level == "PUBLIC":
+            filtered_boards.append(b)
+        elif b.access_level == "AUTHENTICATED":
+            if current_user:
+                filtered_boards.append(b)
+        elif b.access_level == "ADMIN":
+            if current_user and current_user.is_admin:
+                filtered_boards.append(b)
+                
     return JSONResponse(content={
         "success": True,
         "data": [
             {
                 "id": b.id, "name": b.name, "slug": b.slug, 
                 "description": b.description, "access_level": b.access_level
-            } for b in boards
+            } for b in filtered_boards
         ],
         "error": None
     })
 
 @router.post("/api/boards")
-async def create_board(req: BoardCreate, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
+@limiter.limit("5/minute")
+async def create_board(request: Request, req: BoardCreate, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
     # Check existing
     result = await db.execute(select(Board).where((Board.name == req.name) | (Board.slug == req.slug)))
     if result.scalars().first():
@@ -210,7 +228,8 @@ async def get_board_detail_and_posts(
     )
 
 @router.put("/api/boards/{slug}")
-async def update_board(slug: str, req: BoardUpdate, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
+@limiter.limit("10/minute")
+async def update_board(request: Request, slug: str, req: BoardUpdate, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
     result = await db.execute(select(Board).where(Board.slug == slug))
     board = result.scalars().first()
     if not board:
@@ -233,7 +252,8 @@ async def update_board(slug: str, req: BoardUpdate, db: AsyncSession = Depends(g
     })
 
 @router.delete("/api/boards/{slug}")
-async def delete_board(slug: str, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
+@limiter.limit("10/minute")
+async def delete_board(request: Request, slug: str, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
     result = await db.execute(select(Board).where(Board.slug == slug))
     board = result.scalars().first()
     if not board:
@@ -263,7 +283,8 @@ async def get_board_categories(slug: str, db: AsyncSession = Depends(get_db)):
     })
 
 @router.post("/api/boards/{slug}/categories")
-async def create_category(slug: str, req: CategoryCreate, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
+@limiter.limit("20/minute")
+async def create_category(request: Request, slug: str, req: CategoryCreate, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
     result = await db.execute(select(Board).where(Board.slug == slug))
     board = result.scalars().first()
     if not board:
@@ -284,7 +305,8 @@ async def create_category(slug: str, req: CategoryCreate, db: AsyncSession = Dep
     )
 
 @router.put("/api/boards/{slug}/categories/{category_id}")
-async def update_category(slug: str, category_id: int, req: CategoryUpdate, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
+@limiter.limit("20/minute")
+async def update_category(request: Request, slug: str, category_id: int, req: CategoryUpdate, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
     result = await db.execute(select(Board).where(Board.slug == slug))
     board = result.scalars().first()
     if not board:
@@ -308,7 +330,8 @@ async def update_category(slug: str, category_id: int, req: CategoryUpdate, db: 
     })
 
 @router.delete("/api/boards/{slug}/categories/{category_id}")
-async def delete_category(slug: str, category_id: int, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
+@limiter.limit("20/minute")
+async def delete_category(request: Request, slug: str, category_id: int, db: AsyncSession = Depends(get_db), admin: User = Depends(admin_required)):
     result = await db.execute(select(Board).where(Board.slug == slug))
     board = result.scalars().first()
     if not board:

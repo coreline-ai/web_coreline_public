@@ -28,29 +28,35 @@ export default function LoginPage() {
     setIsLoading(true);
     setError(null);
 
-    const result = await signIn('credentials', {
-      username,
-      password,
-      redirect: false,
-    });
+    try {
+      const result = await signIn('credentials', {
+        username,
+        password,
+        redirect: false,
+      });
 
-    if (result?.error) {
-      setError('Invalid username or password');
-      setIsLoading(false);
-    } else {
-      // Check for admin role
-      const session = await getSession();
-
-      const callbackUrl = new URLSearchParams(window.location.search).get('callbackUrl');
-
-      if (callbackUrl) {
-        router.push(callbackUrl);
-      } else if ((session?.user as any)?.isAdmin) {
-        router.push('/admin');
+      if (result?.error) {
+        setError('Invalid username or password');
+        setIsLoading(false);
       } else {
-        router.push('/');
+        // Check for admin role
+        const session = await getSession();
+
+        const callbackUrl = new URLSearchParams(window.location.search).get('callbackUrl');
+
+        if (callbackUrl) {
+          router.push(callbackUrl);
+        } else if ((session?.user as any)?.isAdmin) {
+          router.push('/admin');
+        } else {
+          router.push('/');
+        }
+        router.refresh();
       }
-      router.refresh();
+    } catch (err) {
+      console.error(err);
+      setError('An unexpected error occurred. Please try again.');
+      setIsLoading(false);
     }
   };
 

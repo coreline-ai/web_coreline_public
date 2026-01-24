@@ -1,9 +1,10 @@
 import os
 import boto3
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from api._lib.auth import get_current_user
 from api._lib.models import User
 from api._lib.schemas import ResponseModel
+from api._lib.limiter import limiter
 from pydantic import BaseModel
 from botocore.config import Config
 
@@ -14,7 +15,8 @@ class SignedUrlRequest(BaseModel):
     content_type: str
 
 @router.post("/api/files/signed-url")
-async def get_signed_url(req: SignedUrlRequest, current_user: User = Depends(get_current_user)):
+@limiter.limit("5/minute")
+async def get_signed_url(request: Request, req: SignedUrlRequest, current_user: User = Depends(get_current_user)):
     # Configuration
     S3_BUCKET = os.getenv("S3_BUCKET_NAME")
     AWS_REGION = os.getenv("AWS_REGION", "ap-northeast-2")

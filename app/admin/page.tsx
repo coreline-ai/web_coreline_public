@@ -71,6 +71,13 @@ export default function AdminPage() {
             icon: 'gavel',
             link: '/admin/posts',
             color: 'bg-red-500'
+        },
+        {
+            title: 'Audit Logs',
+            description: '시스템 보안 및 중요 활동 로그 조회.',
+            icon: 'security',
+            link: '/admin/audit',
+            color: 'bg-purple-500'
         }
     ];
 

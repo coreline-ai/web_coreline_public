@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -7,6 +7,7 @@ from api._lib.db import get_db
 from api._lib.models import Post, Board, BoardCategory, User, Comment, Notification, PostLike
 from api._lib.auth import get_current_user
 from api._lib.schemas import ResponseModel
+from api._lib.limiter import limiter
 from pydantic import BaseModel
 from typing import Optional, List
 
@@ -33,7 +34,8 @@ class CommentCreate(BaseModel):
 # --- Endpoints ---
 
 @router.post("/api/posts")
-async def create_post(req: PostCreate, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
+@limiter.limit("5/minute")
+async def create_post(request: Request, req: PostCreate, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
     # Lookup Board by Slug
     board_result = await db.execute(select(Board).where(Board.slug == req.board_slug))
     board = board_result.scalars().first()
@@ -100,15 +102,20 @@ async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), curr
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
     
-    # Increment view count logic moved to POST /api/posts/{post_id}/view
+    # Check board access for detail view
+    # board lookup is done below, but needed earlier for access check
+    board_result = await db.execute(select(Board).where(Board.id == post.board_id))
+    board = board_result.scalars().first()
+
+    if board:
+        from api._lib.access_control import get_post_with_board_access_check
+        # This helper usually takes post and checks access, let's reuse logic manually or use the helper if adapted
+        from api._lib.access_control import check_board_access
+        check_board_access(board, current_user)
     
     # Fetch author
     author_result = await db.execute(select(User).where(User.id == post.user_id))
     author = author_result.scalars().first()
-    
-    # Fetch board
-    board_result = await db.execute(select(Board).where(Board.id == post.board_id))
-    board = board_result.scalars().first()
     
     # Fetch category
     category_result = await db.execute(select(BoardCategory).where(BoardCategory.id == post.category_id))
@@ -160,7 +167,8 @@ async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), curr
     return JSONResponse(content={"success": True, "data": response_data, "error": None})
 
 @router.patch("/api/posts/{post_id}")
-async def update_post(post_id: int, req: PostUpdate, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
+@limiter.limit("10/minute")
+async def update_post(request: Request, post_id: int, req: PostUpdate, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
     result = await db.execute(select(Post).where(Post.id == post_id))
     post = result.scalars().first()
     if not post:
@@ -192,7 +200,8 @@ async def update_post(post_id: int, req: PostUpdate, db: AsyncSession = Depends(
     return ResponseModel.success_res(post)
 
 @router.delete("/api/posts/{post_id}")
-async def delete_post(post_id: int, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
+@limiter.limit("10/minute")
+async def delete_post(request: Request, post_id: int, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
     result = await db.execute(select(Post).where(Post.id == post_id))
     post = result.scalars().first()
     if not post:
@@ -235,7 +244,8 @@ async def get_comments(post_id: int, db: AsyncSession = Depends(get_db)):
     return ResponseModel.success_res(comments_data)
 
 @router.post("/api/posts/{post_id}/comments")
-async def create_comment(post_id: int, req: CommentCreate, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
+@limiter.limit("10/minute")
+async def create_comment(request: Request, post_id: int, req: CommentCreate, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
     # Verify post exists
     post_result = await db.execute(select(Post).where(Post.id == post_id))
     post = post_result.scalars().first()
@@ -280,7 +290,8 @@ async def create_comment(post_id: int, req: CommentCreate, db: AsyncSession = De
     )
 
 @router.post("/api/posts/{post_id}/like")
-async def toggle_like(post_id: int, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
+@limiter.limit("30/minute")
+async def toggle_like(request: Request, post_id: int, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
     # Verify post exists
     post_result = await db.execute(select(Post).where(Post.id == post_id))
     post = post_result.scalars().first()
@@ -323,7 +334,8 @@ async def toggle_like(post_id: int, db: AsyncSession = Depends(get_db), current_
     })
 
 @router.post("/api/posts/{post_id}/view")
-async def increment_view_count(post_id: int, db: AsyncSession = Depends(get_db)):
+@limiter.limit("60/minute")
+async def increment_view_count(request: Request, post_id: int, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(Post).where(Post.id == post_id))
     post = result.scalars().first()
     if not post:

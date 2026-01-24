@@ -60,12 +60,7 @@ export default function ServicesPage() {
         >
           {/* Grid Background */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-5"
-            style={{
-              backgroundImage:
-                'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
-              backgroundSize: '40px 40px',
-            }}
+            className="pointer-events-none absolute inset-0 opacity-5 bg-[linear-gradient(#000_1px,transparent_1px),linear-gradient(90deg,#000_1px,transparent_1px)] bg-[size:40px_40px]"
           ></div>
 
           <div className="relative z-10 mx-auto mb-12 grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
@@ -334,12 +329,7 @@ export default function ServicesPage() {
         >
           {/* Grid Background */}
           <div
-            className="pointer-events-none absolute inset-0 opacity-5"
-            style={{
-              backgroundImage:
-                'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
-              backgroundSize: '40px 40px',
-            }}
+            className="pointer-events-none absolute inset-0 opacity-5 bg-[linear-gradient(#000_1px,transparent_1px),linear-gradient(90deg,#000_1px,transparent_1px)] bg-[size:40px_40px]"
           ></div>
 
           <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-start gap-16 lg:grid-cols-2">

@@ -103,8 +103,7 @@ export default function BoardTemplate({
             <SimpleHeader />
 
             <main className="relative pt-32 pb-24">
-                <div className="pointer-events-none absolute inset-0 opacity-[0.4] dark:opacity-[0.1] bw:opacity-10"
-                    style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+                <div className="pointer-events-none absolute inset-0 opacity-[0.4] bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:24px_24px] dark:opacity-[0.1] bw:opacity-10"></div>
 
                 <div className="relative z-10 mx-auto max-w-[1200px] px-4">
                     <div className="mb-16 border-l-[6px] border-[#FFD600] pl-6">

@@ -93,8 +93,7 @@ export default function ServicesSection() {
                       {/* Icon Moved Here */}
                       <div className="mb-4">
                         <div
-                          className="group-hover:bg-opacity-100 flex h-14 w-14 items-center justify-center rounded-xl border-2 border-white bg-black/20 shadow-lg backdrop-blur-md transition-colors group-hover:border-[#FFD600] group-hover:bg-[#FFD600]"
-                          style={{ borderColor: s.color }}
+                          className={`group-hover:bg-opacity-100 flex h-14 w-14 items-center justify-center rounded-xl border-2 bg-black/20 shadow-lg backdrop-blur-md transition-colors group-hover:bg-[#FFD600] ${s.borderClass} group-hover:border-[#FFD600]`}
                         >
                           <span
                             className="material-symbols-outlined notranslate text-3xl text-black/80 transition-colors group-hover:text-black dark:text-white bw:text-black"
@@ -125,12 +124,10 @@ export default function ServicesSection() {
                   // Standard Layout for other cards
                   <div className="flex h-full flex-col">
                     <div
-                      className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl border-2 border-black transition-all group-hover:scale-110 dark:border dark:border-white/10 bw:border-black"
-                      style={{ backgroundColor: s.color }}
+                      className={`mb-6 flex h-14 w-14 items-center justify-center rounded-xl border-2 border-black transition-all group-hover:scale-110 dark:border dark:border-white/10 bw:border-black ${s.bgClass}`}
                     >
                       <span
                         className="material-symbols-outlined notranslate text-3xl text-white dark:text-white bw:text-white"
-                        style={{ color: theme === 'light' ? '#fff' : undefined }}
                         aria-hidden="true"
                       >
                         {s.icon}

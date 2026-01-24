@@ -37,6 +37,8 @@ export interface Service {
   description: string;
   icon: string;
   color: string;
+  bgClass?: string;
+  borderClass?: string;
 }
 
 export interface Step {

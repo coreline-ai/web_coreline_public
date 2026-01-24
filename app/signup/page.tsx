@@ -62,7 +62,6 @@ export default function SignUpPage() {
           username: formData.username,
           password: formData.password,
           redirect: true,
-          redirect: true,
           callbackUrl: '/signup/success',
         });
       } else {

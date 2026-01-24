@@ -17,7 +17,7 @@ import { MarkdownViewer } from '@/app/components/ui/MarkdownViewer';
 export default function PostDetailPage() {
     const router = useRouter();
     const params = useParams();
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const slug = params.slug as string;
     const postId = params.post_id as string;
 
@@ -43,6 +43,11 @@ export default function PostDetailPage() {
     }, [postId]);
 
     useEffect(() => {
+        if (!session && status !== 'loading') {
+            router.replace(`/login?callbackUrl=/boards/${slug}/posts/${postId}`);
+            return;
+        }
+
         if (postId) {
             fetchPostData();
 

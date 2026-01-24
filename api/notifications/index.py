@@ -12,6 +12,10 @@ router = APIRouter()
 
 @router.get("/api/notifications")
 async def get_unread_notifications(limit: int = 10, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
+    # Clamp limit to prevent DoS
+    if limit > 100:
+        limit = 100
+    
     # Fetch only unread notifications for current user
     result = await db.execute(
         select(Notification)

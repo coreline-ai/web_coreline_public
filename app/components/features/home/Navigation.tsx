@@ -19,7 +19,7 @@ export default function Navigation() {
     }
   };
 
-  const projectLink = session ? '/boards/CL_Project_QnA' : '/login?callbackUrl=/boards/CL_Project_QnA';
+  const projectLink = '/boards/CL_Project_QnA';
 
   return (
     <>

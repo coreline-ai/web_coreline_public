@@ -67,3 +67,50 @@ async def update_user_status(
     await db.commit()
     await db.refresh(user)
     return ResponseModel.success_res(user)
+
+from api._lib.models import AuditLog
+
+@router.get("/api/admin/audit-logs")
+async def get_audit_logs(
+    page: int = 1, 
+    limit: int = 20,
+    user_id: Optional[str] = None,
+    action: Optional[str] = None,
+    db: AsyncSession = Depends(get_db), 
+    admin: User = Depends(admin_required)
+):
+    offset = (page - 1) * limit
+    
+    query = select(AuditLog).order_by(AuditLog.created_at.desc())
+    count_query = select(func.count(AuditLog.id))
+    
+    if user_id:
+        query = query.where(AuditLog.user_id == user_id)
+        count_query = count_query.where(AuditLog.user_id == user_id)
+    
+    if action:
+        query = query.where(AuditLog.action == action)
+        count_query = count_query.where(AuditLog.action == action)
+        
+    query = query.offset(offset).limit(limit)
+    
+    result = await db.execute(query)
+    logs = result.scalars().all()
+    
+    # Needs to join with User to get nickname if we want to display it?
+    # For now, let's just return logs. Frontend can perhaps fetch user details or we can join.
+    # Let's verify if we need User info. Usually yes.
+    # But AuditLog has user_id, which might be None (anonymous).
+    
+    count_result = await db.execute(count_query)
+    total_items = count_result.scalar()
+    total_pages = (total_items + limit - 1) // limit if total_items else 0
+    
+    return ResponseModel.success_res({
+        "items": logs,
+        "pagination": {
+            "current_page": page,
+            "total_pages": total_pages,
+            "total_items": total_items
+        }
+    })

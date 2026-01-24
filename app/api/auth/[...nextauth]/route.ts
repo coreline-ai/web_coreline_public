@@ -13,8 +13,7 @@ export const authOptions: NextAuthOptions = {
                 if (!credentials?.username || !credentials?.password) return null;
 
                 try {
-                    // Use NEXT_PUBLIC_API_URL to call the backend directly
-                    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+                    const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXTAUTH_URL || 'http://localhost:8000';
                     const res = await fetch(`${apiUrl}/api/auth/token`, {
                         method: "POST",
                         body: JSON.stringify({
@@ -26,8 +25,6 @@ export const authOptions: NextAuthOptions = {
 
                     const result = await res.json();
 
-                    // Response spec: { access_token, token_type, user: { ... } }
-                    // Response spec: { success: true, data: { access_token, user: ... } }
                     if (res.ok && result.success && result.data) {
                         return {
                             id: result.data.user.id,
