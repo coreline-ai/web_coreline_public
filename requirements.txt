@@ -9,3 +9,6 @@ python-multipart
 asyncpg
 greenlet
 boto3
+slowapi
+argon2-cffi
+python-dotenv

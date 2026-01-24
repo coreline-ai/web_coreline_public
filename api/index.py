@@ -8,22 +8,26 @@ import os
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+import sys
+# Add parent directory to sys.path for absolute imports
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 # Rate Limiting
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from api._lib.limiter import limiter
 
-# Import routers
-from .auth.token import router as auth_token_router
-from .auth.register import router as auth_register_router
-from .auth.logout import router as auth_logout_router
-from .routers.boards import router as boards_router
-from .routers.posts import router as posts_router
-from .routers.admin import router as admin_router
-from .comments.comment_id import router as comment_delete_router
-from .notifications.index import router as notifications_router
-from .notifications.notification_id_read import router as notification_read_router
-from .files.signed_url import router as files_router
+# Import routers (Absolute imports)
+from api.auth.token import router as auth_token_router
+from api.auth.register import router as auth_register_router
+from api.auth.logout import router as auth_logout_router
+from api.routers.boards import router as boards_router
+from api.routers.posts import router as posts_router
+from api.routers.admin import router as admin_router
+from api.comments.comment_id import router as comment_delete_router
+from api.notifications.index import router as notifications_router
+from api.notifications.notification_id_read import router as notification_read_router
+from api.files.signed_url import router as files_router
 
 app = FastAPI()
 app.state.limiter = limiter

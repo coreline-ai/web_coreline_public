@@ -42,7 +42,5 @@ async def login(req: TokenRequest, db: AsyncSession = Depends(get_db)):
         }
     })
 
-# Vercel entry point
-from fastapi import FastAPI
-app = FastAPI()
-app.include_router(router)
+# Removed Vercel entry point from sub-module to avoid routing confusion
+# All requests should flow through api/index.py
