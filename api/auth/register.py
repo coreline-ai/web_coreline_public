@@ -15,7 +15,7 @@ class RegisterRequest(BaseModel):
     nickname: str
     password: str
 
-@router.post("/api/auth/register")
+@router.post("/api/py-auth/register")
 async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
     # Check if first user (make admin)
     result = await db.execute(select(User))

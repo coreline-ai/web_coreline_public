@@ -45,7 +45,7 @@ export default function SignUpPage() {
     }
 
     try {
-      const res: any = await api.post('/api/auth/register', {
+      const res: any = await api.post('/api/py-auth/register', {
         username: formData.username,
         email: formData.email,
         nickname: formData.nickname || formData.username,

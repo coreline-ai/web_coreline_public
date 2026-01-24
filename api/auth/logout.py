@@ -14,7 +14,7 @@ from datetime import datetime
 
 router = APIRouter()
 
-@router.post("/api/auth/logout")
+@router.post("/api/py-auth/logout")
 async def logout(
     request: Request,
     current_user: User = Depends(get_current_user),

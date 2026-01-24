@@ -13,7 +13,7 @@ class TokenRequest(BaseModel):
     username_or_email: str
     password: str
 
-@router.post("/api/auth/token")
+@router.post("/api/py-auth/token")
 async def login(req: TokenRequest, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(User).where((User.email == req.username_or_email) | (User.username == req.username_or_email)))
     user = result.scalars().first()

@@ -1,15 +1,7 @@
 {
     "rewrites": [
         {
-            "source": "/api/auth/token",
-            "destination": "/api/index.py"
-        },
-        {
-            "source": "/api/auth/register",
-            "destination": "/api/index.py"
-        },
-        {
-            "source": "/api/auth/logout",
+            "source": "/api/py-auth/:path*",
             "destination": "/api/index.py"
         },
         {
