@@ -1,17 +1,24 @@
 import os
+import uuid as uuid_lib
 from datetime import datetime, timedelta
-from typing import Optional
+from typing import Optional, Tuple
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
+from sqlalchemy import delete
 from .db import get_db
-from .models import User
+from .models import User, TokenBlacklist
 
 # Configuration
-SECRET_KEY = os.getenv("JWT_SECRET", "super-secret-key-change-me")
+SECRET_KEY = os.getenv("JWT_SECRET")
+if not SECRET_KEY:
+    if os.getenv("ENVIRONMENT") == "production":
+        raise RuntimeError("CRITICAL: JWT_SECRET environment variable must be set in production!")
+    SECRET_KEY = "dev-secret-key-not-for-production"
+
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 # 1 day
 
@@ -23,20 +30,63 @@ def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 def get_password_hash(password):
-    # print(f"DEBUG: Hashing password of type {type(password)} and length {len(password)}")
-    # If using bcrypt, it has a 72 byte limit. Passlib raises error if > 72.
-    # But for some reason it might be raising it even for short ones if backend is strict?
     return pwd_context.hash(password)
 
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> Tuple[str, str, datetime]:
+    """
+    Create an access token with JTI (JWT ID) for blacklist support.
+    Returns: (encoded_jwt, jti, expire_datetime)
+    """
     to_encode = data.copy()
+    jti = str(uuid_lib.uuid4())  # Unique token ID
+    
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
         expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    to_encode.update({"exp": expire})
+    
+    to_encode.update({
+        "exp": expire,
+        "jti": jti  # JWT ID for blacklist tracking
+    })
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
+    return encoded_jwt, jti, expire
+
+
+async def is_token_blacklisted(jti: str, db: AsyncSession) -> bool:
+    """Check if a token's JTI is in the blacklist."""
+    result = await db.execute(
+        select(TokenBlacklist).where(TokenBlacklist.jti == jti)
+    )
+    return result.scalars().first() is not None
+
+
+async def revoke_token(
+    jti: str, 
+    user_id, 
+    expires_at: datetime, 
+    reason: str, 
+    db: AsyncSession
+) -> None:
+    """Add a token to the blacklist."""
+    blacklist_entry = TokenBlacklist(
+        jti=jti,
+        user_id=user_id,
+        expires_at=expires_at,
+        reason=reason
+    )
+    db.add(blacklist_entry)
+    await db.commit()
+
+
+async def cleanup_expired_blacklist(db: AsyncSession) -> int:
+    """Remove expired entries from the blacklist to keep the table small."""
+    result = await db.execute(
+        delete(TokenBlacklist).where(TokenBlacklist.expires_at < datetime.utcnow())
+    )
+    await db.commit()
+    return result.rowcount
+
 
 async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)):
     credentials_exception = HTTPException(
@@ -47,10 +97,20 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         user_id: str = payload.get("sub")
+        jti: str = payload.get("jti")
         if user_id is None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception
+    
+    # Check if token is blacklisted (only if JTI exists - backward compatibility)
+    if jti:
+        if await is_token_blacklisted(jti, db):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Token has been revoked",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
     
     result = await db.execute(select(User).where(User.id == user_id))
     user = result.scalars().first()
@@ -74,8 +134,14 @@ async def get_current_user_optional(token: Optional[str] = Depends(oauth2_scheme
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         user_id: str = payload.get("sub")
+        jti: str = payload.get("jti")
         if user_id is None:
             return None
+        
+        # Check blacklist for optional auth too
+        if jti and await is_token_blacklisted(jti, db):
+            return None
+            
     except JWTError:
         return None
     

@@ -38,7 +38,7 @@ async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
     await db.commit()
     await db.refresh(new_user)
     
-    access_token = create_access_token(data={"sub": str(new_user.id)})
+    access_token, jti, expire = create_access_token(data={"sub": str(new_user.id)})
     
     from fastapi.responses import JSONResponse
     return JSONResponse(

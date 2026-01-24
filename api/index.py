@@ -1,16 +1,22 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-# Removed ResponseModel import as it causes serialization issues
 import traceback
 import logging
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Rate Limiting
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from api._lib.limiter import limiter
+
 # Import routers
 from .auth.token import router as auth_token_router
 from .auth.register import router as auth_register_router
+from .auth.logout import router as auth_logout_router
 from .routers.boards import router as boards_router
 from .routers.posts import router as posts_router
 from .routers.admin import router as admin_router
@@ -20,11 +26,15 @@ from .notifications.notification_id_read import router as notification_read_rout
 from .files.signed_url import router as files_router
 
 app = FastAPI()
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# Enable CORS for local development
+# Enable CORS - Use environment variable in production
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -34,14 +44,20 @@ app.add_middleware(
 async def global_exception_handler(request: Request, exc: Exception):
     logger.error(f"Global exception: {exc}")
     logger.error(traceback.format_exc())
+    
+    # In production, mask the error detail
+    is_prod = os.getenv("ENVIRONMENT") == "production"
+    error_detail = "Internal Server Error" if is_prod else str(exc)
+    
     return JSONResponse(
         status_code=500,
-        content={"detail": str(exc), "success": False}
+        content={"detail": error_detail, "success": False}
     )
 
 # Include all routers
 app.include_router(auth_token_router)
 app.include_router(auth_register_router)
+app.include_router(auth_logout_router)
 app.include_router(boards_router)
 app.include_router(posts_router)
 app.include_router(admin_router)

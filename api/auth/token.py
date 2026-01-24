@@ -30,7 +30,7 @@ async def login(req: TokenRequest, db: AsyncSession = Depends(get_db)):
     user.last_login_at = datetime.utcnow()
     await db.commit()
     
-    access_token = create_access_token(data={"sub": str(user.id)})
+    access_token, jti, expire = create_access_token(data={"sub": str(user.id)})
     
     return ResponseModel.success_res({
         "access_token": access_token,

@@ -87,3 +87,27 @@ class Notification(Base):
     actor_user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
     is_read = Column(Boolean, default=False, nullable=False)
     created_at = Column(DateTime(timezone=True), default=datetime.utcnow)
+
+class AuditLog(Base):
+    __tablename__ = "audit_logs"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
+    action = Column(String(50), nullable=False)
+    target_id = Column(String(100), nullable=True)
+    target_type = Column(String(50), nullable=True)
+    ip_address = Column(String(50), nullable=True)
+    details = Column(Text, nullable=True)
+    created_at = Column(DateTime(timezone=True), default=datetime.utcnow)
+
+class TokenBlacklist(Base):
+    """블랙리스트된 JWT 토큰 (로그아웃, 밴 등으로 무효화된 토큰)"""
+    __tablename__ = "token_blacklist"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    jti = Column(String(36), unique=True, nullable=False, index=True)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    expires_at = Column(DateTime(timezone=True), nullable=False)
+    revoked_at = Column(DateTime(timezone=True), default=datetime.utcnow)
+    reason = Column(String(50), nullable=True)  # LOGOUT, BANNED, PASSWORD_CHANGE
+
