@@ -6,10 +6,8 @@ const nextConfig = {
         const backendUrl = process.env.BACKEND_URL || 'http://localhost:8000';
 
         return [
-            // Backend-managed auth routes
-            { source: '/api/auth/token', destination: `${backendUrl}/api/auth/token` },
-            { source: '/api/auth/register', destination: `${backendUrl}/api/auth/register` },
-            { source: '/api/auth/logout', destination: `${backendUrl}/api/auth/logout` },
+            // Backend-managed auth routes (py-auth to avoid NextAuth conflict)
+            { source: '/api/py-auth/:path*', destination: `${backendUrl}/api/py-auth/:path*` },
             // Other API routes
             { source: '/api/boards/:path*', destination: `${backendUrl}/api/boards/:path*` },
             { source: '/api/posts/:path*', destination: `${backendUrl}/api/posts/:path*` },
