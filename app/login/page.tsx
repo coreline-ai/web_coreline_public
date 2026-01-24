@@ -1,27 +1,44 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn, getSession, useSession } from 'next-auth/react';
 import SimpleHeader from '../components/layout/SimpleHeader';
 import SimpleFooter from '../components/layout/SimpleFooter';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { data: session, status } = useSession();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  React.useEffect(() => {
+  // Handle NextAuth error query param
+  useEffect(() => {
+    const authError = searchParams.get('error');
+    if (authError) {
+      const errorMessages: Record<string, string> = {
+        'CredentialsSignin': 'Invalid username or password',
+        'Default': 'An authentication error occurred',
+        'Configuration': 'Server configuration error',
+        'AccessDenied': 'Access denied',
+        'Verification': 'Verification failed',
+      };
+      setError(errorMessages[authError] || errorMessages['Default']);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
     if (status === 'authenticated') {
       router.replace('/');
     }
   }, [status, router]);
 
   if (status === 'authenticated') return null; // Prevent flicker
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
