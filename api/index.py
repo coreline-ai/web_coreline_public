@@ -67,6 +67,10 @@ app.include_router(notifications_router)
 app.include_router(notification_read_router)
 app.include_router(files_router)
 
+@app.get("/api/health")
+async def health():
+    return {"status": "ok", "message": "Backend API is fully operational", "success": True}
+
 @app.get("/api")
 async def root():
     return {"data": {"message": "Spectrum API is running"}, "success": True}

@@ -13,7 +13,31 @@
             "destination": "/api/index.py"
         },
         {
-            "source": "/api/((?!auth).*)",
+            "source": "/api/boards/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/posts/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/admin/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/comments/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/notifications/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/files/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api",
             "destination": "/api/index.py"
         }
     ]
