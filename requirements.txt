@@ -12,3 +12,4 @@ boto3
 slowapi
 argon2-cffi
 python-dotenv
+email-validator
