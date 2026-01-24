@@ -15,13 +15,24 @@ async def check_board_access(
 ) -> None:
     """
     Check if user has access to the board based on access_level.
-    Special Rule: blog and research boards are ALWAYS PUBLIC for viewing/reading.
     """
-    # 1. Special Case: Officialboards allow guest reading
+    # 1. Official Boards (blog, research) - FULL PUBLIC READ
     if board.slug in ['blog', 'research'] and action in ["view", "read"]:
         return
 
-    # 2. Standard Access Level Checks
+    # 2. QnA Board - PUBLIC LIST, AUTH DETAIL
+    if board.slug == 'CL_Project_QnA':
+        if action == "view": # List of posts
+            return
+        if action == "read": # Actual post content
+            if not current_user:
+                raise HTTPException(
+                    status_code=401, 
+                    detail="Login required to view the content of this project board."
+                )
+            return
+
+    # 3. Standard Access Level Checks (Others)
     if board.access_level == 'ADMIN':
         if not current_user or not current_user.is_admin:
             raise HTTPException(

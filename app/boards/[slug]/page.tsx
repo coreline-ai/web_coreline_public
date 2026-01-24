@@ -83,7 +83,7 @@ export default function BoardDetailPage() {
 
     return (
         <div className="min-h-screen bg-white font-sans text-black dark:bg-[#111] dark:text-white bw:bg-white bw:text-black">
-            <SimpleHeader redirectOnLogout={data.board.access_level === 'AUTHENTICATED' ? '/' : undefined} />
+            <SimpleHeader />
             <main className="relative pt-32 pb-24">
                 <div className="mx-auto max-w-[1000px] px-4">
                     {/* Header */}

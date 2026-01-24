@@ -36,17 +36,20 @@ export default function PostDetailPage() {
                 setError('Failed to load post data');
             }
         } catch (err: any) {
+            // Handle 401 (Login Required) gracefully by redirecting to login
+            if (err.message?.includes('Login required') || err.message?.includes('401')) {
+                router.replace(`/login?callbackUrl=/boards/${slug}/posts/${postId}`);
+                return;
+            }
             setError(err.message || 'Failed to load post');
         } finally {
             setIsLoading(false);
         }
-    }, [postId]);
+    }, [postId, slug, router]);
 
     useEffect(() => {
-        if (!session && status !== 'loading') {
-            router.replace(`/login?callbackUrl=/boards/${slug}/posts/${postId}`);
-            return;
-        }
+        // REMOVED: Forced client-side redirect. 
+        // Access is now controlled by the backend and middleware config.
 
         if (postId) {
             fetchPostData();
@@ -83,9 +86,10 @@ export default function PostDetailPage() {
     if (isLoading) return <div className="min-h-screen animate-pulse bg-white dark:bg-black bw:bg-white" />;
     if (error || !post) return <div className="p-20 text-center font-black text-red-500">{error || 'Post not found'}</div>;
 
-    const canManage = post.board?.access_level === 'ADMIN'
-        ? session?.user?.isAdmin
-        : (session?.user?.id === post.user_id || session?.user?.isAdmin);
+    const isOfficialBoard = slug === 'blog' || slug === 'research';
+    const canManage = isOfficialBoard
+        ? !!session?.user?.isAdmin  // Official boards: Only Admins can manage
+        : (session?.user?.id === post.user_id || session?.user?.isAdmin); // Others: Owner or Admin
 
     return (
         <div className="min-h-screen bg-white font-sans text-black dark:bg-[#111] dark:text-white bw:bg-white bw:text-black">

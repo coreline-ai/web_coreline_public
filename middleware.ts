@@ -20,9 +20,9 @@ export default withAuth(
 
                 // 1. ALWAYS PUBLIC ROUTES (Explicitly allow guest viewing for official boards)
                 if (
-                    pathname.startsWith("/blog") ||
-                    pathname.startsWith("/research") ||
-                    pathname.startsWith("/boards")
+                    pathname.includes("/blog") ||
+                    pathname.includes("/research") ||
+                    pathname.includes("/boards")
                 ) {
                     // Only sub-actions like /new or /edit (if applicable) require login
                     if (pathname.endsWith("/new") || pathname.includes("/edit/")) {
