@@ -167,7 +167,7 @@ async def get_board_detail_and_posts(
         .join(User, Post.user_id == User.id)\
         .join(BoardCategory, Post.category_id == BoardCategory.id)\
         .where(Post.board_id == board.id, Post.is_notice == True)\
-        .order_by(Post.created_at.desc())
+        .order_by(Post.id.desc())
     
     # 3. Posts (Pagination)
     limit = 20
@@ -183,7 +183,7 @@ async def get_board_detail_and_posts(
     if keyword:
         posts_query = posts_query.where(Post.title.ilike(f"%{keyword}%") | Post.content.ilike(f"%{keyword}%"))
     
-    posts_query = posts_query.order_by(Post.created_at.desc()).offset(offset).limit(limit)
+    posts_query = posts_query.order_by(Post.id.desc()).offset(offset).limit(limit)
 
     # 4. Total Count
     count_query = select(func.count(Post.id)).where(Post.board_id == board.id, Post.is_notice == False)
