@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 // import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
 
@@ -14,7 +15,7 @@ export function MarkdownViewer({ content }: MarkdownViewerProps) {
         <div className="prose prose-lg dark:prose-invert max-w-none break-words">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                // rehypePlugins={[rehypeSanitize]} // Temporarily disabled to fix content stripping
+                rehypePlugins={[rehypeRaw]}
                 components={{
                     // Override specific elements for custom styling if needed
                     a: ({ node, ...props }) => (
