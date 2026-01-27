@@ -19,7 +19,7 @@ export default function ServicesSection() {
           <div className="flex flex-col gap-4">
             <Link
               href="/services"
-              className="flex w-fit cursor-pointer items-center gap-2 rounded-full border-2 border-white bg-black px-3 py-1 text-xs font-black tracking-widest text-white uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:scale-105 active:scale-95 dark:border-none dark:bg-[#FFD600] dark:text-black dark:shadow-none bw:border-black bw:bg-black bw:text-white bw:shadow-none"
+              className="flex w-fit cursor-pointer items-center gap-2 rounded-full border-2 border-white bg-black px-3 py-1 text-xs font-black tracking-widest text-white uppercase neo-shadow-sm transition-all hover:scale-105 active:scale-95 dark:border-none dark:bg-[#FFD600] dark:text-black dark:shadow-none bw:border-black bw:bg-black bw:text-white bw:shadow-none"
             >
               <span
                 className="material-symbols-outlined notranslate text-sm text-[#FFD600] dark:text-black bw:text-white"
@@ -69,7 +69,7 @@ export default function ServicesSection() {
               <Link
                 href={`/services${linkTarget}`}
                 key={s.id}
-                className={`group relative block flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none hover:dark:translate-x-0 hover:dark:-translate-y-1 hover:dark:border-[#FFD600] bw:border-black bw:bg-white bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${specialImage ? 'p-0' : 'p-6 sm:p-8'}`}
+                className={`group relative block flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border-2 border-black bg-white neo-shadow neo-shadow-hover transition-all dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none hover:dark:translate-x-0 hover:dark:-translate-y-1 hover:dark:border-[#FFD600] bw:border-black bw:bg-white bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${specialImage ? 'p-0' : 'p-6 sm:p-8'}`}
               >
                 {/* Special Layout for First & Second Card */}
                 {specialImage ? (

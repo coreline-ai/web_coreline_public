@@ -148,6 +148,16 @@ async def create_tables():
             details TEXT,
             created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
         )
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS token_blacklist (
+            id SERIAL PRIMARY KEY,
+            jti VARCHAR(36) UNIQUE NOT NULL,
+            user_id UUID NOT NULL REFERENCES users(id),
+            expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
+            revoked_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+            reason VARCHAR(50)
+        )
         """
     ]
     

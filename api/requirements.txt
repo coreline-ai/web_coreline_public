@@ -1,3 +1,4 @@
+
 fastapi
 sqlalchemy
 psycopg2-binary
@@ -12,3 +13,4 @@ boto3
 slowapi
 argon2-cffi
 python-dotenv
+alembic

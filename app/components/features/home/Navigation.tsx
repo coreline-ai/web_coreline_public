@@ -24,7 +24,7 @@ export default function Navigation() {
   return (
     <>
       <nav className="pointer-events-none fixed top-0 right-0 left-0 z-50 flex justify-center px-4 py-6">
-        <div className="pointer-events-auto flex w-full max-w-[1200px] items-center justify-between rounded-xl border-2 border-black bg-white px-6 py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 dark:border dark:border-white/20 dark:bg-black/80 dark:shadow-none dark:backdrop-blur-md bw:border-black bw:bg-white bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <div className="pointer-events-auto flex w-full max-w-[1200px] items-center justify-between rounded-xl border-2 border-black bg-white px-6 py-4 neo-shadow transition-all duration-300 dark:border dark:border-white/20 dark:bg-black/80 dark:shadow-none dark:backdrop-blur-md bw:border-black bw:bg-white bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
           <div
             className="flex cursor-pointer items-center gap-3"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -53,7 +53,7 @@ export default function Navigation() {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[1px] hover:translate-y-[1px] active:shadow-none dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10 bw:border-black bw:bg-white bw:text-black bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-black bg-white text-black neo-shadow-sm transition-all hover:translate-x-[1px] hover:translate-y-[1px] active:shadow-none dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10 bw:border-black bw:bg-white bw:text-black bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
               aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
               <span className="material-symbols-outlined notranslate" aria-hidden="true">
@@ -94,7 +94,7 @@ export default function Navigation() {
         >
           <div className="mb-10 flex items-center justify-between">
             <Link href="/" className="group relative z-50 flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center border-2 border-black bg-[#FFD600] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all group-hover:translate-x-[1px] group-hover:translate-y-[1px] group-hover:shadow-none">
+              <div className="flex h-8 w-8 items-center justify-center border-2 border-black bg-[#FFD600] neo-shadow-sm transition-all group-hover:translate-x-[1px] group-hover:translate-y-[1px] group-hover:shadow-none">
                 <Image
                   src="/logo.svg"
                   alt="Coreline Logo"
@@ -107,7 +107,7 @@ export default function Navigation() {
             </Link>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-black bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all active:scale-95 dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none bw:border-black bw:bg-white bw:text-black"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-black bg-white text-black neo-shadow-sm transition-all active:scale-95 dark:border-white/20 dark:bg-transparent dark:text-white dark:shadow-none bw:border-black bw:bg-white bw:text-black"
               aria-label="Close menu"
             >
               <span className="material-symbols-outlined notranslate" aria-hidden="true">close</span>

@@ -94,44 +94,40 @@ from api._lib.auth import get_current_user_optional
 
 @router.get("/api/posts/{post_id}")
 async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), current_user: Optional[User] = Depends(get_current_user_optional)):
-    # Fetch post
-    query = select(Post).where(Post.id == post_id)
-    result = await db.execute(query)
-    post = result.scalars().first()
+
+    # Optimized Query: Fetch Post, Relations, Like Count, and Like Status in ONE query.
     
-    if not post:
+    # 1. Like Count Subquery
+    like_count_sub = select(func.count(PostLike.post_id)).where(PostLike.post_id == Post.id).scalar_subquery()
+    
+    # 2. Is Liked Expression
+    from sqlalchemy import case, literal, exists
+    is_liked_expr = literal(False)
+    if current_user:
+        # checking if a record exists in PostLike for this user and post
+        is_liked_sub = select(1).where(
+            PostLike.post_id == Post.id, 
+            PostLike.user_id == current_user.id
+        ).exists()
+        is_liked_expr = case((is_liked_sub, True), else_=False)
+    
+    # 3. Main Query
+    query = select(Post, Board, User, BoardCategory, like_count_sub, is_liked_expr)\
+        .join(Board, Post.board_id == Board.id)\
+        .join(User, Post.user_id == User.id)\
+        .join(BoardCategory, Post.category_id == BoardCategory.id)\
+        .where(Post.id == post_id)
+        
+    result = await db.execute(query)
+    row = result.first()
+    
+    if not row:
         raise HTTPException(status_code=404, detail="Post not found")
     
-    # Check board access for detail view
-    # board lookup is done below, but needed earlier for access check
-    board_result = await db.execute(select(Board).where(Board.id == post.board_id))
-    board = board_result.scalars().first()
-
-    if board:
-        # Check Access Level (AWAITED centralized helper)
-        await check_board_access(board, current_user, action="read")
+    post, board, author, category, like_count, liked = row
     
-    # Fetch author
-    author_result = await db.execute(select(User).where(User.id == post.user_id))
-    author = author_result.scalars().first()
-    
-    # Fetch category
-    category_result = await db.execute(select(BoardCategory).where(BoardCategory.id == post.category_id))
-    category = category_result.scalars().first()
-    
-    # Get like count
-    like_count_result = await db.execute(
-        select(func.count(PostLike.post_id)).where(PostLike.post_id == post.id)
-    )
-    like_count = like_count_result.scalar() or 0
-    
-    # Check if current user liked this post
-    liked = False
-    if current_user:
-        liked_result = await db.execute(
-            select(PostLike).where(PostLike.post_id == post.id, PostLike.user_id == current_user.id)
-        )
-        liked = liked_result.scalars().first() is not None
+    # Check Access Level
+    await check_board_access(board, current_user, action="read")
     
     response_data = {
         "id": post.id,
@@ -141,17 +137,17 @@ async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), curr
         "author": {
             "id": str(author.id),
             "nickname": author.nickname
-        } if author else None,
+        },
         "board": {
             "id": board.id,
             "slug": board.slug,
             "name": board.name,
             "access_level": board.access_level
-        } if board else None,
+        },
         "category": {
             "id": category.id,
             "name": category.name
-        } if category else None,
+        },
         "file_url": post.file_url,
         "created_at": post.created_at.isoformat() if post.created_at else None,
         "updated_at": post.updated_at.isoformat() if post.updated_at else None,

@@ -9,25 +9,25 @@ body {
 }
 
 .neo-shadow {
-  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
 }
 
 .neo-shadow-sm {
-  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
 }
 
 .neo-shadow-lg {
-  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
 }
 
 .neo-shadow-hover:hover {
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
-  transform: translate(4px, 4px);
+  transform: translate(2px, 2px);
 }
 
 .neo-shadow-none:active {
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
-  transform: translate(6px, 6px);
+  transform: translate(4px, 4px);
 }
 
 .bg-grid {

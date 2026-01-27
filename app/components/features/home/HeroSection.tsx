@@ -9,7 +9,7 @@ export default function HeroSection() {
     <section className="relative flex justify-center overflow-hidden bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] px-4 pt-48 pb-24 transition-all duration-300 dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:bg-none dark:from-gray-900 dark:via-black dark:to-black bw:bg-white">
       <div className="relative z-10 flex w-full max-w-[1200px] flex-col items-center gap-20 lg:flex-row">
         <div className="flex flex-1 flex-col gap-8">
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-black bg-white px-4 py-1.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all dark:border dark:border-white/10 dark:bg-white/5 dark:shadow-none bw:border-black bw:bg-white bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+          <div className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-black bg-white px-4 py-1.5 neo-shadow-sm transition-all dark:border dark:border-white/10 dark:bg-white/5 dark:shadow-none bw:border-black bw:bg-white bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
             <span className="relative flex h-3 w-3">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex h-3 w-3 rounded-full border border-black/10 bg-green-500"></span>
@@ -45,7 +45,7 @@ export default function HeroSection() {
           <div className="flex flex-wrap gap-4 pt-4">
             <Link
               href="/services"
-              className="flex h-14 items-center gap-3 rounded-xl border-2 border-black bg-black px-8 text-lg font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95 dark:bg-[#FFD600] dark:text-black dark:shadow-none dark:hover:translate-none dark:hover:bg-yellow-400 bw:bg-black bw:text-white bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-800"
+              className="flex h-14 items-center gap-3 rounded-xl border-2 border-black bg-black px-8 text-lg font-black text-white neo-shadow transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95 dark:bg-[#FFD600] dark:text-black dark:shadow-none dark:hover:translate-none dark:hover:bg-yellow-400 bw:bg-black bw:text-white bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-800"
             >
               서비스 보기{' '}
               <span className="material-symbols-outlined notranslate" aria-hidden="true">
@@ -56,7 +56,7 @@ export default function HeroSection() {
               href="https://github.com/coreline-ai/web_coreline_public"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-black bg-white px-8 text-lg font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95 dark:border dark:border-white/30 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10 bw:border-black bw:bg-white bw:text-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-100"
+              className="flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-black bg-white px-8 text-lg font-black text-black neo-shadow transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95 dark:border dark:border-white/30 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10 bw:border-black bw:bg-white bw:text-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-100"
             >
               <span className="material-symbols-outlined notranslate" aria-hidden="true">
                 hub
@@ -67,7 +67,7 @@ export default function HeroSection() {
               href="https://gitlab.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-black bg-white px-8 text-lg font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95 dark:border dark:border-white/30 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10 bw:border-black bw:bg-white bw:text-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-100"
+              className="flex h-14 items-center justify-center gap-2 rounded-xl border-2 border-black bg-white px-8 text-lg font-black text-black neo-shadow transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:scale-95 dark:border dark:border-white/30 dark:bg-transparent dark:text-white dark:shadow-none dark:hover:translate-none dark:hover:bg-white/10 bw:border-black bw:bg-white bw:text-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-100"
             >
               <span className="material-symbols-outlined notranslate" aria-hidden="true">
                 deployed_code
@@ -83,7 +83,7 @@ export default function HeroSection() {
             ].map((stat, i) => (
               <div
                 key={i}
-                className="rounded-xl border-2 border-black bg-white p-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all dark:border dark:border-white/10 dark:bg-white/5 dark:shadow-none dark:backdrop-blur-sm bw:border-black bw:bg-white bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                className="rounded-xl border-2 border-black bg-white p-4 neo-shadow-sm transition-all dark:border dark:border-white/10 dark:bg-white/5 dark:shadow-none dark:backdrop-blur-sm bw:border-black bw:bg-white bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
               >
                 <span className="block text-3xl font-black">{stat.num}</span>
                 <span className="text-xs font-bold tracking-widest text-gray-500 uppercase dark:text-gray-400 bw:text-gray-500">
@@ -98,7 +98,7 @@ export default function HeroSection() {
           <div className="pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full bg-[#FFD600] opacity-0 blur-[100px] transition-opacity duration-500 dark:opacity-20 bw:hidden"></div>
           <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-blue-500 opacity-0 blur-[100px] transition-opacity duration-500 dark:opacity-20 bw:hidden"></div>
 
-          <div className="group relative aspect-square overflow-hidden rounded-[2rem] border-2 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 dark:border dark:border-white/20 dark:bg-[#111] dark:shadow-2xl dark:shadow-blue-500/10 bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <div className="group relative aspect-square overflow-hidden rounded-[2rem] border-2 border-black bg-white neo-shadow-lg transition-all duration-300 dark:border dark:border-white/20 dark:bg-[#111] dark:shadow-2xl dark:shadow-blue-500/10 bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <div className="flex h-10 w-full items-center gap-2 border-b-2 border-black bg-black px-4 transition-colors dark:border-white/10 dark:bg-[#222] bw:border-black bw:bg-black">
               <div className="h-3 w-3 rounded-full bg-red-500"></div>
               <div className="h-3 w-3 rounded-full bg-yellow-400"></div>

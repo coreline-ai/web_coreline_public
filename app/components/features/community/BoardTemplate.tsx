@@ -154,82 +154,84 @@ export default function BoardTemplate({
                         </form>
                     </div>
 
-                    <div className="overflow-hidden rounded-[2rem] border-2 border-black bg-white shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white/10 dark:bg-[#111] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
-                        <div className="hidden md:grid grid-cols-[60px_1fr_120px_120px_100px] border-b-2 border-black bg-black px-6 py-4 text-[11px] font-black tracking-widest text-white uppercase dark:border-white/10 bw:border-black">
-                            <div className="text-center">번호</div>
-                            <div>제목</div>
-                            <div className="text-center">작성자</div>
-                            <div className="text-center">날짜</div>
-                            <div className="text-center">조회수</div>
-                        </div>
+                    <div className="relative z-10 rounded-[2rem] border-2 border-black bg-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:border-white/10 dark:bg-[#111] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+                        <div className="overflow-hidden rounded-[calc(2rem-2px)]">
+                            <div className="hidden md:grid grid-cols-[60px_1fr_120px_120px_100px] border-b-2 border-black bg-black px-6 py-4 text-[11px] font-black tracking-widest text-white uppercase dark:border-white/10 bw:border-black">
+                                <div className="text-center">번호</div>
+                                <div>제목</div>
+                                <div className="text-center">작성자</div>
+                                <div className="text-center">날짜</div>
+                                <div className="text-center">조회수</div>
+                            </div>
 
-                        <div className="divide-y divide-gray-100 dark:divide-white/5 bw:divide-gray-200">
-                            {isLoading ? (
-                                <div className="p-12 text-center text-gray-500 font-bold">로딩 중...</div>
-                            ) : error ? (
-                                <div className="p-12 text-center text-red-500 font-bold">
-                                    {error instanceof Error ? error.message : String(error)}
-                                </div>
-                            ) : notices.length === 0 && posts.length === 0 ? (
-                                <div className="p-12 text-center text-gray-500 font-bold">해당하는 게시글이 없습니다.</div>
-                            ) : (
-                                <>
-                                    {[...notices, ...posts].map((post) => (
-                                        <div
-                                            key={post.id}
-                                            className={`group flex flex-col gap-4 p-6 md:grid md:grid-cols-[60px_1fr_120px_120px_100px] md:items-center md:gap-0 md:px-6 md:py-5 transition-colors hover:bg-gray-50 dark:hover:bg-white/5 ${post.is_notice ? 'bg-[#FEFCE8] dark:bg-yellow-900/10 bw:bg-yellow-50' : ''}`}
-                                        >
-                                            {/* Mobile Head */}
-                                            <div className="flex items-center justify-between md:hidden">
-                                                <div className="flex items-center gap-2">
-                                                    {post.is_notice && <span className="rounded-md border border-black bg-[#FFD600] px-2 py-0.5 text-[10px] font-black text-black">공지</span>}
-                                                    <span className="text-xs font-bold text-gray-400">
-                                                        {categories.find(c => c.id === post.category_id)?.name || 'General'}
+                            <div className="divide-y divide-gray-100 dark:divide-white/5 bw:divide-gray-200">
+                                {isLoading ? (
+                                    <div className="p-12 text-center text-gray-500 font-bold">로딩 중...</div>
+                                ) : error ? (
+                                    <div className="p-12 text-center text-red-500 font-bold">
+                                        {error instanceof Error ? error.message : String(error)}
+                                    </div>
+                                ) : notices.length === 0 && posts.length === 0 ? (
+                                    <div className="p-12 text-center text-gray-500 font-bold">해당하는 게시글이 없습니다.</div>
+                                ) : (
+                                    <>
+                                        {[...notices, ...posts].map((post) => (
+                                            <div
+                                                key={post.id}
+                                                className={`group flex flex-col gap-4 p-6 md:grid md:grid-cols-[60px_1fr_120px_120px_100px] md:items-center md:gap-0 md:px-6 md:py-5 transition-colors hover:bg-gray-50 dark:hover:bg-white/5 ${post.is_notice ? 'bg-[#FEFCE8] dark:bg-yellow-900/10 bw:bg-yellow-50' : ''}`}
+                                            >
+                                                {/* Mobile Head */}
+                                                <div className="flex items-center justify-between md:hidden">
+                                                    <div className="flex items-center gap-2">
+                                                        {post.is_notice && <span className="rounded-md border border-black bg-[#FFD600] px-2 py-0.5 text-[10px] font-black text-black">공지</span>}
+                                                        <span className="text-xs font-bold text-gray-400">
+                                                            {categories.find(c => c.id === post.category_id)?.name || 'General'}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-xs font-bold text-gray-400">{formatDate(post.created_at)}</span>
+                                                </div>
+
+                                                {/* ID */}
+                                                <div className="hidden text-center font-mono text-sm font-bold text-gray-400 group-hover:text-black md:block dark:group-hover:text-white bw:group-hover:text-black">
+                                                    {post.is_notice ? <span className="material-symbols-outlined notranslate text-xl text-yellow-600">campaign</span> : post.id}
+                                                </div>
+
+                                                {/* Title */}
+                                                <div className="flex items-center gap-3">
+                                                    {post.is_notice && <span className="hidden rounded-lg border border-black bg-[#FFD600] px-2 py-0.5 text-[10px] font-black text-black md:inline-block">공지</span>}
+                                                    <Link href={`/boards/${slug}/posts/${post.id}`} className="text-lg font-black leading-tight text-black group-hover:underline md:text-base md:font-bold dark:text-white bw:text-black">
+                                                        {post.title}
+                                                    </Link>
+                                                    {post.file_url && <span className="material-symbols-outlined notranslate text-lg text-gray-400">attach_file</span>}
+                                                </div>
+
+                                                {/* Desktop/Mobile Detail */}
+                                                <div className="flex items-center justify-between border-t border-gray-100 pt-3 md:hidden dark:border-white/5 bw:border-gray-200">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-xs font-bold text-gray-600 dark:text-gray-400 bw:text-gray-600">{post.author?.nickname || 'Anonymous'}</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-1 text-xs font-bold text-gray-400">
+                                                        <span className="material-symbols-outlined notranslate text-[14px]">visibility</span>
+                                                        {post.view_count}
+                                                    </div>
+                                                </div>
+
+                                                <div className="hidden items-center justify-center gap-2 md:flex">
+                                                    <span className="text-sm font-bold text-gray-600 dark:text-gray-400 bw:text-gray-600">{post.author?.nickname || 'Anonymous'}</span>
+                                                </div>
+                                                <div className="hidden text-center text-sm font-bold text-gray-400 md:block">
+                                                    {formatDate(post.created_at)}
+                                                </div>
+                                                <div className="hidden justify-center md:flex">
+                                                    <span className="rounded bg-gray-50 px-2 py-1 text-xs font-black text-black dark:bg-white/5 dark:text-white/60 bw:bg-gray-100 bw:text-black">
+                                                        {post.view_count}
                                                     </span>
                                                 </div>
-                                                <span className="text-xs font-bold text-gray-400">{formatDate(post.created_at)}</span>
                                             </div>
-
-                                            {/* ID */}
-                                            <div className="hidden text-center font-mono text-sm font-bold text-gray-400 group-hover:text-black md:block dark:group-hover:text-white bw:group-hover:text-black">
-                                                {post.is_notice ? <span className="material-symbols-outlined notranslate text-xl text-yellow-600">campaign</span> : post.id}
-                                            </div>
-
-                                            {/* Title */}
-                                            <div className="flex items-center gap-3">
-                                                {post.is_notice && <span className="hidden rounded-lg border border-black bg-[#FFD600] px-2 py-0.5 text-[10px] font-black text-black md:inline-block">공지</span>}
-                                                <Link href={`/boards/${slug}/posts/${post.id}`} className="text-lg font-black leading-tight text-black group-hover:underline md:text-base md:font-bold dark:text-white bw:text-black">
-                                                    {post.title}
-                                                </Link>
-                                                {post.file_url && <span className="material-symbols-outlined notranslate text-lg text-gray-400">attach_file</span>}
-                                            </div>
-
-                                            {/* Desktop/Mobile Detail */}
-                                            <div className="flex items-center justify-between border-t border-gray-100 pt-3 md:hidden dark:border-white/5 bw:border-gray-200">
-                                                <div className="flex items-center gap-2">
-                                                    <span className="text-xs font-bold text-gray-600 dark:text-gray-400 bw:text-gray-600">{post.author?.nickname || 'Anonymous'}</span>
-                                                </div>
-                                                <div className="flex items-center gap-1 text-xs font-bold text-gray-400">
-                                                    <span className="material-symbols-outlined notranslate text-[14px]">visibility</span>
-                                                    {post.view_count}
-                                                </div>
-                                            </div>
-
-                                            <div className="hidden items-center justify-center gap-2 md:flex">
-                                                <span className="text-sm font-bold text-gray-600 dark:text-gray-400 bw:text-gray-600">{post.author?.nickname || 'Anonymous'}</span>
-                                            </div>
-                                            <div className="hidden text-center text-sm font-bold text-gray-400 md:block">
-                                                {formatDate(post.created_at)}
-                                            </div>
-                                            <div className="hidden justify-center md:flex">
-                                                <span className="rounded bg-gray-50 px-2 py-1 text-xs font-black text-black dark:bg-white/5 dark:text-white/60 bw:bg-gray-100 bw:text-black">
-                                                    {post.view_count}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </>
-                            )}
+                                        ))}
+                                    </>
+                                )}
+                            </div>
                         </div>
                     </div>
 
@@ -272,7 +274,7 @@ export default function BoardTemplate({
 
                         <Link
                             href={session ? `/boards/${slug}/new` : "/login"}
-                            className="flex w-auto items-center justify-center gap-3 rounded-xl border-2 border-black bg-[#FFD600] px-6 py-3 font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none md:px-8 md:py-4"
+                            className="flex w-auto items-center justify-center gap-3 rounded-xl border-2 border-black bg-[#FFD600] px-6 py-3 font-black text-black neo-shadow transition-all hover:-translate-y-1 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none md:px-8 md:py-4"
                         >
                             <span className="material-symbols-outlined notranslate">edit_note</span>
                             포스트 추가하기

@@ -63,7 +63,7 @@ export default function ContactSection() {
                                 </div>
                                 <Link
                                     href="/contact"
-                                    className="mt-4 flex h-12 w-full items-center justify-center rounded-xl border-2 border-black bg-black text-base font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none dark:border-transparent dark:bg-[#FFD600] dark:text-black dark:shadow-none dark:hover:bg-yellow-400 dark:active:scale-95 bw:border-black bw:bg-black bw:text-white bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-800"
+                                    className="mt-4 flex h-12 w-full items-center justify-center rounded-xl border-2 border-black bg-black text-base font-black text-white neo-shadow transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none dark:border-transparent dark:bg-[#FFD600] dark:text-black dark:shadow-none dark:hover:bg-yellow-400 dark:active:scale-95 bw:border-black bw:bg-black bw:text-white bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:hover:bg-gray-800"
                                 >
                                     문의 보내기
                                 </Link>

@@ -14,7 +14,7 @@ export default function PortfolioSection() {
       <div className="w-full max-w-[1200px]">
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="mb-4 w-fit rounded-lg border-2 border-black bg-[#FFD600] px-4 py-1 text-xs font-black tracking-widest text-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all dark:border-white/10 dark:shadow-none bw:border-black bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+            <div className="mb-4 w-fit rounded-lg border-2 border-black bg-[#FFD600] px-4 py-1 text-xs font-black tracking-widest text-black uppercase neo-shadow-sm transition-all dark:border-white/10 dark:shadow-none bw:border-black bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
               Dashboard / Portfolio
             </div>
             <h2 className="text-4xl font-black md:text-5xl">
@@ -26,7 +26,7 @@ export default function PortfolioSection() {
           </div>
           <Link
             href="/projects"
-            className="flex w-fit items-center gap-2 rounded-lg border-2 border-black bg-[#FFD600] px-6 py-3 font-black text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none dark:border-white/10 dark:shadow-none bw:border-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+            className="flex w-fit items-center gap-2 rounded-lg border-2 border-black bg-[#FFD600] px-6 py-3 font-black text-black neo-shadow transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none dark:border-white/10 dark:shadow-none bw:border-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
           >
             모든 프로젝트 <span className="material-symbols-outlined notranslate">arrow_forward</span>
           </Link>
@@ -36,7 +36,7 @@ export default function PortfolioSection() {
             <Link
               href={`/projects/${p.id}`}
               key={p.id}
-              className="group block overflow-hidden rounded-[2rem] border border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:-translate-y-1 sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none dark:hover:border-gray-500 bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+              className="group block overflow-hidden rounded-[2rem] border border-black bg-white neo-shadow transition-all duration-300 hover:-translate-y-1 sm:neo-shadow-lg dark:border dark:border-white/10 dark:bg-[#111] dark:shadow-none dark:hover:border-gray-500 bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
             >
               <div className="flex h-10 items-center gap-2 border-b border-black bg-gray-50 px-4 transition-colors dark:border-white/10 dark:bg-[#1A1A1A] bw:border-black bw:bg-gray-50">
                 <div className="h-3 w-3 rounded-full bg-red-400"></div>

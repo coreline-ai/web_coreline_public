@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "python3 scripts/auto_migrate.py && concurrently -n \"API,NEXT\" -c \"yellow,cyan\" \"uvicorn api.index:app --reload --port 8000\" \"next dev\"",
     "prebuild": "node scripts/validate-env.js",
-    "build": "next build",
+    "build": "python3 scripts/auto_migrate.py && next build",
     "start": "next start",
     "lint": "eslint .",
-    "validate:env": "node scripts/validate-env.js"
+    "validate:env": "node scripts/validate-env.js",
+    "db:migrate": "./scripts/db_sync.sh"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.18",
@@ -34,6 +35,7 @@
     "@types/node": "^25.0.5",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "concurrently": "^9.2.1",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.0.0",
     "prettier": "^3.7.4",

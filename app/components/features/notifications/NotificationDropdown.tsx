@@ -75,7 +75,7 @@ export function NotificationDropdown() {
                         className="fixed inset-0 z-40"
                         onClick={() => setIsOpen(false)}
                     />
-                    <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-[8px_8px_0px_0px_black] border-4 border-black overflow-hidden z-50 dark:bg-black dark:border-white/20 dark:shadow-none bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_black]">
+                    <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl neo-shadow-sm border-4 border-black overflow-hidden z-50 dark:bg-black dark:border-white/20 dark:shadow-none bw:border-black bw:bg-white bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                         <div className="flex items-center justify-between p-4 border-b-2 border-black bg-[#FFD600] dark:border-white/20 dark:bg-white/10 bw:border-black bw:bg-[#FFD600]">
                             <h3 className="font-black text-black dark:text-white bw:text-black">Notifications</h3>
                             {unreadCount > 0 && (

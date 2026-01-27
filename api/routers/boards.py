@@ -156,22 +156,31 @@ async def get_board_detail_and_posts(
     # Check Access Level (AWAITED centralized helper)
     await check_board_access(board, current_user, action="view")
     
-    # Get Categories and build map
+    # Get Categories
     cat_result = await db.execute(select(BoardCategory).where(BoardCategory.board_id == board.id))
     categories = cat_result.scalars().all()
-    categories_map = {c.id: c for c in categories}
     
-    # Get Notices
-    notice_result = await db.execute(
-        select(Post).where(Post.board_id == board.id, Post.is_notice == True).order_by(Post.created_at.desc())
-    )
-    notices = notice_result.scalars().all()
+    # Get Notices with Author and Category
+    notice_stmt = select(Post, User, BoardCategory)\
+        .select_from(Post)\
+        .join(User, Post.user_id == User.id)\
+        .join(BoardCategory, Post.category_id == BoardCategory.id)\
+        .where(Post.board_id == board.id, Post.is_notice == True)\
+        .order_by(Post.created_at.desc())
+        
+    notice_result = await db.execute(notice_stmt)
+    notice_rows = notice_result.all()
     
-    # Get Posts with Pagination
+    # Get Posts with Pagination and Relations
     limit = 20
     offset = (page - 1) * limit
     
-    query = select(Post).where(Post.board_id == board.id, Post.is_notice == False)
+    query = select(Post, User, BoardCategory)\
+        .select_from(Post)\
+        .join(User, Post.user_id == User.id)\
+        .join(BoardCategory, Post.category_id == BoardCategory.id)\
+        .where(Post.board_id == board.id, Post.is_notice == False)
+        
     if category_id:
         query = query.where(Post.category_id == category_id)
     if keyword:
@@ -179,7 +188,7 @@ async def get_board_detail_and_posts(
     
     query = query.order_by(Post.created_at.desc()).offset(offset).limit(limit)
     posts_result = await db.execute(query)
-    posts = posts_result.scalars().all()
+    posts_rows = posts_result.all()
     
     # Get Total Count
     count_query = select(func.count(Post.id)).where(Post.board_id == board.id, Post.is_notice == False)
@@ -192,9 +201,6 @@ async def get_board_detail_and_posts(
     total_items = total_count_result.scalar()
     total_pages = (total_items + limit - 1) // limit if total_items else 0
 
-    # Build response with author/category objects
-    users_cache = {}
-    
     board_data = {
         "id": board.id,
         "name": board.name,
@@ -204,15 +210,34 @@ async def get_board_detail_and_posts(
     }
     categories_data = [{"id": c.id, "name": c.name} for c in categories]
     
-    # Serialize notices with author/category
-    notices_data = []
-    for n in notices:
-        notices_data.append(await serialize_post(n, db, categories_map, users_cache))
-    
-    # Serialize posts with author/category
-    posts_data = []
-    for p in posts:
-        posts_data.append(await serialize_post(p, db, categories_map, users_cache))
+    # Batch Fetch Like Counts (Fix N+1)
+    all_post_ids = [row[0].id for row in notice_rows + posts_rows]
+    likes_map = {}
+    if all_post_ids:
+        likes_stmt = select(PostLike.post_id, func.count(PostLike.post_id))\
+            .where(PostLike.post_id.in_(all_post_ids))\
+            .group_by(PostLike.post_id)
+        likes_res = await db.execute(likes_stmt)
+        likes_map = {post_id: count for post_id, count in likes_res.all()}
+
+    def format_post_row(row):
+        post, author, category = row
+        like_count = likes_map.get(post.id, 0)
+        
+        return {
+            "id": post.id,
+            "title": post.title,
+            "is_notice": post.is_notice,
+            "author": {"id": str(author.id), "nickname": author.nickname} if author else {"id": "", "nickname": "Unknown"},
+            "category": {"id": category.id, "name": category.name} if category else None,
+            "created_at": post.created_at.isoformat() if post.created_at else None,
+            "updated_at": post.updated_at.isoformat() if post.updated_at else None,
+            "view_count": post.view_count,
+            "like_count": like_count
+        }
+
+    notices_data = [format_post_row(row) for row in notice_rows]
+    posts_data = [format_post_row(row) for row in posts_rows]
     
     return JSONResponse(
         content={
