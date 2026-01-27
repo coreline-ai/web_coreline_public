@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "python3 scripts/auto_migrate.py && concurrently -n \"API,NEXT\" -c \"yellow,cyan\" \"uvicorn api.index:app --reload --port 8000\" \"next dev\"",
     "prebuild": "node scripts/validate-env.js",
-    "build": "pip3 install -r api/requirements.txt && python3 scripts/auto_migrate.py && next build",
+    "build": "pip3 install -r api/requirements.txt --break-system-packages && python3 scripts/auto_migrate.py && next build",
     "start": "next start",
     "lint": "eslint .",
     "validate:env": "node scripts/validate-env.js",
