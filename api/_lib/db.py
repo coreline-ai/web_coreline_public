@@ -36,7 +36,15 @@ connect_args = {}
 if DATABASE_URL and ("neon.tech" in DATABASE_URL or "supabase" in DATABASE_URL or os.getenv("ENVIRONMENT") == "production"):
     connect_args["ssl"] = True
 
-engine = create_async_engine(DATABASE_URL, connect_args=connect_args, echo=os.getenv("ENVIRONMENT") != "production") if DATABASE_URL else None
+engine = create_async_engine(
+    DATABASE_URL, 
+    connect_args=connect_args, 
+    echo=os.getenv("ENVIRONMENT") != "production",
+    pool_pre_ping=True,   # Check if connection is alive before using (Critical for Serverless)
+    pool_recycle=300,     # Recycle connections every 5 minutes
+    pool_size=5,          # Keep up to 5 connections open
+    max_overflow=10       # Allow bursting up to 10 extra connections
+) if DATABASE_URL else None
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False) if engine else None
 
 Base = declarative_base()
