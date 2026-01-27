@@ -14,7 +14,7 @@ export function MarkdownViewer({ content }: MarkdownViewerProps) {
         <div className="prose prose-lg dark:prose-invert max-w-none break-words">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeSanitize]}
+                // rehypePlugins={[rehypeSanitize]} // Temporarily disabled to fix content stripping
                 components={{
                     // Override specific elements for custom styling if needed
                     a: ({ node, ...props }) => (
