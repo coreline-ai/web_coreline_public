@@ -344,19 +344,24 @@ async def increment_view_count(request: Request, post_id: int, db: AsyncSession 
 
 class AdminPostUpdate(BaseModel):
     id: int
-    content: str
+    content: Optional[str] = None
+    title: Optional[str] = None
 
 @router.post("/api/admin/force-update-post")
 async def force_update_post(req: AdminPostUpdate, db: AsyncSession = Depends(get_db)):
-    """Temporary endpoint to force update ANY post in Production DB"""
+    """Temporary endpoint to force update ANY post (Title/Content) in Production DB"""
     result = await db.execute(select(Post).where(Post.id == req.id))
     post = result.scalars().first()
     
     if not post:
         return JSONResponse(status_code=404, content={"error": f"Post {req.id} not found"})
         
-    post.content = req.content
-    post.updated_at = func.now() # Ensure updated_at changes
+    if req.content:
+        post.content = req.content
+    if req.title:
+        post.title = req.title
+        
+    post.updated_at = func.now() 
     await db.commit()
     
-    return {"success": True, "message": f"Post {req.id} successfully updated."}
+    return {"success": True, "message": f"Post {req.id} updated (Title: {bool(req.title)}, Content: {bool(req.content)})"}
