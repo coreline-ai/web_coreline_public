@@ -15,7 +15,7 @@ def run_auto_migration():
     # Run alembic revision
     # autogenerate is critical here
     result = subprocess.run(
-        ["alembic", "revision", "--autogenerate", "-m", msg], 
+        [sys.executable, "-m", "alembic", "revision", "--autogenerate", "-m", msg], 
         capture_output=True, 
         text=True
     )
@@ -36,7 +36,7 @@ def run_auto_migration():
     else:
         # If a file was generated or other output, we try to upgrade
         print("🚀 [Auto-Migrate] Changes detected. Applying migrations...")
-        upgrade_result = subprocess.run(["alembic", "upgrade", "head"], capture_output=True, text=True)
+        upgrade_result = subprocess.run([sys.executable, "-m", "alembic", "upgrade", "head"], capture_output=True, text=True)
         print(upgrade_result.stdout)
         
         if upgrade_result.returncode == 0:
