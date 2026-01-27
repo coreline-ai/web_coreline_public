@@ -156,49 +156,55 @@ async def get_board_detail_and_posts(
     # Check Access Level (AWAITED centralized helper)
     await check_board_access(board, current_user, action="view")
     
-    # Get Categories
-    cat_result = await db.execute(select(BoardCategory).where(BoardCategory.board_id == board.id))
-    categories = cat_result.scalars().all()
+    # Define queries for parallel execution
     
-    # Get Notices with Author and Category
+    # 1. Categories
+    cat_query = select(BoardCategory).where(BoardCategory.board_id == board.id)
+    
+    # 2. Notices
     notice_stmt = select(Post, User, BoardCategory)\
         .select_from(Post)\
         .join(User, Post.user_id == User.id)\
         .join(BoardCategory, Post.category_id == BoardCategory.id)\
         .where(Post.board_id == board.id, Post.is_notice == True)\
         .order_by(Post.created_at.desc())
-        
-    notice_result = await db.execute(notice_stmt)
-    notice_rows = notice_result.all()
     
-    # Get Posts with Pagination and Relations
+    # 3. Posts (Pagination)
     limit = 20
     offset = (page - 1) * limit
-    
-    query = select(Post, User, BoardCategory)\
+    posts_query = select(Post, User, BoardCategory)\
         .select_from(Post)\
         .join(User, Post.user_id == User.id)\
         .join(BoardCategory, Post.category_id == BoardCategory.id)\
         .where(Post.board_id == board.id, Post.is_notice == False)
         
     if category_id:
-        query = query.where(Post.category_id == category_id)
+        posts_query = posts_query.where(Post.category_id == category_id)
     if keyword:
-        query = query.where(Post.title.ilike(f"%{keyword}%") | Post.content.ilike(f"%{keyword}%"))
+        posts_query = posts_query.where(Post.title.ilike(f"%{keyword}%") | Post.content.ilike(f"%{keyword}%"))
     
-    query = query.order_by(Post.created_at.desc()).offset(offset).limit(limit)
-    posts_result = await db.execute(query)
-    posts_rows = posts_result.all()
-    
-    # Get Total Count
+    posts_query = posts_query.order_by(Post.created_at.desc()).offset(offset).limit(limit)
+
+    # 4. Total Count
     count_query = select(func.count(Post.id)).where(Post.board_id == board.id, Post.is_notice == False)
     if category_id:
         count_query = count_query.where(Post.category_id == category_id)
     if keyword:
         count_query = count_query.where(Post.title.ilike(f"%{keyword}%") | Post.content.ilike(f"%{keyword}%"))
-    
-    total_count_result = await db.execute(count_query)
-    total_items = total_count_result.scalar()
+
+    # Execute all independent queries in parallel
+    import asyncio
+    cat_res, notice_res, posts_res, count_res = await asyncio.gather(
+        db.execute(cat_query),
+        db.execute(notice_stmt),
+        db.execute(posts_query),
+        db.execute(count_query)
+    )
+
+    categories = cat_res.scalars().all()
+    notice_rows = notice_res.all()
+    posts_rows = posts_res.all()
+    total_items = count_res.scalar()
     total_pages = (total_items + limit - 1) // limit if total_items else 0
 
     board_data = {
