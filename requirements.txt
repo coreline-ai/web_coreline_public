@@ -13,3 +13,6 @@ slowapi
 argon2-cffi
 python-dotenv
 email-validator
+zhipuai
+uvicorn[standard]
+alembic
