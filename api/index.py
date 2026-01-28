@@ -15,19 +15,19 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # Rate Limiting
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
-from api._lib.limiter import limiter
+from ._lib.limiter import limiter
 
-# Import routers (Absolute imports)
-from api.auth.token import router as auth_token_router
-from api.auth.register import router as auth_register_router
-from api.auth.logout import router as auth_logout_router
-from api.auth.refresh import router as auth_refresh_router
-from api.routers.boards import router as boards_router
-from api.routers.posts import router as posts_router
-from api.routers.admin import router as admin_router
-from api.routers.comments import router as comments_router
-from api.routers.notifications import router as notifications_router
-from api.routers.files import router as files_router
+# Import routers (Relative imports to avoid path issues)
+from .auth.token import router as auth_token_router
+from .auth.register import router as auth_register_router
+from .auth.logout import router as auth_logout_router
+from .auth.refresh import router as auth_refresh_router
+from .routers.boards import router as boards_router
+from .routers.posts import router as posts_router
+from .routers.admin import router as admin_router
+from .routers.comments import router as comments_router
+from .routers.notifications import router as notifications_router
+from .routers.files import router as files_router
 
 app = FastAPI()
 app.state.limiter = limiter
