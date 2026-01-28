@@ -193,14 +193,11 @@ async def get_board_detail_and_posts(
     if keyword:
         count_query = count_query.where(Post.title.ilike(f"%{keyword}%") | Post.content.ilike(f"%{keyword}%"))
 
-    # Execute all independent queries in parallel
-    import asyncio
-    cat_res, notice_res, posts_res, count_res = await asyncio.gather(
-        db.execute(cat_query),
-        db.execute(notice_stmt),
-        db.execute(posts_query),
-        db.execute(count_query)
-    )
+    # Execute queries sequentially (AsyncSession is not thread-safe for concurrency)
+    cat_res = await db.execute(cat_query)
+    notice_res = await db.execute(notice_stmt)
+    posts_res = await db.execute(posts_query)
+    count_res = await db.execute(count_query)
 
     categories = cat_res.scalars().all()
     notice_rows = notice_res.all()
