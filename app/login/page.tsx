@@ -69,7 +69,9 @@ export default function LoginPage() {
 
         const callbackUrl = new URLSearchParams(window.location.search).get('callbackUrl');
 
-        if (callbackUrl) {
+        // Security: Open Redirect Prevention
+        // Only allow relative paths (starting with /) to prevent redirection to external malicious sites.
+        if (callbackUrl && callbackUrl.startsWith('/')) {
           router.push(callbackUrl);
         } else if ((session?.user as any)?.isAdmin) {
           router.push('/admin');
