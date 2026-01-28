@@ -21,6 +21,7 @@ from api._lib.limiter import limiter
 from api.auth.token import router as auth_token_router
 from api.auth.register import router as auth_register_router
 from api.auth.logout import router as auth_logout_router
+from api.auth.refresh import router as auth_refresh_router
 from api.routers.boards import router as boards_router
 from api.routers.posts import router as posts_router
 from api.routers.admin import router as admin_router
@@ -63,6 +64,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 app.include_router(auth_token_router)
 app.include_router(auth_register_router)
 app.include_router(auth_logout_router)
+app.include_router(auth_refresh_router)
 app.include_router(boards_router)
 app.include_router(posts_router)
 app.include_router(admin_router)

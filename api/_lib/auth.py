@@ -20,7 +20,8 @@ if not SECRET_KEY:
     SECRET_KEY = "dev-secret-key-not-for-production"
 
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days (Align with session duration)
+ACCESS_TOKEN_EXPIRE_MINUTES = 30  # Short-lived access token
+REFRESH_TOKEN_EXPIRE_DAYS = 7     # Long-lived refresh token
 
 # Switch to argon2 (modern, no 72 byte limit, no bcrypt incompatibility issues)
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
@@ -34,11 +35,11 @@ def get_password_hash(password):
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> Tuple[str, str, datetime]:
     """
-    Create an access token with JTI (JWT ID) for blacklist support.
+    Create an access token.
     Returns: (encoded_jwt, jti, expire_datetime)
     """
     to_encode = data.copy()
-    jti = str(uuid_lib.uuid4())  # Unique token ID
+    jti = str(uuid_lib.uuid4())
     
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
@@ -47,7 +48,29 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
     
     to_encode.update({
         "exp": expire,
-        "jti": jti  # JWT ID for blacklist tracking
+        "jti": jti,
+        "type": "access"
+    })
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt, jti, expire
+
+def create_refresh_token(data: dict, expires_delta: Optional[timedelta] = None) -> Tuple[str, str, datetime]:
+    """
+    Create a refresh token.
+    Returns: (encoded_jwt, jti, expire_datetime)
+    """
+    to_encode = data.copy()
+    jti = str(uuid_lib.uuid4())
+    
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)
+    
+    to_encode.update({
+        "exp": expire,
+        "jti": jti,
+        "type": "refresh"
     })
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt, jti, expire

@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from api._lib.db import get_db
 from api._lib.models import User
-from api._lib.auth import verify_password, create_access_token
+from api._lib.auth import verify_password, create_access_token, create_refresh_token
 from api._lib.schemas import ResponseModel
 from pydantic import BaseModel
 
@@ -30,10 +30,12 @@ async def login(req: TokenRequest, db: AsyncSession = Depends(get_db)):
     user.last_login_at = datetime.utcnow()
     await db.commit()
     
-    access_token, jti, expire = create_access_token(data={"sub": str(user.id)})
+    access_token, _, _ = create_access_token(data={"sub": str(user.id)})
+    refresh_token, _, _ = create_refresh_token(data={"sub": str(user.id)})
     
     return ResponseModel.success_res({
         "access_token": access_token,
+        "refresh_token": refresh_token,
         "token_type": "Bearer",
         "user": {
             "id": str(user.id),
