@@ -1,46 +1,48 @@
 {
-    "source": "/api/auth/:path*",
-    "destination": "/api/auth/:path*"
-},
-{
-    "source": "/api/proxy/:path*",
-    "destination": "/api/proxy/:path*"
-},
-{
-    "source": "/api/py-auth/:path*",
-    "destination": "/api/index.py"
-},
-{
-    "source": "/api/boards/:path*",
-    "destination": "/api/index.py"
-},
-{
-    "source": "/api/posts/:path*",
-    "destination": "/api/index.py"
-},
-{
-    "source": "/api/admin/:path*",
-    "destination": "/api/index.py"
-},
-{
-    "source": "/api/comments/:path*",
-    "destination": "/api/index.py"
-},
-{
-    "source": "/api/notifications/:path*",
-    "destination": "/api/index.py"
-},
-{
-    "source": "/api/files/:path*",
-    "destination": "/api/index.py"
-},
-{
-    "source": "/api/health",
-    "destination": "/api/index.py"
-},
-{
-    "source": "/api",
-    "destination": "/api/index.py"
-}
-]
+    "rewrites": [
+        {
+            "source": "/api/auth/:path*",
+            "destination": "/api/auth/:path*"
+        },
+        {
+            "source": "/api/proxy/:path*",
+            "destination": "/api/proxy/:path*"
+        },
+        {
+            "source": "/api/py-auth/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/boards/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/posts/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/admin/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/comments/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/notifications/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/files/:path*",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api/health",
+            "destination": "/api/index.py"
+        },
+        {
+            "source": "/api",
+            "destination": "/api/index.py"
+        }
+    ]
 }
