@@ -20,7 +20,7 @@ if not SECRET_KEY:
     SECRET_KEY = "dev-secret-key-not-for-production"
 
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60  # 1 hour (Security hardening)
+ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days (Align with session duration)
 
 # Switch to argon2 (modern, no 72 byte limit, no bcrypt incompatibility issues)
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
