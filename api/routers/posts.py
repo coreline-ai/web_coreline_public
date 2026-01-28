@@ -34,9 +34,14 @@ class CommentCreate(BaseModel):
 
 # --- Endpoints ---
 
+from api._lib.ai import generate_summary
+
+# ... imports ...
+
 @router.post("/api/posts")
 @limiter.limit("5/minute")
 async def create_post(request: Request, req: PostCreate, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
+    # ... (Board/Category validation logic remains same) ...
     # Lookup Board by Slug
     board_result = await db.execute(select(Board).where(Board.slug == req.board_slug))
     board = board_result.scalars().first()
@@ -53,12 +58,17 @@ async def create_post(request: Request, req: PostCreate, db: AsyncSession = Depe
     # Only admin can set is_notice = True
     notice_val = req.is_notice if current_user.is_admin else False
 
-    # Check Board Write Access (Centralized helper handles blog/research/ADMIN special rules)
+    # Check Board Write Access
     await check_board_write_access(board, current_user)
     
+    # [AI] Generate Summary
+    # Combine title and content for better context
+    ai_summary = generate_summary(f"Title: {req.title}\n\nContent: {req.content}")
+
     new_post = Post(
         title=req.title,
         content=req.content,
+        summary=ai_summary,  # Save summary
         user_id=current_user.id,
         board_id=board.id,
         category_id=req.category_id,
@@ -78,6 +88,7 @@ async def create_post(request: Request, req: PostCreate, db: AsyncSession = Depe
                 "id": new_post.id,
                 "title": new_post.title,
                 "content": new_post.content,
+                "summary": new_post.summary, # Return summary
                 "user_id": str(new_post.user_id),
                 "board_id": new_post.board_id,
                 "category_id": new_post.category_id,
@@ -90,75 +101,71 @@ async def create_post(request: Request, req: PostCreate, db: AsyncSession = Depe
         }
     )
 
-from api._lib.auth import get_current_user_optional
+# ...
 
 @router.get("/api/posts/{post_id}")
-async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), current_user: Optional[User] = Depends(get_current_user_optional)):
-
-    # Optimized Query: Fetch Post, Relations, Like Count, and Like Status in ONE query.
-    
-    # 1. Like Count Subquery
-    like_count_sub = select(func.count(PostLike.post_id)).where(PostLike.post_id == Post.id).scalar_subquery()
-    
-    # 2. Is Liked Expression
-    from sqlalchemy import case, literal, exists
-    is_liked_expr = literal(False)
-    if current_user:
-        # checking if a record exists in PostLike for this user and post
-        is_liked_sub = select(1).where(
-            PostLike.post_id == Post.id, 
-            PostLike.user_id == current_user.id
-        ).exists()
-        is_liked_expr = case((is_liked_sub, True), else_=False)
-    
-    # 3. Main Query
-    query = select(Post, Board, User, BoardCategory, like_count_sub, is_liked_expr)\
-        .join(Board, Post.board_id == Board.id)\
+async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user_optional)):
+    # Fetch Post with related data
+    stmt = select(Post, User, BoardCategory, Board)\
         .join(User, Post.user_id == User.id)\
         .join(BoardCategory, Post.category_id == BoardCategory.id)\
+        .join(Board, Post.board_id == Board.id)\
         .where(Post.id == post_id)
         
-    result = await db.execute(query)
+    result = await db.execute(stmt)
     row = result.first()
     
     if not row:
         raise HTTPException(status_code=404, detail="Post not found")
+        
+    post, author, category, board = row
+
+    # Check Read Access
+    await check_board_access(board, current_user, action="view")
     
-    post, board, author, category, like_count, liked = row
+    # Get Like Count & User Like Status
+    like_count_res = await db.execute(select(func.count(PostLike.post_id)).where(PostLike.post_id == post.id))
+    like_count = like_count_res.scalar() or 0
     
-    # Check Access Level
-    await check_board_access(board, current_user, action="read")
-    
-    response_data = {
-        "id": post.id,
-        "title": post.title,
-        "content": post.content,
-        "is_notice": post.is_notice,
-        "author": {
-            "id": str(author.id),
-            "nickname": author.nickname
-        },
-        "board": {
-            "id": board.id,
-            "slug": board.slug,
-            "name": board.name,
-            "access_level": board.access_level
-        },
-        "category": {
-            "id": category.id,
-            "name": category.name
-        },
-        "file_url": post.file_url,
-        "created_at": post.created_at.isoformat() if post.created_at else None,
-        "updated_at": post.updated_at.isoformat() if post.updated_at else None,
-        "view_count": post.view_count,
-        "like_count": like_count
-    }
-    
+    auth_liked = False
     if current_user:
-        response_data["liked"] = liked
-    
-    return JSONResponse(content={"success": True, "data": response_data, "error": None})
+        liked_res = await db.execute(select(PostLike).where(PostLike.post_id == post.id, PostLike.user_id == current_user.id))
+        auth_liked = bool(liked_res.scalars().first())
+
+    return JSONResponse(content={
+        "success": True,
+        "data": {
+            "id": post.id,
+            "title": post.title,
+            "content": post.content,
+            "summary": post.summary,
+            "user_id": str(post.user_id),
+            "board_id": post.board_id,
+            "category_id": post.category_id,
+            "is_notice": post.is_notice,
+            "file_url": post.file_url,
+            "created_at": post.created_at.isoformat() if post.created_at else None,
+            "updated_at": post.updated_at.isoformat() if post.updated_at else None,
+            "view_count": post.view_count,
+            "like_count": like_count,
+            "liked": auth_liked,
+            "author": {
+                "id": str(author.id), 
+                "nickname": author.nickname,
+                "email": author.email
+            },
+            "category": {
+                "id": category.id, 
+                "name": category.name
+            },
+            "board": {
+                "id": board.id,
+                "slug": board.slug,
+                "name": board.name
+            }
+        },
+        "error": None
+    })
 
 @router.patch("/api/posts/{post_id}")
 @limiter.limit("10/minute")
@@ -176,13 +183,16 @@ async def update_post(request: Request, post_id: int, req: PostUpdate, db: Async
     board_res = await db.execute(select(Board).where(Board.id == post.board_id))
     board = board_res.scalars().first()
 
-    # Check Board Write Access (Centralized helper)
+    # Check Board Write Access
     await check_board_write_access(board, current_user)
     
+    needs_summary_update = False
     if req.title is not None:
         post.title = req.title
+        needs_summary_update = True
     if req.content is not None:
         post.content = req.content
+        needs_summary_update = True
     if req.category_id is not None:
         # Validate category
         cat_result = await db.execute(select(BoardCategory).where(BoardCategory.id == req.category_id, BoardCategory.board_id == post.board_id))
@@ -190,6 +200,10 @@ async def update_post(request: Request, post_id: int, req: PostUpdate, db: Async
             raise HTTPException(status_code=400, detail="Invalid category for this board")
         post.category_id = req.category_id
         
+    # [AI] Regenerate Summary if content changed
+    if needs_summary_update:
+        post.summary = generate_summary(f"Title: {post.title}\n\nContent: {post.content}")
+
     await db.commit()
     await db.refresh(post)
     return ResponseModel.success_res(post)
@@ -212,6 +226,23 @@ async def delete_post(request: Request, post_id: int, db: AsyncSession = Depends
 
     # Check Board Write Access (Centralized helper)
     await check_board_write_access(board, current_user)
+    
+    # Delete dependencies first (Manual Cascade)
+    # 1. Likes
+    await db.execute(select(PostLike).where(PostLike.post_id == post_id).execution_options(synchronize_session=False))
+    # It seems sqlalchemy delete needs 'delete' statement not select
+    from sqlalchemy import delete
+    await db.execute(delete(PostLike).where(PostLike.post_id == post_id))
+    
+    # 2. Notifications
+    await db.execute(delete(Notification).where(Notification.post_id == post_id))
+    
+    # 3. Comments (and their notifications? Notification has comment_id, handled by post_id delete mostly? 
+    # Notification has post_id, so deleting by post_id handles most. 
+    # Any notification unrelated to post but related to comment? No, Notification model has post_id nullable=False usually?
+    # Let's check model: post_id is nullable=False. So deleting by post_id is safe.)
+    
+    await db.execute(delete(Comment).where(Comment.post_id == post_id))
     
     await db.delete(post)
     await db.commit()

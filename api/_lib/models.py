@@ -54,6 +54,7 @@ class Post(Base):
     board_id = Column(Integer, ForeignKey("boards.id"), nullable=False)
     category_id = Column(Integer, ForeignKey("board_categories.id"), nullable=False)
     file_url = Column(String(300), nullable=True)
+    summary = Column(Text, nullable=True)
     is_notice = Column(Boolean, default=False, nullable=False)
     view_count = Column(Integer, default=0, nullable=False)
     created_at = Column(DateTime(timezone=True), default=datetime.utcnow)

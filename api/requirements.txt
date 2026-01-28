@@ -14,3 +14,4 @@ slowapi
 argon2-cffi
 python-dotenv
 alembic
+zhipuai

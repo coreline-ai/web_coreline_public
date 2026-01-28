@@ -56,6 +56,7 @@ async def serialize_post(post: Post, db: AsyncSession, categories_map: dict, use
     return {
         "id": post.id,
         "title": post.title,
+        "summary": post.summary,
         "is_notice": post.is_notice,
         "author": {"id": str(author.id), "nickname": author.nickname} if author else None,
         "category": {"id": category.id, "name": category.name} if category else None,
@@ -233,6 +234,7 @@ async def get_board_detail_and_posts(
         return {
             "id": post.id,
             "title": post.title,
+            "summary": post.summary,
             "is_notice": post.is_notice,
             "author": {"id": str(author.id), "nickname": author.nickname} if author else {"id": "", "nickname": "Unknown"},
             "category": {"id": category.id, "name": category.name} if category else None,

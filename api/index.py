@@ -25,10 +25,9 @@ from api.auth.refresh import router as auth_refresh_router
 from api.routers.boards import router as boards_router
 from api.routers.posts import router as posts_router
 from api.routers.admin import router as admin_router
-from api.comments.comment_id import router as comment_delete_router
-from api.notifications.index import router as notifications_router
-from api.notifications.notification_id_read import router as notification_read_router
-from api.files.signed_url import router as files_router
+from api.routers.comments import router as comments_router
+from api.routers.notifications import router as notifications_router
+from api.routers.files import router as files_router
 
 app = FastAPI()
 app.state.limiter = limiter
@@ -68,9 +67,8 @@ app.include_router(auth_refresh_router)
 app.include_router(boards_router)
 app.include_router(posts_router)
 app.include_router(admin_router)
-app.include_router(comment_delete_router)
+app.include_router(comments_router)
 app.include_router(notifications_router)
-app.include_router(notification_read_router)
 app.include_router(files_router)
 
 @app.get("/api/health")
