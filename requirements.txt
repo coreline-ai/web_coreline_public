@@ -16,3 +16,6 @@ email-validator
 zhipuai
 uvicorn[standard]
 alembic
+sniffio
+httpx
+anyio

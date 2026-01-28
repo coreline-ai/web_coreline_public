@@ -16,3 +16,6 @@ argon2-cffi
 python-dotenv
 alembic
 zhipuai
+sniffio
+httpx
+anyio
