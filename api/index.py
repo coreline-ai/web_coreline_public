@@ -29,41 +29,15 @@ from .routers.comments import router as comments_router
 from .routers.notifications import router as notifications_router
 from .routers.files import router as files_router
 
-from alembic.config import Config
-from alembic import command
+from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Determine if we should run migrations
-    # We check for VERCEL or a cloud-like DATABASE_URL
+    # Log environment info for debugging
     db_url = os.getenv("DATABASE_URL", "")
-    is_cloud_db = "neon.tech" in db_url or "supabase" in db_url
     is_vercel = os.getenv("VERCEL") == "1" or os.getenv("VERCEL_ENV") is not None
-    
-    logger.info(f"🔍 Lifespan check: is_vercel={is_vercel}, is_cloud_db={is_cloud_db}")
-    
-    if is_vercel or is_cloud_db:
-        logger.info("🚀 Running migrations via Alembic command...")
-        try:
-            # Initialize Alembic config
-            root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            ini_path = os.path.join(root_dir, "alembic.ini")
-            
-            # Use a thread-safe way to run sync alembic code in async lifespan
-            def run_upgrade():
-                alembic_cfg = Config(ini_path)
-                # Ensure we use the current sys.executable path for internal imports if needed
-                command.upgrade(alembic_cfg, "head")
-                
-            import asyncio
-            await asyncio.to_thread(run_upgrade)
-            logger.info("✅ Migrations applied successfully.")
-        except Exception as e:
-            logger.error(f"❌ Error during runtime migration: {e}")
-            logger.error(traceback.format_exc())
-    
+    logger.info(f"🚀 Application starting... Vercel={is_vercel}, DB={db_url[:20]}...")
     yield
-    # Cleanup (not needed for now)
 
 app = FastAPI(lifespan=lifespan)
 app.state.limiter = limiter
