@@ -33,13 +33,14 @@ if DATABASE_URL:
 # SSL configuration - Enable for cloud databases (Neon, Supabase, etc.)
 connect_args = {}
 # Enable SSL if URL contains cloud database indicators or if explicitly set
-if DATABASE_URL and ("neon.tech" in DATABASE_URL or "supabase" in DATABASE_URL or os.getenv("ENVIRONMENT") == "production"):
+is_prod = os.getenv("ENVIRONMENT") == "production" or os.getenv("VERCEL_ENV") == "production"
+if DATABASE_URL and ("neon.tech" in DATABASE_URL or "supabase" in DATABASE_URL or is_prod):
     connect_args["ssl"] = True
 
 engine = create_async_engine(
     DATABASE_URL, 
     connect_args=connect_args, 
-    echo=os.getenv("ENVIRONMENT") != "production",
+    echo=not is_prod,
     pool_pre_ping=True,   # Check if connection is alive before using (Critical for Serverless)
     pool_recycle=300,     # Recycle connections every 5 minutes
     pool_size=5,          # Keep up to 5 connections open

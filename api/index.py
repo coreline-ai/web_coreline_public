@@ -35,8 +35,13 @@ import subprocess
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Run migrations on startup to ensure production DB is in sync
-    # This handles cases where build-time migrations fail due to missing env vars
-    if os.getenv("ENVIRONMENT") == "production":
+    # We check for VERCEL_ENV or ENVIRONMENT to detect production
+    is_vercel_prod = os.getenv("VERCEL_ENV") == "production" or os.getenv("ENVIRONMENT") == "production"
+    is_vercel = os.getenv("VERCEL") == "1"
+    
+    logger.info(f"🔍 Environment: VERCEL_ENV={os.getenv('VERCEL_ENV')}, ENVIRONMENT={os.getenv('ENVIRONMENT')}, VERCEL={os.getenv('VERCEL')}")
+    
+    if is_vercel_prod or is_vercel:
         logger.info("🚀 Running production migrations...")
         try:
             # Run alembic upgrade head
