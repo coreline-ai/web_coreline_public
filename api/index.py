@@ -29,35 +29,38 @@ from .routers.comments import router as comments_router
 from .routers.notifications import router as notifications_router
 from .routers.files import router as files_router
 
-from contextlib import asynccontextmanager
-import subprocess
+from alembic.config import Config
+from alembic import command
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Run migrations on startup to ensure production DB is in sync
-    # We check for VERCEL_ENV or ENVIRONMENT to detect production
-    is_vercel_prod = os.getenv("VERCEL_ENV") == "production" or os.getenv("ENVIRONMENT") == "production"
-    is_vercel = os.getenv("VERCEL") == "1"
+    # Determine if we should run migrations
+    # We check for VERCEL or a cloud-like DATABASE_URL
+    db_url = os.getenv("DATABASE_URL", "")
+    is_cloud_db = "neon.tech" in db_url or "supabase" in db_url
+    is_vercel = os.getenv("VERCEL") == "1" or os.getenv("VERCEL_ENV") is not None
     
-    logger.info(f"🔍 Environment: VERCEL_ENV={os.getenv('VERCEL_ENV')}, ENVIRONMENT={os.getenv('ENVIRONMENT')}, VERCEL={os.getenv('VERCEL')}")
+    logger.info(f"🔍 Lifespan check: is_vercel={is_vercel}, is_cloud_db={is_cloud_db}")
     
-    if is_vercel_prod or is_vercel:
-        logger.info("🚀 Running production migrations...")
+    if is_vercel or is_cloud_db:
+        logger.info("🚀 Running migrations via Alembic command...")
         try:
-            # Run alembic upgrade head
-            # We use absolute path to alembic if possible, but 'python3 -m alembic' is safer
-            result = subprocess.run(
-                [sys.executable, "-m", "alembic", "upgrade", "head"],
-                capture_output=True,
-                text=True,
-                cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            )
-            if result.returncode == 0:
-                logger.info("✅ Migrations applied successfully.")
-            else:
-                logger.error(f"❌ Migration failed: {result.stderr}")
+            # Initialize Alembic config
+            root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            ini_path = os.path.join(root_dir, "alembic.ini")
+            
+            # Use a thread-safe way to run sync alembic code in async lifespan
+            def run_upgrade():
+                alembic_cfg = Config(ini_path)
+                # Ensure we use the current sys.executable path for internal imports if needed
+                command.upgrade(alembic_cfg, "head")
+                
+            import asyncio
+            await asyncio.to_thread(run_upgrade)
+            logger.info("✅ Migrations applied successfully.")
         except Exception as e:
             logger.error(f"❌ Error during runtime migration: {e}")
+            logger.error(traceback.format_exc())
     
     yield
     # Cleanup (not needed for now)

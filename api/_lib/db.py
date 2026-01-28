@@ -33,7 +33,7 @@ if DATABASE_URL:
 # SSL configuration - Enable for cloud databases (Neon, Supabase, etc.)
 connect_args = {}
 # Enable SSL if URL contains cloud database indicators or if explicitly set
-is_prod = os.getenv("ENVIRONMENT") == "production" or os.getenv("VERCEL_ENV") == "production"
+is_prod = os.getenv("ENVIRONMENT") == "production" or os.getenv("VERCEL_ENV") == "production" or os.getenv("VERCEL") == "1"
 if DATABASE_URL and ("neon.tech" in DATABASE_URL or "supabase" in DATABASE_URL or is_prod):
     connect_args["ssl"] = True
 
