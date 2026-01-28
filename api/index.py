@@ -29,7 +29,35 @@ from .routers.comments import router as comments_router
 from .routers.notifications import router as notifications_router
 from .routers.files import router as files_router
 
-app = FastAPI()
+from contextlib import asynccontextmanager
+import subprocess
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Run migrations on startup to ensure production DB is in sync
+    # This handles cases where build-time migrations fail due to missing env vars
+    if os.getenv("ENVIRONMENT") == "production":
+        logger.info("🚀 Running production migrations...")
+        try:
+            # Run alembic upgrade head
+            # We use absolute path to alembic if possible, but 'python3 -m alembic' is safer
+            result = subprocess.run(
+                [sys.executable, "-m", "alembic", "upgrade", "head"],
+                capture_output=True,
+                text=True,
+                cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            )
+            if result.returncode == 0:
+                logger.info("✅ Migrations applied successfully.")
+            else:
+                logger.error(f"❌ Migration failed: {result.stderr}")
+        except Exception as e:
+            logger.error(f"❌ Error during runtime migration: {e}")
+    
+    yield
+    # Cleanup (not needed for now)
+
+app = FastAPI(lifespan=lifespan)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
