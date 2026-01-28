@@ -38,7 +38,7 @@ export default function PostDetailPage() {
         } catch (err: any) {
             // Handle 401 (Login Required) gracefully by redirecting to login
             if (err.message?.includes('Login required') || err.message?.includes('401')) {
-                router.replace(`/login?callbackUrl=/boards/${slug}/posts/${postId}`);
+                router.replace(`/login?error=SessionExpired&callbackUrl=/boards/${slug}/posts/${postId}`);
                 return;
             }
             setError(err.message || 'Failed to load post');

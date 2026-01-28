@@ -12,12 +12,24 @@ body {
   box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
 }
 
+.dark .neo-shadow {
+  box-shadow: none;
+}
+
 .neo-shadow-sm {
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
 }
 
+.dark .neo-shadow-sm {
+  box-shadow: none;
+}
+
 .neo-shadow-lg {
   box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.dark .neo-shadow-lg {
+  box-shadow: none;
 }
 
 .neo-shadow-hover:hover {
@@ -25,9 +37,19 @@ body {
   transform: translate(2px, 2px);
 }
 
+.dark .neo-shadow-hover:hover {
+  box-shadow: none;
+  transform: none;
+}
+
 .neo-shadow-none:active {
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
   transform: translate(4px, 4px);
+}
+
+.dark .neo-shadow-none:active {
+  box-shadow: none;
+  transform: none;
 }
 
 .bg-grid {

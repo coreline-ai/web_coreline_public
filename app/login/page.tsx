@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { signIn, getSession, useSession } from 'next-auth/react';
+import { signIn, getSession, useSession, signOut } from 'next-auth/react';
 import SimpleHeader from '../components/layout/SimpleHeader';
 import SimpleFooter from '../components/layout/SimpleFooter';
 
@@ -26,16 +26,24 @@ export default function LoginPage() {
         'Configuration': 'Server configuration error',
         'AccessDenied': 'Access denied',
         'Verification': 'Verification failed',
+        'SessionExpired': 'Session expired. Please log in again.',
       };
+
+      if (authError === 'SessionExpired') {
+        signOut({ redirect: false });
+      }
+
       setError(errorMessages[authError] || errorMessages['Default']);
     }
   }, [searchParams]);
 
   useEffect(() => {
-    if (status === 'authenticated') {
+    // Redirect to home if already authenticated, BUT NOT if there's an error (like SessionExpired)
+    // trying to force a logout/re-login flow.
+    if (status === 'authenticated' && !searchParams.get('error')) {
       router.replace('/');
     }
-  }, [status, router]);
+  }, [status, router, searchParams]);
 
   if (status === 'authenticated') return null; // Prevent flicker
 
