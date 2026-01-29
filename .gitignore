@@ -61,3 +61,4 @@ share/python-wheels/
 # Local development scripts with hardcoded credentials
 scripts/verify/
 promote_admin.py
+api/scripts/
