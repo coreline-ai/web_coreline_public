@@ -15,7 +15,7 @@
 
 > **현재 상태**: Next.js 프론트엔드와 Python FastAPI 백엔드가 결합된 하이브리드 아키텍처로 고도화되었습니다.
 
-- **Demo Web Page**: [https://web-coreline-public.vercel.app/](https://web-coreline-public.vercel.app/)
+- **Demo Web Page**: [https://coreline-project.vercel.app/](https://coreline-project.vercel.app/)
 - **Simple Fullstack Profile**: [https://github.com/coreline-ai/fullstack_profile_public](https://github.com/coreline-ai/fullstack_profile_public)
 
 이 프로젝트는 최신 **Next.js 16 (App Router)** 와 **React 19**, 그리고 **Python (FastAPI)** 백엔드를 기반으로 구축되어 있습니다.
