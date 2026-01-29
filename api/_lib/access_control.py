@@ -20,17 +20,14 @@ async def check_board_access(
     if board.slug in ['blog', 'research'] and action in ["view", "read"]:
         return
 
-    # 2. QnA Board - PUBLIC LIST, AUTH DETAIL
+    # 2. QnA Board - AUTHENTICATED ONLY
     if board.slug == 'CL_Project_QnA':
-        if action == "view": # List of posts
-            return
-        if action == "read": # Actual post content
-            if not current_user:
-                raise HTTPException(
-                    status_code=401, 
-                    detail="Login required to view the content of this project board."
-                )
-            return
+        if not current_user:
+            raise HTTPException(
+                status_code=401, 
+                detail="Login required to access this project board."
+            )
+        return
 
     # 3. Standard Access Level Checks (Others)
     if board.access_level == 'ADMIN':
