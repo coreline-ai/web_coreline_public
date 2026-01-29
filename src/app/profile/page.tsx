@@ -160,11 +160,11 @@ export default function ProfilePage() {
                     <span
                       key={tech}
                       className={`rounded-xl border-2 border-black px-4 py-2 text-xs font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-transform hover:-translate-y-1 dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] bw:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${tech === 'Enterprise SDK' ||
-                          tech === 'Android SDK' ||
-                          tech === 'Flutter' ||
-                          tech === 'System Level Tuning'
-                          ? 'bg-[#FFD600] text-black'
-                          : 'bg-white text-black'
+                        tech === 'Android SDK' ||
+                        tech === 'Flutter' ||
+                        tech === 'System Level Tuning'
+                        ? 'bg-[#FFD600] text-black'
+                        : 'bg-white text-black'
                         }`}
                     >
                       {tech}
@@ -188,7 +188,7 @@ export default function ProfilePage() {
                     <div className="absolute top-1 -left-[9px] h-4 w-4 rounded-full border-2 border-white bg-black dark:border-black dark:bg-white bw:border-white bw:bg-black"></div>
                     <h4 className="text-xl font-black">Team Lead</h4>
                     <p className="mb-2 text-[10px] font-bold text-purple-600 uppercase dark:text-purple-400 bw:text-purple-600">
-                      Real Estate Tech Company
+                      Device Tech Company
                     </p>
                     <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400 bw:text-gray-600">
                       Led new App dev & stability enhancements. Directed the engineering team in

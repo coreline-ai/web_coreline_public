@@ -20,6 +20,21 @@ export default function Navigation() {
   };
 
   const projectLink = '/boards/CL_Project_QnA';
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id.replace('#', ''));
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
     <>
@@ -37,15 +52,19 @@ export default function Navigation() {
 
           <div className="hidden items-center gap-6 md:flex">
             <div className="flex items-center gap-8 font-bold text-black transition-colors duration-300 dark:text-gray-300 bw:text-black">
-              {['서비스', '포트폴리오', '프로세스', '소개'].map((item, i) => (
-                <a
-                  key={i}
-                  href={`${item === '포트폴리오' ? '#projects' : item === '서비스' ? '#services' : item === '프로세스' ? '#process' : '#about'}`}
-                  className="decoration-black decoration-2 underline-offset-4 transition-all hover:text-black hover:underline dark:decoration-[#FFD600] dark:hover:text-white bw:decoration-black bw:hover:text-black"
-                >
-                  {item}
-                </a>
-              ))}
+              {['서비스', '포트폴리오', '프로세스', '소개', '연구소', '문의'].map((item, i) => {
+                const targetId = item === '포트폴리오' ? '#projects' : item === '서비스' ? '#services' : item === '프로세스' ? '#process' : item === '연구소' ? '#research' : item === '소개' ? '#about' : '#contact';
+                return (
+                  <a
+                    key={i}
+                    href={targetId}
+                    onClick={(e) => scrollToSection(e, targetId)}
+                    className="decoration-black decoration-2 underline-offset-4 transition-all hover:text-black hover:underline dark:decoration-[#FFD600] dark:hover:text-white bw:decoration-black bw:hover:text-black"
+                  >
+                    {item}
+                  </a>
+                );
+              })}
             </div>
 
             <div className="mx-2 h-6 w-px bg-gray-300 dark:bg-gray-700 bw:bg-gray-300"></div>
@@ -115,16 +134,19 @@ export default function Navigation() {
           </div>
 
           <div className="flex flex-col gap-6 text-2xl font-black">
-            {['서비스', '포트폴리오', '프로세스', '소개'].map((item, i) => (
-              <a
-                key={i}
-                href={`${item === '포트폴리오' ? '#projects' : item === '서비스' ? '#services' : item === '프로세스' ? '#process' : '#about'}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="border-b-2 border-black pb-4 transition-all hover:pl-4 dark:border-white/10 dark:text-gray-300 dark:hover:text-white bw:border-black bw:text-black bw:hover:text-gray-600"
-              >
-                {item}
-              </a>
-            ))}
+            {['서비스', '포트폴리오', '프로세스', '소개', '연구소', '문의'].map((item, i) => {
+              const targetId = item === '포트폴리오' ? '#projects' : item === '서비스' ? '#services' : item === '프로세스' ? '#process' : item === '연구소' ? '#research' : item === '소개' ? '#about' : '#contact';
+              return (
+                <a
+                  key={i}
+                  href={targetId}
+                  onClick={(e) => scrollToSection(e, targetId)}
+                  className="border-b-2 border-black pb-4 transition-all hover:pl-4 dark:border-white/10 dark:text-gray-300 dark:hover:text-white bw:border-black bw:text-black bw:hover:text-gray-600"
+                >
+                  {item}
+                </a>
+              );
+            })}
           </div>
 
           <div className="mt-auto flex flex-col gap-4">

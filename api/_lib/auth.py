@@ -12,12 +12,10 @@ from sqlalchemy import delete
 from .db import get_db
 from .models import User, TokenBlacklist
 
+from .config import settings
+
 # Configuration
-SECRET_KEY = os.getenv("JWT_SECRET")
-if not SECRET_KEY:
-    if os.getenv("ENVIRONMENT") == "production":
-        raise RuntimeError("CRITICAL: JWT_SECRET environment variable must be set in production!")
-    SECRET_KEY = "dev-secret-key-not-for-production"
+SECRET_KEY = settings.jwt_secret
 
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30  # Short-lived access token

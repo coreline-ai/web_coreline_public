@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function ContactSection() {
     return (
-        <section className="flex justify-center bg-black px-4 py-24 text-white transition-colors duration-300 dark:bg-black dark:text-white border-t-2 border-white/10 bw:bg-black bw:text-white">
+        <section id="contact" className="flex scroll-mt-40 justify-center bg-black px-4 py-24 text-white transition-colors duration-300 dark:bg-black dark:text-white border-t-2 border-white/10 bw:bg-black bw:text-white">
             <div className="w-full max-w-[1200px]">
                 <div className="flex flex-col gap-20 lg:flex-row">
                     <div className="flex-1">

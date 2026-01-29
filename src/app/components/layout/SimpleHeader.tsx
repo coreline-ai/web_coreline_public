@@ -43,6 +43,12 @@ export default function SimpleHeader({ redirectOnLogout }: SimpleHeaderProps) {
           HOME
         </Link>
         <Link
+          href="/boards/CL_Project_QnA"
+          className="decoration-black decoration-2 underline-offset-4 hover:underline dark:decoration-[#FFD600] bw:decoration-black"
+        >
+          Q&A
+        </Link>
+        <Link
           href="/blog"
           className="decoration-black decoration-2 underline-offset-4 hover:underline dark:decoration-[#FFD600] bw:decoration-black"
         >

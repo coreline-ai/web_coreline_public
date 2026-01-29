@@ -44,12 +44,12 @@ def generate_summary(text: str) -> str:
         response = local_client.chat.completions.create(
             model=model_name,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that summarizes text."},
-                {"role": "user", "content": f"Summarize the following content into 3 concise sentences in Korean:\n\n{text[:3000]}"} 
+                {"role": "system", "content": "당신은 전문 요약가입니다. 핵심 내용을 5문장 내외의 명확한 한국어(총 300자 이내)로 요약합니다."},
+                {"role": "user", "content": f"다음 내용을 핵심 위주로 5문장 정도로 상세하게 요약해줘. 전체 길이는 300자를 넘지 않아야 해:\n\n{text[:3000]}"} 
             ],
             top_p=0.7,
-            temperature=0.7,
-            max_tokens=1024,
+            temperature=0.4,
+            max_tokens=512,
             timeout=float(os.environ.get("GLM_TIMEOUT_SECONDS", 30))
         )
         return response.choices[0].message.content.strip()

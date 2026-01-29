@@ -116,7 +116,7 @@ export default function CommunitySection() {
     const getIcon = (idx: number) => iconPool[idx % iconPool.length];
 
     return (
-        <section className="border-b border-black bg-white px-4 py-24 dark:border-white/10 dark:bg-black bw:border-black bw:bg-white">
+        <section id="research" className="scroll-mt-40 border-b border-black bg-white px-4 py-24 dark:border-white/10 dark:bg-black bw:border-black bw:bg-white">
             <div className="mx-auto max-w-[1200px]">
                 {/* Header */}
                 <div className="mb-16">
@@ -180,7 +180,7 @@ export default function CommunitySection() {
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                         {displayPosts.map((post) => {
                             const CardContent = (
-                                <div className="group relative flex h-full flex-col justify-between rounded-3xl border border-black bg-white p-6 neo-shadow transition-all hover:-translate-y-2 hover:neo-shadow-lg dark:border-white/10 dark:bg-[#111] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                                <div className="group relative flex h-full flex-col justify-start rounded-3xl border border-black bg-white p-6 neo-shadow transition-all hover:-translate-y-2 hover:neo-shadow-lg dark:border-white/10 dark:bg-[#111] dark:shadow-none bw:border-black bw:bg-white bw:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                                     <div>
                                         <div className="mb-6 flex items-start justify-between">
                                             <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-black bg-white neo-shadow transition-all group-hover:scale-110 group-hover:bg-[#FFD600] dark:border-white dark:bg-black dark:text-white dark:shadow-none dark:group-hover:text-black bw:border-black bw:bg-white bw:text-black bw:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bw:group-hover:text-black">
@@ -190,21 +190,30 @@ export default function CommunitySection() {
                                                 {post.categoryName}
                                             </span>
                                         </div>
-                                        <h3 className="mb-3 text-lg font-black text-black leading-tight line-clamp-2 dark:text-white bw:text-black">{post.title}</h3>
-                                        <p className="mb-8 text-sm font-bold leading-relaxed text-gray-500 line-clamp-3 dark:text-gray-400 bw:text-gray-500">
-                                            {(post.content || '').slice(0, 100)}...
+                                        <h3 className="mb-3 text-lg font-black text-black leading-tight line-clamp-2 dark:text-white bw:text-black">
+                                            {post.title}
+                                        </h3>
+                                        <p className="mb-6 text-sm font-bold leading-relaxed text-gray-500 line-clamp-4 dark:text-gray-400 bw:text-gray-500">
+                                            {post.content || ''}
                                         </p>
                                     </div>
 
-                                    {/* Analysis Section (Replaces Read Source) */}
-                                    {post.analysis && (
-                                        <div className="mt-auto border-l-4 border-[#FFD600] bg-gray-900 p-4 dark:bg-white/5">
+                                    {/* Analysis Section */}
+                                    {post.analysis ? (
+                                        <div className="border-l-4 border-[#FFD600] bg-gray-900 p-4 dark:bg-white/5">
                                             <h4 className="mb-1 text-[10px] font-black tracking-widest text-[#FFD600] uppercase">ANALYSIS</h4>
                                             <p className="text-xs font-bold leading-relaxed text-gray-300">
                                                 {post.analysis}
                                             </p>
                                         </div>
-                                    )}
+                                    ) : activeTab !== 'news' ? (
+                                        <div className="border-l-4 border-gray-200 bg-gray-50 p-4 dark:bg-white/5 dark:border-white/10">
+                                            <h4 className="mb-1 text-[10px] font-black tracking-widest text-gray-400 uppercase">ANALYSIS</h4>
+                                            <p className="text-xs font-bold italic leading-relaxed text-gray-400">
+                                                No AI analysis available for this post.
+                                            </p>
+                                        </div>
+                                    ) : null}
                                 </div>
                             );
 
