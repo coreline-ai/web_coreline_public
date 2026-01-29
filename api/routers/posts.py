@@ -121,7 +121,7 @@ async def get_post_detail(post_id: int, db: AsyncSession = Depends(get_db), curr
     post, author, category, board = row
 
     # Check Read Access
-    await check_board_access(board, current_user, action="view")
+    await check_board_access(board, current_user, action="read")
     
     # Get Like Count & User Like Status
     like_count_res = await db.execute(select(func.count(PostLike.post_id)).where(PostLike.post_id == post.id))
