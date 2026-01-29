@@ -46,20 +46,28 @@
 - **구조화된 데이터 (JSON-LD)**: 상세한 검색 엔진 이해를 위한 "Organization" 및 "Person" 스키마 마크업.
 - **사이트맵 및 로봇**: `sitemap.xml` 및 `robots.txt`의 자동 생성.
 
+### 4.4. 백엔드 및 인증 (New)
+
+- **하이브리드 아키텍처**: Next.js (Frontend) + Python FastAPI (Backend).
+- **인증 (Authentication)**: NextAuth.js 및 JWT 기반 인증 시스템.
+- **데이터베이스**: SQLAlchemy 및 Alembic을 활용한 마이그레이션 관리.
+
 ## 5. 기술 요구사항
 
 ### 5.1. 핵심 스택
 
-- **프레임워크**: Next.js 16.1.1 (App Router)
+- **프레임워크 (FE)**: Next.js 16.1.1 (App Router)
+- **프레임워크 (BE)**: Python FastAPI
 - **라이브러리**: React 19
-- **언어**: TypeScript
-- **스타일링**: Tailwind CSS
-- **아이콘**: Lucide React
-- **패키지 관리자**: npm/yarn/pnpm (표준 노드 생태계)
+- **언어**: TypeScript, Python 3.11+
+- **스타일링**: Tailwind CSS v4
+- **ORM**: SQLAlchemy
+- **패키지 관리자**: npm/pip
 
 ### 5.2. 아키텍처
 
 - **App Router**: 성능을 위해 React 서버 컴포넌트(RSC) 활용.
+- **API 통합**: `api/` 디렉토리에 Python 백엔드 통합.
 - **Edge 런타임**: 오픈 그래프 이미지 생성에 사용됩니다.
 - **컴포넌트 기반**: 유지보수를 위한 모듈식 컴포넌트 (레이아웃, 헤더, 카드).
 
@@ -69,37 +77,36 @@
 - 서버사이드 렌더링을 사용한 빠른 첫 콘텐츠 페인트(FCP).
 - 접근 가능한 HTML 구조 (ARIA 레이블, 시맨틱 태그).
 
-### 5.4. 개발 현황 (Current Status) - 2026.01.10 기준 (최신 업데이트)
+### 5.4. 개발 현황 (Current Status) - 2026.01.29 기준 (최신 업데이트)
 
+- **하이브리드 아키텍처 완성**:
+  - Next.js와 Python 백엔드가 단일 레포지토리에서 통합 실행.
+  - `concurrently`를 통한 개발 환경 최적화.
 - **아키텍처 개선 (Refactoring)**:
   - 단일 파일(`page.tsx`)을 8개의 모듈형 컴포넌트(`Hero`, `Services`, `Navigation` 등)로 분리하여 유지보수성 향상.
 - **브랜드 정체성 (Identity)**:
   - 새로운 로고 시스템(`logo.svg`)을 헤더, 푸터, 모바일 메뉴에 일괄 적용.
   - 헤더 텍스트를 "CORELINE"에서 **"Coreline"** (Title Case)으로 통일하여 세련된 인상 제공.
-- **사용자 경험 (UX)**:
-  - 서브 페이지 헤더에서 불필요한 "Sign Up" 메뉴 제거, 네비게이션 간소화.
-  - 다크 모드에서 Login 버튼 호버 시 시그니처 옐로우 컬러(#FFD600) 적용으로 인터랙션 강화.
 - **시스템 안정성 & 품질**:
   - **Resilience**: 커스텀 404, 글로벌 에러 바운더리, 로딩 상태 구현으로 예외 상황 및 네비게이션 UX 강화.
   - **Type Safety**: `tsc` 빌드 에러 무시 플래그(`ignoreBuildErrors`) 제거, 엄격한 타입 검사 적용.
   - **Code Quality**: Prettier 도입으로 코드 스타일 일관성 확보.
-  - **Build Stability**: ESLint 의존성을 안정적인 v8 버전으로 고정하여 호환성 문제 예방.
-  - **Performance**: `next/image` 전면 적용으로 이미지 로딩 최적화 및 CLS 방지.
   - **Health Check**: 런타임 콘솔 에러 0건(Zero Errors) 달성 및 주요 링크/기능 전수 검증 완료.
 
 ## 6. 폴더 구조 전략
 
 ```bash
-app/
-  layout.tsx          # SEO 및 Provider가 포함된 전역 레이아웃
-  page.tsx            # 메인 랜딩 페이지 콘텐츠
-  globals.css         # 전역 스타일 및 Tailwind 지시문
-  sitemap.ts          # 사이트맵 생성기
-  robots.ts           # Robots.txt 생성기
-  opengraph-image.tsx # 동적 OG 이미지
-components/           # 재사용 가능한 UI 컴포넌트
-public/               # 정적 자산 (파비콘 등)
-docs/                 # 문서 (PRD, 개요 등)
+/
+├── api/                  # Python 백엔드 (FastAPI)
+├── src/                  # 메인 애플리케이션 소스
+│   └── app/              # Next.js App Router
+│       ├── components/   # UI 컴포넌트
+│       ├── pages/        # (Optional) 추가 페이지
+│       └── ...
+├── scripts/              # 유틸리티 및 마이그레이션 스크립트
+├── public/               # 정적 자산 (파비콘 등)
+├── docs/                 # 문서 (PRD, 개요 등)
+└── next.config.mjs       # Next.js 설정
 ```
 
 ## 7. 향후 고려사항
