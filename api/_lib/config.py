@@ -36,15 +36,13 @@ class Settings(BaseSettings):
 
     @model_validator(mode='after')
     def validate_security(self) -> 'Settings':
-        """Ensure critical security settings are present in production."""
+        """Ensure critical security settings are present."""
         if not self.jwt_secret:
-            if self.is_production:
-                logger.error("🛑 CRITICAL: JWT_SECRET environment variable is missing in production!")
-                raise RuntimeError("JWT_SECRET must be set for production environments.")
-            else:
-                # Provide a clear, secure default for development + warning
-                logger.warning("⚠️  JWT_SECRET is not set. Using a development-only secret.")
-                self.jwt_secret = "dev-secret-key-not-for-production"
+            raise RuntimeError(
+                "🛑 JWT_SECRET not set!\n"
+                "Please create a .env file:\n"
+                "  echo 'JWT_SECRET=$(openssl rand -base64 32)' > .env\n"
+            )
         
         return self
 
