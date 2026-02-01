@@ -13,6 +13,13 @@
 
 **Coreline**은 엔지니어링 중심의 AI 및 소프트웨어 스튜디오를 위한 포트폴리오 웹사이트입니다. 단순한 프로토타입을 넘어, 지속 가능하고 실제 프로덕션 환경에서 운영 가능한 고품질 솔루션을 제공하는 역량을 보여주기 위해 제작되었습니다.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/112e54a5-e85f-4d21-97c7-a37e763dea9f"
+       width="45%" style="margin-right: 30px;" />
+  <img src="https://github.com/user-attachments/assets/643f9528-c4b6-4f25-bb67-cfa16659a77e"
+       width="45%" />
+</p>
+
 > **현재 상태**: Next.js 프론트엔드와 Python FastAPI 백엔드가 결합된 하이브리드 아키텍처로 고도화되었습니다.
 
 - **Demo Web Page**: [https://coreline-project.vercel.app/](https://coreline-project.vercel.app/)
